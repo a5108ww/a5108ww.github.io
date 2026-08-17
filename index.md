@@ -1,9 +1,17 @@
 ---
-layout: post
-title: "我的第一篇 GitHub Pages 文章"
-date: 2026-08-17
+layout: default
+title: "我的部落格首頁"
 ---
 
-## 歡迎來到我的部落格
+# 歡迎來到我的部落格！
 
-這是使用 Markdown 撰寫的內容！
+以下是我的最新文章列表：
+
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <span>{{ post.date | date: "%Y-%m-%d" }}</span> — 
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
