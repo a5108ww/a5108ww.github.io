@@ -1,9 +1,28 @@
+/* 1. 清除 body 預設邊界，並為右側內文留出左邊距 (padding-left) */
+body {
+  margin: 0;
+  padding-left: 220px; /* 寬度需大於 header 的 width，內容才不會被遮住 */
+}
+
+/* 2. 將 Header 固定在最左側並設為垂直排列 */
 .site-header {
+  position: fixed;      /* 固定在螢幕畫面上 */
+  top: 0;
+  left: 0;
+  width: 200px;         /* 設定左側欄固定寬度 */
+  height: 100vh;        /* 佔滿全螢幕高度 (100 Viewport Height) */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
+  flex-direction: column; /* 改為垂直上下排列 */
+  justify-content: flex-start; /* 內容從頂部開始排 */
+  align-items: flex-start;    /* 內容靠左對齊 */
+  padding: 30px 20px;
+  box-sizing: border-box;     /* 確保 padding 不會排擠寬度 */
   background-color: #333;
+}
+
+/* 3. 標題下方的留白間距 */
+.site-title {
+  margin-bottom: 40px;  /* 讓標題與下方選單保持距離 */
 }
 
 .site-title a {
@@ -13,10 +32,12 @@
   text-decoration: none;
 }
 
+/* 4. 將選單項目改為垂直排列 */
 .site-nav ul {
   display: flex;
-  gap: 20px;
-  list-style: none; /* 移除圓點 */
+  flex-direction: column; /* 選單文字改為直向排列 */
+  gap: 15px;              /* 選單項目的上下間距 */
+  list-style: none;
   margin: 0;
   padding: 0;
 }
@@ -27,5 +48,5 @@
 }
 
 .site-nav a:hover {
-  color: #4da6ff; /* 滑鼠懸停顏色 */
+  color: #4da6ff;
 }
