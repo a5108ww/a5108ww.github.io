@@ -2,10 +2,10 @@
   link: "/"
 
 - name: "文章列表"
-  link: "/blog/"
+  link: "/blog"
 
 - name: "專案作品"
-  link: "/portfolio/"
+  link: "/portfolio"
 
 - name: " GitHub"
   link: "https://github.com/a5108ww"

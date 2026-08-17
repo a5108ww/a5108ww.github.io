@@ -1,28 +1,37 @@
-/* 1. 清除 body 預設邊界，並為右側內文留出左邊距 (padding-left) */
+/* 1. 為右側內文推開足夠的距離 ( 5px 邊界 + 200px 寬度 + 額外留白 ) */
 body {
   margin: 0;
-  padding-left: 220px; /* 寬度需大於 header 的 width，內容才不會被遮住 */
+  padding-left: 230px;
+  /* 避開左側 Header (200px 寬 + 5px 邊距 + 20px 留白) */
+  padding-right: 230px;
+  /* 避開右側 Sidebar (200px 寬 + 5px 邊距 + 20px 留白) */
 }
 
-/* 2. 將 Header 固定在最左側並設為垂直排列 */
+/* 2. 調整 Header 的位置與間距 */
 .site-header {
-  position: fixed;      /* 固定在螢幕畫面上 */
-  top: 0;
-  left: 0;
-  width: 200px;         /* 設定左側欄固定寬度 */
-  height: 100vh;        /* 佔滿全螢幕高度 (100 Viewport Height) */
+  position: fixed;
+  top: 5px;
+  /* 上方距離邊界 5px */
+  left: 5px;
+  /* 最左側距離邊界 5px */
+  width: 200px;
+  height: calc(100vh - 10px);
+  /* 扣掉上下各 5px 的間距，保持滿版 */
+
   display: flex;
-  flex-direction: column; /* 改為垂直上下排列 */
-  justify-content: flex-start; /* 內容從頂部開始排 */
-  align-items: flex-start;    /* 內容靠左對齊 */
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   padding: 30px 20px;
-  box-sizing: border-box;     /* 確保 padding 不會排擠寬度 */
+  box-sizing: border-box;
   background-color: #333;
+  border-radius: 8px;
+  /* 可選：加上圓角效果更美觀 */
 }
 
-/* 3. 標題下方的留白間距 */
+/* 3. 標題與選單維持直向排列 */
 .site-title {
-  margin-bottom: 40px;  /* 讓標題與下方選單保持距離 */
+  margin-bottom: 40px;
 }
 
 .site-title a {
@@ -32,11 +41,10 @@ body {
   text-decoration: none;
 }
 
-/* 4. 將選單項目改為垂直排列 */
 .site-nav ul {
   display: flex;
-  flex-direction: column; /* 選單文字改為直向排列 */
-  gap: 15px;              /* 選單項目的上下間距 */
+  flex-direction: column;
+  gap: 15px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -49,4 +57,109 @@ body {
 
 .site-nav a:hover {
   color: #4da6ff;
+}
+
+/* 2. 定位右側 Sidebar */
+.sidebar {
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  /* 距離最右側邊界 5px */
+  width: 200px;
+  /* 與左側 Header 寬度一致 */
+  height: calc(100vh - 10px);
+  /* 扣除上下各 5px 的間距 */
+
+  padding: 20px 15px;
+  box-sizing: border-box;
+  background-color: #333;
+  /* 設定與 Header 相同的暗色背景 */
+  color: #fff;
+  /* 文字顏色改為白色 */
+  border-radius: 8px;
+  /* 圓角邊框 */
+
+  overflow-y: auto;
+  /* 關鍵：若右側內容/文章太多，允許內部單獨垂直捲動 */
+}
+
+/* 3. 調整 Sidebar 內部的文字與連結顏色 */
+.sidebar h3 {
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #4da6ff;
+  /* 標題套用主題藍色 */
+}
+
+.sidebar hr {
+  border: 0;
+  border-top: 1px solid #555;
+  /* 分隔線顏色 */
+  margin: 15px 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 8px;
+}
+
+.sidebar a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  color: #4da6ff;
+}
+
+/* ==========================================
+   手機與平板版 (螢幕寬度 <= 768px)
+   ========================================== */
+
+@media (max-width: 768px) {
+  body {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 60px;
+    /* 留空間給頂部固定導覽列 */
+  }
+
+  /* 手機版只隱藏右側 Sidebar */
+  .sidebar {
+    display: none;
+  }
+
+  /* 手機版將 Header 改為上方橫向懸浮列 */
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    border-radius: 0;
+    padding: 0 15px;
+
+    display: flex;
+    flex-direction: row;
+    /* 改回橫向排列 */
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .site-title {
+    margin-bottom: 0;
+    /* 移除原本的下邊距 */
+  }
+
+  .site-nav ul {
+    flex-direction: row;
+    /* 選單改回橫排 */
+    gap: 10px;
+  }
 }
