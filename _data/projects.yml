@@ -1,0 +1,12 @@
+- name: "極簡 Markdown 部落格"
+  description: "基於 GitHub Pages 與 Jekyll 架設的個人技術部落格。"
+  tech: ["Jekyll", "Liquid", "Markdown"]
+  link: "https://github.com"
+  featured: true
+
+- name: "氣象預報 API 串接小工具"
+  description: "使用 JavaScript 實時抓取中央氣象署 API 的前端小專案。"
+  tech: ["JavaScript", "CSS3", "RESTful API"]
+  link: "https://example.com"
+  featured: false
+

@@ -1,0 +1,10 @@
+[
+  {
+    "category": "前端開發",
+    "items": ["HTML5/CSS3", "JavaScript", "Vue.js"]
+  },
+  {
+    "category": "後端與工具",
+    "items": ["Git / GitHub", "Jekyll", "Node.js"]
+  }
+]
