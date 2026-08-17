@@ -1,18 +1,39 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
   <meta charset="UTF-8">
   <title>{{ page.title }} | {{ site.title }}</title>
   <style>
     /* 簡單的 HTML/CSS 雙欄外觀 */
-    .container { display: flex; gap: 30px; max-width: 1000px; margin: 0 auto; padding: 20px; }
-    .main-content { flex: 3; }
-    .sidebar { flex: 1; background: #f9f9f9; padding: 15px; border-radius: 8px; }
+    .container {
+      display: flex;
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .main-content {
+      flex: 3;
+    }
+
+    .sidebar {
+      flex: 1;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+    }
   </style>
 </head>
+
 <body>
 
   <div class="container">
+
+    <!-- 頂部功能導覽列 -->
+    {% include header.html %}
+
     <!-- 主內容區塊 (如 index.md 的內容) -->
     <main class="main-content">
       {{ content }}
@@ -25,4 +46,5 @@
   </div>
 
 </body>
+
 </html>
