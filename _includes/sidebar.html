@@ -1,0 +1,31 @@
+<!-- 作者個人簡介 -->
+<div class="widget">
+  <h3>關於作者</h3>
+  <p>嗨！我是 Web 開發者，喜歡寫 Markdown 記錄技術生活。</p>
+</div>
+
+<hr>
+
+<!-- 最新文章動態列表 -->
+<div class="widget">
+  <h3>最新文章</h3>
+  <ul>
+    {% for post in site.posts limit:5 %}
+      <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<hr>
+
+<!-- 讀取 _data/socials.yml 靜態資料 -->
+<div class="widget">
+  <h3>追蹤我</h3>
+  <ul>
+    {% for link in site.data.socials %}
+      <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+    {% endfor %}
+  </ul>
+</div>

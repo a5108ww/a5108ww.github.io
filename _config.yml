@@ -1,0 +1,8 @@
+author:
+  name: "謝阿文"
+  avatar: "/assets/images/dog.jpg"
+  bio: "寫程式與分享生活"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com"
