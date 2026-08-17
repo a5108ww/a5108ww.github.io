@@ -1,0 +1,31 @@
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #333;
+}
+
+.site-title a {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.site-nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none; /* 移除圓點 */
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: #4da6ff; /* 滑鼠懸停顏色 */
+}
