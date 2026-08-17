@@ -1,21 +1,30 @@
-/* 1. 為右側內文推開足夠的距離 ( 5px 邊界 + 200px 寬度 + 額外留白 ) */
+/* 全域 CSS 變數，便於維護 */
+:root {
+  --header-width: 200px;
+  --sidebar-width: 200px;
+  --side-gutter: 30px; /* header/sidebar 與內容間距 */
+  --top-gap: 5px;
+  --content-max-width: 800px;
+}
+
+/* 1. 為兩側固定區塊留出空間，並設定基本頁面內距 */
 body {
   margin: 0;
-  padding-left: 230px;
-  /* 避開左側 Header (200px 寬 + 5px 邊距 + 20px 留白) */
-  padding-right: 230px;
-  /* 避開右側 Sidebar (200px 寬 + 5px 邊距 + 20px 留白) */
+  padding-left: calc(var(--header-width) + var(--side-gutter));
+  padding-right: calc(var(--sidebar-width) + var(--side-gutter));
+  padding-top: 20px;
+  box-sizing: border-box;
 }
 
 /* 2. 調整 Header 的位置與間距 */
 .site-header {
   position: fixed;
-  top: 5px;
+  top: var(--top-gap);
   /* 上方距離邊界 5px */
-  left: 5px;
+  left: var(--top-gap);
   /* 最左側距離邊界 5px */
-  width: 200px;
-  height: calc(100vh - 10px);
+  width: var(--header-width);
+  height: calc(100vh - (var(--top-gap) * 2));
   /* 扣掉上下各 5px 的間距，保持滿版 */
 
   display: flex;
@@ -26,6 +35,7 @@ body {
   box-sizing: border-box;
   background-color: #333;
   border-radius: 8px;
+  z-index: 1000;
   /* 可選：加上圓角效果更美觀 */
 }
 
@@ -62,12 +72,12 @@ body {
 /* 2. 定位右側 Sidebar */
 .sidebar {
   position: fixed;
-  top: 5px;
-  right: 5px;
+  top: var(--top-gap);
+  right: var(--top-gap);
   /* 距離最右側邊界 5px */
-  width: 200px;
+  width: var(--sidebar-width);
   /* 與左側 Header 寬度一致 */
-  height: calc(100vh - 10px);
+  height: calc(100vh - (var(--top-gap) * 2));
   /* 扣除上下各 5px 的間距 */
 
   padding: 20px 15px;
@@ -78,9 +88,19 @@ body {
   /* 文字顏色改為白色 */
   border-radius: 8px;
   /* 圓角邊框 */
+  z-index: 1000;
 
   overflow-y: auto;
   /* 關鍵：若右側內容/文章太多，允許內部單獨垂直捲動 */
+}
+
+/* 主內容區塊限制寬度並置中，避免被固定側欄視覺上包覆 */
+.main-content {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+  background-color: transparent;
 }
 
 /* 3. 調整 Sidebar 內部的文字與連結顏色 */
@@ -126,7 +146,8 @@ body {
   body {
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 60px;
+    /* 增加上方空間，確保固定 header 不會遮擋內容 */
+    padding-top: 70px;
     /* 留空間給頂部固定導覽列 */
   }
 
@@ -144,6 +165,7 @@ body {
     height: 50px;
     border-radius: 0;
     padding: 0 15px;
+    z-index: 1200;
 
     display: flex;
     flex-direction: row;
@@ -161,5 +183,20 @@ body {
     flex-direction: row;
     /* 選單改回橫排 */
     gap: 10px;
+  }
+
+  /* 手機版主內容：取消最大寬度限制並增加上方保護內距 */
+  .main-content {
+    max-width: 100%;
+    margin: 0;
+    padding-top: 16px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* 若側邊欄雖隱藏但仍存在，確保 avatar 或其他元素不影響佈局 */
+  .avatar-img {
+    width: 64px;
+    height: 64px;
   }
 }

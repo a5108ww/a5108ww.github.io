@@ -6,3 +6,15 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com"
+title: "Shilvain部落格"
+
+# 基本站點設定（請視實際部署情況修改 url 與 baseurl）
+url: "https://a5108ww.github.io"
+baseurl: ""
+timezone: "Asia/Taipei"
+
+# Markdown 與 permalink 設定
+markdown: kramdown
+permalink: /:year/:month/:day/:title.html
+
+# 可視需要加入更多 Jekyll 設定（plugins、exclude 等）

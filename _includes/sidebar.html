@@ -1,12 +1,15 @@
 <!-- 作者個人簡介 -->
 <div class="widget">
   <h3>關於作者</h3>
-  {% if site.author.avatar %}
-  <img src="{{ site.author.avatar | relative_url }}" alt="{{ site.author.name }}" class="avatar-img"
+  {% if site.author and site.author.avatar %}
+  <img src="{{ site.author.avatar | relative_url }}" alt="{% if site.author.name %}{{ site.author.name }}{% else %}作者{% endif %}" class="avatar-img"
     style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;" />
   {% endif %}
-
+  {% if site.author and site.author.bio %}
+  <p>{{ site.author.bio }}</p>
+  {% else %}
   <p>嗨！我是 Web 開發者，喜歡寫 Markdown 記錄技術生活。</p>
+  {% endif %}
 </div>
 
 <hr>
@@ -28,9 +31,15 @@
 <!-- 讀取 _data/socials.yml 靜態資料 -->
 <div class="widget">
   <h3>追蹤我</h3>
+  {% if site.data.socials and site.data.socials.size > 0 %}
   <ul>
     {% for link in site.data.socials %}
-    <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+      {% if link.url and link.name %}
+        <li><a href="{{ link.url }}" {% if link.external %}target="_blank" rel="noopener"{% endif %}>{{ link.name }}</a></li>
+      {% endif %}
     {% endfor %}
   </ul>
+  {% else %}
+  <p>還沒有社群連結。</p>
+  {% endif %}
 </div>
