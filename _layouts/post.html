@@ -18,7 +18,8 @@
       <article class="post-article">
         <header class="post-header">
           <h1>{{ page.title }}</h1>
-          <p class="post-meta">發布：{{ page.date | date: "%Y-%m-%d" }}{% if page.author %} • 作者：{{ page.author }}{% endif %}</p>
+          <p class="post-meta">發布：{{ page.date | date: "%Y-%m-%d" }}{% if page.author %} • 作者：{{ page.author }}{% endif
+            %}</p>
         </header>
 
         <section class="post-body">
@@ -29,7 +30,7 @@
         <footer class="post-tags">
           <p>標籤：
             {% for tag in page.tags %}
-              <span class="tag">{{ tag }}</span>{% unless forloop.last %}, {% endunless %}
+            <span class="tag">{{ tag }}</span>{% unless forloop.last %}, {% endunless %}
             {% endfor %}
           </p>
         </footer>
@@ -41,7 +42,16 @@
       {% include sidebar.html %}
     </aside>
   </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script>
+  <script>
+    SimpleJekyllSearch({
+      searchInput: document.getElementById('search-input'),
+      resultsContainer: document.getElementById('results-container'),
+      json: '/search.json',
+      searchResultTemplate: '<li><a href="{url}">{title}</a> - <small>{date}</small></li>',
+      noResultsText: '找不到相關文章'
+    });
+  </script>
 </body>
 
 </html>
@@ -64,7 +74,6 @@
     .main-content {
       flex: 3;
     }
-
   </style>
   <!-- 正確引入 CSS 檔案，記得加上 | relative_url -->
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
