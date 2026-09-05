@@ -5,23 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ page.title }} | {{ site.title }}</title>
-  <style>
-    /* 簡單的 HTML/CSS 雙欄外觀 */
-    .container {
-      display: flex;
-      gap: 30px;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .main-content {
-      flex: 3;
-    }
-
-  </style>
   <!-- 正確引入 CSS 檔案，記得加上 | relative_url -->
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
 </head>
 
 <body>

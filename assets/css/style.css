@@ -1,31 +1,78 @@
-/* 全域 CSS 變數，便於維護 */
+/* ==========================================================================
+   全域 CSS 變數，便於維護
+   ========================================================================== */
 :root {
   --header-width: 200px;
   --sidebar-width: 200px;
   --side-gutter: 30px; /* header/sidebar 與內容間距 */
   --top-gap: 5px;
   --content-max-width: 800px;
+
+  --panel-bg: #333;
+  --panel-line: #555;
+  --accent: #4da6ff;
+  --mobile-bar-height: 50px;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC",
+               "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
-/* 1. 為兩側固定區塊留出空間，並設定基本頁面內距 */
+/* ==========================================================================
+   基礎排版
+   ========================================================================== */
+html {
+  /* 避免 iOS 由橫向轉回直向時自動放大字體 */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 為兩側固定區塊留出空間，並設定基本頁面內距 */
 body {
   margin: 0;
   padding-left: calc(var(--header-width) + var(--side-gutter));
   padding-right: calc(var(--sidebar-width) + var(--side-gutter));
   padding-top: 20px;
   box-sizing: border-box;
+
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.75; /* 中文閱讀需要較寬鬆的行高 */
+  color: #222;
 }
 
-/* 2. 調整 Header 的位置與間距 */
+/* 版心容器
+   （原先寫在 _layouts/default.html 的 inline <style>，移來此處統一管理） */
+.container {
+  display: flex;
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 主內容區塊限制寬度並置中，避免被固定側欄視覺上包覆 */
+.main-content {
+  flex: 3;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+  background-color: transparent;
+  overflow-wrap: break-word; /* 長網址等不可斷字串不會撐破版面 */
+}
+
+/* ==========================================================================
+   左側 Header（桌機版為固定直向欄）
+   ========================================================================== */
 .site-header {
   position: fixed;
-  top: var(--top-gap);
-  /* 上方距離邊界 5px */
-  left: var(--top-gap);
-  /* 最左側距離邊界 5px */
+  top: var(--top-gap); /* 上方距離邊界 5px */
+  left: var(--top-gap); /* 最左側距離邊界 5px */
   width: var(--header-width);
+  /* 扣掉上下各 5px 的間距，保持滿版。
+     行動瀏覽器的 100vh 含網址列高度，dvh 較準，不支援時自動退回 vh */
   height: calc(100vh - (var(--top-gap) * 2));
-  /* 扣掉上下各 5px 的間距，保持滿版 */
+  height: calc(100dvh - (var(--top-gap) * 2));
 
   display: flex;
   flex-direction: column;
@@ -33,14 +80,17 @@ body {
   align-items: flex-start;
   padding: 30px 20px;
   box-sizing: border-box;
-  background-color: #333;
+  background-color: var(--panel-bg);
   border-radius: 8px;
   z-index: 1000;
-  /* 可選：加上圓角效果更美觀 */
 }
 
-/* 3. 標題與選單維持直向排列 */
-.site-title {
+/* 站名與漢堡按鈕所在的橫列（桌機版只有站名） */
+.site-header__bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   margin-bottom: 40px;
 }
 
@@ -51,6 +101,7 @@ body {
   text-decoration: none;
 }
 
+/* 標題與選單維持直向排列 */
 .site-nav ul {
   display: flex;
   flex-direction: column;
@@ -66,56 +117,76 @@ body {
 }
 
 .site-nav a:hover {
-  color: #4da6ff;
+  color: var(--accent);
 }
 
-/* 2. 定位右側 Sidebar */
+/* 漢堡按鈕：桌機版不需要，僅在手機版顯示 */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px; /* 觸控目標建議下限 44x44 */
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-toggle__bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: #fff;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* 展開時三條線變成叉叉 */
+.site-header.is-nav-open .nav-toggle__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.site-header.is-nav-open .nav-toggle__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.site-header.is-nav-open .nav-toggle__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   右側 Sidebar（桌機版為固定直向欄）
+   ========================================================================== */
 .sidebar {
   position: fixed;
   top: var(--top-gap);
-  right: var(--top-gap);
-  /* 距離最右側邊界 5px */
-  width: var(--sidebar-width);
-  /* 與左側 Header 寬度一致 */
+  right: var(--top-gap); /* 距離最右側邊界 5px */
+  width: var(--sidebar-width); /* 與左側 Header 寬度一致 */
   height: calc(100vh - (var(--top-gap) * 2));
-  /* 扣除上下各 5px 的間距 */
+  height: calc(100dvh - (var(--top-gap) * 2));
 
   padding: 20px 15px;
   box-sizing: border-box;
-  background-color: #333;
-  /* 設定與 Header 相同的暗色背景 */
+  background-color: var(--panel-bg);
   color: #fff;
-  /* 文字顏色改為白色 */
   border-radius: 8px;
-  /* 圓角邊框 */
   z-index: 1000;
 
-  overflow-y: auto;
-  /* 關鍵：若右側內容/文章太多，允許內部單獨垂直捲動 */
+  overflow-y: auto; /* 若內容過多，允許內部單獨垂直捲動 */
 }
 
-/* 主內容區塊限制寬度並置中，避免被固定側欄視覺上包覆 */
-.main-content {
-  max-width: var(--content-max-width);
-  margin: 0 auto;
-  padding: 24px;
-  box-sizing: border-box;
-  background-color: transparent;
-}
-
-/* 3. 調整 Sidebar 內部的文字與連結顏色 */
 .sidebar h3 {
   font-size: 1.1rem;
   margin-top: 0;
   margin-bottom: 10px;
-  color: #4da6ff;
-  /* 標題套用主題藍色 */
+  color: var(--accent); /* 標題套用主題藍色 */
 }
 
 .sidebar hr {
   border: 0;
-  border-top: 1px solid #555;
-  /* 分隔線顏色 */
+  border-top: 1px solid var(--panel-line);
   margin: 15px 0;
 }
 
@@ -135,68 +206,233 @@ body {
 }
 
 .sidebar a:hover {
-  color: #4da6ff;
+  color: var(--accent);
 }
 
-/* ==========================================
+/* 作者頭像
+   （原先寫在 _includes/sidebar.html 的 inline style，因 inline 優先級高於樣式表，
+     手機版的縮小規則永遠無法生效，故移來此處） */
+.avatar-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   內文元素的溢出防護
+   ========================================================================== */
+.main-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.main-content pre {
+  overflow-x: auto;
+  padding: 12px;
+  background-color: #f6f8fa;
+  border-radius: 6px;
+}
+
+.main-content code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+/* 行內程式碼（不含程式碼區塊內的） */
+.main-content :not(pre) > code {
+  padding: 0.15em 0.35em;
+  background-color: #f0f2f4;
+  border-radius: 4px;
+}
+
+/* 表格捲動容器，由 assets/js/site.js 動態包上 */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.main-content table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.main-content th,
+.main-content td {
+  border: 1px solid #ddd;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.main-content thead th {
+  background-color: #f2f4f6;
+}
+
+/* ==========================================================================
    手機與平板版 (螢幕寬度 <= 768px)
-   ========================================== */
+   ========================================================================== */
 
 @media (max-width: 768px) {
   body {
-    padding-left: 15px;
-    padding-right: 15px;
-    /* 增加上方空間，確保固定 header 不會遮擋內容 */
-    padding-top: 70px;
+    padding-left: 0;
+    padding-right: 0;
     /* 留空間給頂部固定導覽列 */
+    padding-top: var(--mobile-bar-height);
   }
 
-  /* 手機版只隱藏右側 Sidebar */
-  .sidebar {
-    display: none;
+  .container {
+    flex-direction: column;
+    gap: 0;
+    padding: 15px;
   }
 
-  /* 手機版將 Header 改為上方橫向懸浮列 */
+  /* Header 改為頂部固定橫列，選單以下拉面板呈現 */
   .site-header {
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 50px;
+    height: auto; /* 讓下拉面板得以撐開 */
     border-radius: 0;
-    padding: 0 15px;
+    padding: 0;
+    display: block; /* 取消桌機版的直向 flex */
     z-index: 1200;
-
-    display: flex;
-    flex-direction: row;
-    /* 改回橫向排列 */
-    justify-content: space-between;
-    align-items: center;
   }
 
-  .site-title {
+  .site-header__bar {
+    height: var(--mobile-bar-height);
     margin-bottom: 0;
-    /* 移除原本的下邊距 */
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+
+  .nav-toggle {
+    display: flex; /* 手機版才顯示漢堡按鈕 */
+  }
+
+  /* 選單預設收合，點漢堡後才展開 */
+  .site-nav {
+    display: none;
+    border-top: 1px solid var(--panel-line);
+    background-color: var(--panel-bg);
+  }
+
+  .site-header.is-nav-open .site-nav {
+    display: block;
   }
 
   .site-nav ul {
-    flex-direction: row;
-    /* 選單改回橫排 */
-    gap: 10px;
+    flex-direction: column;
+    gap: 0;
   }
 
-  /* 手機版主內容：取消最大寬度限制並增加上方保護內距 */
+  .site-nav a {
+    display: block;
+    padding: 14px 15px; /* 觸控區高度 >= 44px */
+    border-bottom: 1px solid #444;
+  }
+
+  .site-nav li:last-child a {
+    border-bottom: 0;
+  }
+
+  /* 手機版主內容：取消最大寬度限制 */
   .main-content {
     max-width: 100%;
     margin: 0;
-    padding-top: 16px;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 16px 0 0;
   }
 
-  /* 若側邊欄雖隱藏但仍存在，確保 avatar 或其他元素不影響佈局 */
+  /* ------------------------------------------------------------------
+     側邊欄改造為滿版頁尾
+
+     原先為 display: none，「最新文章」等內容在手機上完全看不到。
+     單純改成靜態堆疊又會像一塊掉在底部的浮動面板，因此去圓角、拉成
+     貫穿左右的色帶，讓它讀起來就是頁尾。
+     ------------------------------------------------------------------ */
+  .sidebar {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow-y: visible;
+    border-radius: 0;
+    margin: 40px -15px 0; /* 負值抵銷 .container 的 15px 內距，做出滿版 */
+    padding: 26px 20px 30px;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 視覺順序改為：最新文章 → 關於作者 → 追蹤我。
+     讀完內文先給下一篇，其次才是身分與社群。
+     註：依賴 sidebar.html 目前的三個 widget 順序，日後增減需同步調整。 */
+  .sidebar .widget:nth-of-type(1) { order: 2; } /* 關於作者 */
+  .sidebar .widget:nth-of-type(2) { order: 1; } /* 最新文章 */
+  .sidebar .widget:nth-of-type(3) { order: 3; } /* 追蹤我 */
+
+  /* 改用區塊間距與分隔線取代原本的 <hr>（flex 重排後 <hr> 位置會錯亂） */
+  .sidebar hr {
+    display: none;
+  }
+
+  .sidebar .widget {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid var(--panel-line);
+  }
+
+  /* 視覺上的第一塊不需要上分隔線 */
+  .sidebar .widget:nth-of-type(2) {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .sidebar h3 {
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  /* 最新文章：整列可點，觸控區加大 */
+  .sidebar ul li {
+    margin-bottom: 0;
+  }
+
+  .sidebar ul li a {
+    display: block;
+    padding: 10px 0;
+  }
+
+  /* 關於作者：頭像縮小並與簡介同一行 */
   .avatar-img {
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
+    float: left;
+    margin: 6px 12px 8px 0;
+  }
+
+  .sidebar .widget:nth-of-type(1)::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .sidebar .widget:nth-of-type(1) p {
+    margin: 6px 0 0;
+    font-size: 0.95rem;
+    color: #ddd;
+  }
+
+  /* 追蹤我：改為行內連結列 */
+  .sidebar .widget:nth-of-type(3) ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 22px;
+  }
+
+  /* 寬表格在窄螢幕維持可讀的欄寬，並於容器內橫向捲動 */
+  .table-scroll table {
+    min-width: 600px;
   }
 }

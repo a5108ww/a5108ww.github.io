@@ -2,8 +2,7 @@
 <div class="widget">
   <h3>關於作者</h3>
   {% if site.author and site.author.avatar %}
-  <img src="{{ site.author.avatar | relative_url }}" alt="{% if site.author.name %}{{ site.author.name }}{% else %}作者{% endif %}" class="avatar-img"
-    style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;" />
+  <img src="{{ site.author.avatar | relative_url }}" alt="{% if site.author.name %}{{ site.author.name }}{% else %}作者{% endif %}" class="avatar-img" />
   {% endif %}
   {% if site.author and site.author.bio %}
   <p>{{ site.author.bio }}</p>
