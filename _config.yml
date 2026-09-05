@@ -17,4 +17,9 @@ timezone: "Asia/Taipei"
 markdown: kramdown
 permalink: /:year/:month/:day/:title.html
 
+# 本站不使用任何 Jekyll 主題，樣式全部來自 assets/css/style.css。
+# 必須明確寫成 null：github-pages gem 會強制帶入預設的 jekyll-theme-primer，
+# 該主題的 assets/css/style.scss 編譯後會與本站的 style.css 撞到同一個輸出路徑並將其覆蓋。
+theme: null
+
 # 可視需要加入更多 Jekyll 設定（plugins、exclude 等）

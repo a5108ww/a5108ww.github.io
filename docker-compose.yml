@@ -1,0 +1,22 @@
+services:
+  jekyll:
+    image: ruby:3.3
+    working_dir: /site
+    # --host 0.0.0.0    對外開放，手機才連得進來（預設的 127.0.0.1 只有本機可用）
+    # --force_polling   Windows bind mount 不會把檔案變更事件傳進 Linux 容器，
+    #                   少了這個參數，存檔後 Jekyll 不會自動重建
+    # --livereload      存檔後瀏覽器自動重新整理
+    command: >
+      bash -c "bundle install &&
+      bundle exec jekyll serve --host 0.0.0.0 --force_polling --livereload"
+    ports:
+      - "4000:4000"
+      - "35729:35729"   # livereload 用
+    volumes:
+      - .:/site
+      # 具名 volume：把 bundle install 的成果留在容器外，
+      # 避免每次啟動都重裝一次 github-pages 的相依套件
+      - bundle-cache:/usr/local/bundle
+
+volumes:
+  bundle-cache:
