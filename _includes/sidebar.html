@@ -5,7 +5,7 @@
   <img src="{{ site.author.avatar | relative_url }}" alt="{% if site.author.name %}{{ site.author.name }}{% else %}作者{% endif %}" class="avatar-img" />
   {% endif %}
   {% if site.author and site.author.bio %}
-  <p>{{ site.author.bio }}</p>
+  <p>嗨！我是{{site.author.name}}，{{ site.author.bio }}</p> 
   {% else %}
   <p>嗨！我是 Web 開發者，喜歡寫 Markdown 記錄技術生活。</p>
   {% endif %}
@@ -17,7 +17,7 @@
 <div class="widget">
   <h3>最新文章</h3>
   <ul>
-    {% for post in site.posts limit:5 %}
+    {% for post in site.posts limit:3 %}
     <li>
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
     </li>

@@ -1,10 +1,12 @@
 [
   {
     "url": "https://example.com.tw",
-    "name": "FB"
+    "name": "FB",
+    "external": true
   },
   {
     "url": "https://example.com.tw",
-    "name": "IG"
+    "name": "IG",
+    "external": true
   }
 ]

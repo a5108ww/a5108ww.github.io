@@ -1,10 +1,22 @@
 [
   {
     "category": "前端開發",
-    "items": ["HTML5/CSS3", "JavaScript", "Vue.js"]
+    "items": ["HTML5/CSS3", "JavaScript", "Bootstrap","Razor Page","Blazor Page"]
   },
   {
-    "category": "後端與工具",
-    "items": ["Git / GitHub", "Jekyll", "Node.js"]
+    "category": "後端開發",
+    "items": ["C#" ,".Net 6、Net 8、Net 10", "Design Pattern"]
+  },
+  {
+    "category": "資料庫",
+    "items": ["Mongo DB" ,"MySql" ,"MsSql"]
+  },
+  {
+    "category": "版本控制 / 自動化 / 測試工具",
+    "items": ["Git / GitHub / GitLab / 自架Git Server","Postman","Apache JMeter","Docker"]
+  },
+  {
+    "category": "雲端",
+    "items": ["Azure公有雲","GCP公有雲","私有雲(Nas自架站)"]
   }
 ]

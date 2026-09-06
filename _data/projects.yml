@@ -1,12 +1,11 @@
-- name: "極簡 Markdown 部落格"
-  description: "基於 GitHub Pages 與 Jekyll 架設的個人技術部落格。"
-  tech: ["Jekyll", "Liquid", "Markdown"]
-  link: "https://github.com"
+- name: "新私人後台"
+  description: "為管理私人事務而架設的資訊管理網站"
+  tech: ["Blazor Assembly", "C#"]
+  link: "https://gindernewweb-f9bfewe7bkg0d3ae.eastasia-01.azurewebsites.net/"
   featured: true
 
-- name: "氣象預報 API 串接小工具"
-  description: "使用 JavaScript 實時抓取中央氣象署 API 的前端小專案。"
-  tech: ["JavaScript", "CSS3", "RESTful API"]
-  link: "https://example.com"
+- name: "私人後台"
+  description: "為管理私人事務而架設的資訊管理網站(經個人綜合考量，目前停站中)"
+  tech: ["Net 8、Net 10","JavaScript", "CSS", "RESTful API"]
+  link: "https://ginderbackweb.shilvain.com/home/login"
   featured: false
-

@@ -246,6 +246,50 @@ body {
   border-radius: 4px;
 }
 
+/* --------------------------------------------------------------------------
+   文章插圖
+
+   .shot-compare 用於同一部位、不同對象的並排對照；
+   .shot-gallery 用於單一對象的多張補充圖。
+   兩者的圖片長寬比落差很大（1.42 ~ 2.52），因此以 aspect-ratio + object-fit
+   強制統一比例，避免並排時高低參差。
+   -------------------------------------------------------------------------- */
+.shot-compare,
+.shot-gallery {
+  display: grid;
+  gap: 14px;
+  margin: 20px 0 26px;
+}
+
+.shot-compare {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.shot-gallery {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.shot {
+  margin: 0;
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid #e2e6ea;
+  border-radius: 6px;
+  background-color: #f4f6f8;
+}
+
+.shot figcaption {
+  margin-top: 6px;
+  color: #7d858f;
+  font-size: 0.84rem;
+  text-align: center;
+}
+
 /* 表格捲動容器，由 assets/js/site.js 動態包上 */
 .table-scroll {
   overflow-x: auto;
@@ -267,6 +311,198 @@ body {
 
 .main-content thead th {
   background-color: #f2f4f6;
+}
+
+/* ==========================================================================
+   首頁
+   ========================================================================== */
+.home-hero {
+  padding-bottom: 22px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e5e8eb;
+}
+
+.home-hero h1 {
+  margin: 0 0 10px;
+  font-size: 1.8rem;
+}
+
+.home-hero__lead {
+  margin: 0;
+  max-width: 46em;
+  color: #555d66;
+  font-size: 1.02rem;
+}
+
+.home-section {
+  margin-bottom: 38px;
+}
+
+.home-section h2 {
+  margin: 0 0 16px;
+  font-size: 1.15rem;
+}
+
+/* 分類卡片：篇數與最新文章皆由 site.categories 自動帶入 */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.cat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 1px solid #e2e6ea;
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  background-color: #fbfcfd;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.cat-card:hover {
+  border-color: var(--accent);
+  background-color: #f4f9ff;
+}
+
+.cat-card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cat-card__name {
+  color: #1a4d80;
+  font-weight: 600;
+}
+
+.cat-card__count {
+  color: #8a929c;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.cat-card__latest {
+  color: #7d858f;
+  font-size: 0.84rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.home-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #eceff2;
+}
+
+.home-list__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 5px;
+  color: #8a929c;
+  font-size: 0.82rem;
+}
+
+.home-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin: 0;
+}
+
+/* ==========================================================================
+   標籤與分類文章列表
+   ========================================================================== */
+.tag {
+  display: inline-block;
+  padding: 1px 8px;
+  border: 1px solid #d6dae0;
+  border-radius: 999px;
+  background-color: #f4f6f8;
+  color: #5a6572;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+/* 文章頁底部的標籤列 */
+.post-tags {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e8eb;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* 依分類分組的文章列表 */
+.post-index__group {
+  margin-bottom: 34px;
+}
+
+.post-index__group h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+  font-size: 1.15rem;
+}
+
+.post-index__count {
+  padding: 0 8px;
+  border-radius: 999px;
+  background-color: #eef1f4;
+  color: #6b7480;
+  font-size: 0.78rem;
+  font-weight: normal;
+}
+
+.post-index ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-index li {
+  padding: 11px 0;
+  border-bottom: 1px solid #eceff2;
+}
+
+.post-index__link {
+  color: #1a4d80;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.post-index__link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* 日期與標籤同一行，作為次要資訊 */
+.post-index__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 5px;
+  color: #8a929c;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ==========================================================================
@@ -434,5 +670,12 @@ body {
   /* 寬表格在窄螢幕維持可讀的欄寬，並於容器內橫向捲動 */
   .table-scroll table {
     min-width: 600px;
+  }
+
+  /* 插圖改為單欄，避免三張並排在手機上各只剩約 110px 寬而看不清細節 */
+  .shot-compare,
+  .shot-gallery {
+    grid-template-columns: 1fr;
+    gap: 18px;
   }
 }

@@ -2,6 +2,8 @@
 layout: post
 title: "OpenTelemetry"
 date: 2026-09-02
+categories: [後端開發]
+tags: [可觀測性, tracing]
 ---
 
 # Open Telemetry
