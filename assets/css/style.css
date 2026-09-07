@@ -313,6 +313,112 @@ body {
   background-color: #f2f4f6;
 }
 
+/* --------------------------------------------------------------------------
+   主觀評分表（權重試算）
+
+   表格本體由 Markdown 產生，滑桿與「加權總分」列由 assets/js/site.js 補上。
+   -------------------------------------------------------------------------- */
+.score-card td,
+.score-card th {
+  vertical-align: middle;
+}
+
+.score-card__weight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.score-card__weight input[type="range"] {
+  width: 88px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.score-card__weight output {
+  min-width: 1ch;
+  color: #555d66;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 加扣分列：不吃權重，直接加到總分上 */
+.score-card__bonus-mark {
+  color: #8a929c;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.main-content .score-card tfoot th,
+.main-content .score-card tfoot td {
+  border-top: 2px solid var(--accent);
+  background-color: #f8fafc;
+  font-weight: 600;
+}
+
+.main-content .score-card tfoot td.is-best {
+  background-color: #eef6ff;
+}
+
+.score-card__total {
+  display: block;
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.score-card td.is-best .score-card__total {
+  color: #1a4d80;
+}
+
+.score-card__bar {
+  display: block;
+  height: 6px;
+  margin-top: 6px;
+  border-radius: 3px;
+  background-color: #e6eaee;
+  overflow: hidden;
+}
+
+.score-card__bar i {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background-color: var(--accent);
+  transition: width 0.18s ease;
+}
+
+.score-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 26px;
+}
+
+.score-card-actions__hint {
+  margin: 0;
+  color: #7d858f;
+  font-size: 0.84rem;
+}
+
+.score-card-actions__reset {
+  padding: 5px 12px;
+  border: 1px solid #d7dde3;
+  border-radius: 4px;
+  background-color: #fbfcfd;
+  color: #555d66;
+  font-family: inherit;
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.score-card-actions__reset:hover {
+  border-color: var(--accent);
+  background-color: #f4f9ff;
+}
+
 /* ==========================================================================
    首頁
    ========================================================================== */
@@ -677,5 +783,10 @@ body {
   .shot-gallery {
     grid-template-columns: 1fr;
     gap: 18px;
+  }
+
+  /* 評分表在 600px 的捲動寬度下，滑桿也要跟著縮短才不會擠掉分數欄 */
+  .score-card__weight input[type="range"] {
+    width: 62px;
   }
 }
