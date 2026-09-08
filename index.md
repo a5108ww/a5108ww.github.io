@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "【MyBlog】"
+title: "Shilvain Hsieh | Senior Backend Engineer"
 ---
 
 <section class="home-hero">
