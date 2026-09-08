@@ -1,5 +1,6 @@
 ---
 layout: default
+title: "Shilvain's Blog"
 ---
 
 <section class="home-hero">

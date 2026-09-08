@@ -43,4 +43,8 @@ exclude:
   - .jekyll-cache/
   - node_modules/
 
-# 可視需要加入更多 Jekyll 設定（plugins 等）
+# jekyll-sitemap 會自動產生 /sitemap.xml，供 Google Search Console 提交。
+# 它在 GitHub Pages 的官方支援清單內，但屬於「選用」外掛，不寫在這裡不會啟用。
+# 產生的清單會自動略過上方 exclude 的檔案。
+plugins:
+  - jekyll-sitemap
