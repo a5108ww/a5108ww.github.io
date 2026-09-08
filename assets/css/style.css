@@ -553,15 +553,30 @@ body {
   color: #666;
 }
 
-/* 依分類分組的文章列表 */
+/* 依分類分組的文章列表
+   ---------------------------------------------------------------------------
+   分類與分類之間水平排列（欄數依容器寬度自動增減），同分類的文章仍垂直堆疊。
+   min(300px, 100%) 是為了避免容器比 300px 還窄時 track 撐破版面。
+   align-items: start 讓各分類卡片保持自身高度，不被同列最高者拉長。 */
+.post-index {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  align-items: start;
+  gap: 22px;
+}
+
 .post-index__group {
-  margin-bottom: 34px;
+  padding: 4px 18px 8px;
+  border: 1px solid #e2e6ea;
+  border-radius: 6px;
+  background-color: #fbfcfd;
 }
 
 .post-index__group h2 {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-top: 14px;
   margin-bottom: 6px;
   padding-bottom: 8px;
   border-bottom: 2px solid var(--accent);
@@ -588,6 +603,11 @@ body {
   border-bottom: 1px solid #eceff2;
 }
 
+/* 卡片內最後一篇不畫底線，否則會與卡片下緣形成雙線 */
+.post-index li:last-child {
+  border-bottom: none;
+}
+
 .post-index__link {
   color: #1a4d80;
   text-decoration: none;
@@ -609,6 +629,161 @@ body {
   color: #8a929c;
   font-size: 0.82rem;
   font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   浮動分類清單（文章列表頁，DOM 由 assets/js/site.js 生成）
+   ========================================================================== */
+
+/* 錨點捲動：兩側固定欄不遮擋內容，桌機只需留一點呼吸空間；
+   手機版有固定頂欄，偏移量在下方的 media query 內加大。 */
+.post-index__group h2 {
+  scroll-margin-top: 16px;
+}
+
+/* 尊重使用者的減少動態設定，其餘情況才平滑捲動 */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* 跳轉後標示目標分類。
+   分類不多時整個網格只比視窗高一點，點了清單其實捲不動多少，
+   沒有這個高亮會像是「按了沒反應」。
+   :has() 不支援的瀏覽器只是少了高亮，跳轉本身不受影響。 */
+.post-index__group:has(> h2:target) {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(77, 166, 255, 0.18);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .post-index__group:has(> h2:target) {
+    animation: post-index-flash 1.6s ease-out;
+  }
+}
+
+@keyframes post-index-flash {
+  from {
+    box-shadow: 0 0 0 7px rgba(77, 166, 255, 0.38);
+  }
+  to {
+    box-shadow: 0 0 0 3px rgba(77, 166, 255, 0.18);
+  }
+}
+
+.cat-nav {
+  position: fixed;
+  /* 停在右側固定 sidebar 的左緣外，按鈕才不會疊在 sidebar 上
+     （兩者同為深色，疊在一起會糊成一塊，還會蓋住「追蹤我」區塊） */
+  right: calc(var(--sidebar-width) + var(--top-gap) + 12px);
+  bottom: 20px;
+  z-index: 1100; /* 高於 sidebar(1000)，低於手機版固定頂欄(1200) */
+
+  display: flex;
+  /* DOM 順序是「按鈕 → 面板」（控制項在前較合語意），
+     reverse 讓面板顯示在按鈕上方，展開時才不會蓋住按鈕本身 */
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.cat-nav__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 999px;
+  background-color: var(--panel-bg);
+  color: #fff;
+  font: inherit;
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.15s ease;
+}
+
+.cat-nav__toggle:hover {
+  background-color: #444;
+}
+
+.cat-nav__icon {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 14px;
+}
+
+.cat-nav__icon i {
+  height: 2px;
+  border-radius: 1px;
+  background-color: currentColor;
+}
+
+.cat-nav__panel {
+  width: 210px;
+  max-height: min(60vh, 420px);
+  overflow-y: auto;
+  padding: 14px 16px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: var(--panel-bg);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.cat-nav__panel[hidden] {
+  display: none;
+}
+
+.cat-nav__title {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.cat-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cat-nav__list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 9px;
+  border-left: 3px solid transparent;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
+.cat-nav__list a:hover {
+  background-color: #3f3f3f;
+  color: var(--accent);
+}
+
+/* 捲動到哪一個分類就標示哪一個 */
+.cat-nav__list a.is-current {
+  border-left-color: var(--accent);
+  background-color: #3a3a3a;
+  color: var(--accent);
+}
+
+.cat-nav__count {
+  color: #9aa3ad;
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.cat-nav__list a.is-current .cat-nav__count {
+  color: inherit;
 }
 
 /* ==========================================================================
@@ -788,5 +963,21 @@ body {
   /* 評分表在 600px 的捲動寬度下，滑桿也要跟著縮短才不會擠掉分數欄 */
   .score-card__weight input[type="range"] {
     width: 62px;
+  }
+
+  /* 錨點跳轉的落點要避開固定頂欄，否則分類標題會被蓋住 */
+  .post-index__group h2 {
+    scroll-margin-top: calc(var(--mobile-bar-height) + 12px);
+  }
+
+  /* 浮動分類清單：貼邊縮進一點，面板不超過螢幕寬 */
+  .cat-nav {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .cat-nav__panel {
+    width: min(210px, calc(100vw - 28px));
+    max-height: min(55vh, 360px);
   }
 }

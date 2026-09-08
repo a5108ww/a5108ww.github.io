@@ -22,4 +22,20 @@ permalink: /:year/:month/:day/:title.html
 # 該主題的 assets/css/style.scss 編譯後會與本站的 style.css 撞到同一個輸出路徑並將其覆蓋。
 theme: null
 
-# 可視需要加入更多 Jekyll 設定（plugins、exclude 等）
+# 不納入建置的檔案。
+# 注意：一旦寫出 exclude，就會「取代」而非「附加」到 Jekyll 的預設清單，
+# 因此 Gemfile 等原本預設排除的項目必須一併列出，否則會被複製進 _site。
+# CLAUDE.md 是給 AI 讀的專案說明，內文含未配對的 {% raw %} 等 Liquid 標記，
+# 不排除的話 Jekyll 會嘗試解析並讓整個建置失敗。
+exclude:
+  - CLAUDE.md
+  - docker-compose.yml # 本機預覽環境設定，沒有發佈到站上的必要
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .bundle/
+  - .sass-cache/
+  - .jekyll-cache/
+  - node_modules/
+
+# 可視需要加入更多 Jekyll 設定（plugins 等）

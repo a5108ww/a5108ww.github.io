@@ -248,7 +248,158 @@
     update();
   }
 
+  /* ------------------------------------------------------------------
+     文章列表頁的浮動分類清單
+
+     清單直接從頁面上的 .post-index__group h2 生成，不另外維護一份分類表。
+     blog.md 與 index.md 已各有一份寫死的分類順序（ordered 變數），再多一份
+     就是第三個要同步的地方；改從 DOM 讀取，未列入 ordered 的分類與「未分類」
+     也都會自動出現在清單裡。
+
+     預設收合成一顆按鈕：桌機的左右兩側都已被固定的 header/sidebar 佔滿，
+     常駐面板一定會蓋到其中之一，所以展開與否交給使用者決定。
+     ------------------------------------------------------------------ */
+  var CAT_NAV_OFFSET = 120; // 判定「目前分類」時，標題距視窗頂端的界線
+
+  function initCategoryNav() {
+    var index = document.querySelector('.post-index');
+    if (!index) return; // 只有文章列表頁需要
+
+    var headings = index.querySelectorAll('.post-index__group h2[id]');
+    if (headings.length < 2) return; // 只有一個分類時沒有跳轉的必要
+
+    var panelId = 'cat-nav-panel';
+
+    var nav = document.createElement('nav');
+    nav.className = 'cat-nav';
+    nav.setAttribute('aria-label', '分類快速跳轉');
+
+    var toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'cat-nav__toggle';
+    toggle.setAttribute('aria-controls', panelId);
+
+    var icon = document.createElement('span');
+    icon.className = 'cat-nav__icon';
+    icon.setAttribute('aria-hidden', 'true');
+    icon.appendChild(document.createElement('i'));
+    icon.appendChild(document.createElement('i'));
+    icon.appendChild(document.createElement('i'));
+
+    var toggleText = document.createElement('span');
+    toggleText.textContent = '分類';
+
+    toggle.appendChild(icon);
+    toggle.appendChild(toggleText);
+
+    var panel = document.createElement('div');
+    panel.className = 'cat-nav__panel';
+    panel.id = panelId;
+
+    var title = document.createElement('p');
+    title.className = 'cat-nav__title';
+    title.textContent = '跳至分類';
+
+    var list = document.createElement('ul');
+    list.className = 'cat-nav__list';
+
+    // 用原生錨點連結而非 JS 捲動：沒有 JS 時清單仍然可用，
+    // 平滑捲動與固定頂欄的偏移都交給 CSS（scroll-behavior / scroll-margin-top）。
+    var items = [];
+    Array.prototype.forEach.call(headings, function (heading) {
+      var countEl = heading.querySelector('.post-index__count');
+
+      var name = document.createElement('span');
+      name.className = 'cat-nav__name';
+      name.textContent = heading.id; // id 就是分類名，不含「-N篇」
+
+      var link = document.createElement('a');
+      link.href = '#' + encodeURIComponent(heading.id);
+      link.appendChild(name);
+
+      if (countEl) {
+        var count = document.createElement('span');
+        count.className = 'cat-nav__count';
+        count.textContent = countEl.textContent.replace(/[^0-9]/g, '');
+        link.appendChild(count);
+      }
+
+      link.addEventListener('click', function () {
+        setOpen(false); // 點完就收起，才看得到跳過去的分類
+      });
+
+      var li = document.createElement('li');
+      li.appendChild(link);
+      list.appendChild(li);
+
+      items.push({ link: link, heading: heading });
+    });
+
+    panel.appendChild(title);
+    panel.appendChild(list);
+    nav.appendChild(toggle);
+    nav.appendChild(panel);
+    document.body.appendChild(nav);
+
+    function setOpen(open) {
+      nav.classList.toggle('is-open', open);
+      panel.hidden = !open;
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? '收合分類清單' : '展開分類清單');
+    }
+
+    // 與 initNav 的漢堡選單相同的收合慣例：Esc、點擊面板以外的區域
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setOpen(!nav.classList.contains('is-open'));
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setOpen(false);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!nav.contains(e.target)) setOpen(false);
+    });
+
+    // 捲動時標示目前所在的分類
+    function update() {
+      var current = 0;
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].heading.getBoundingClientRect().top - CAT_NAV_OFFSET > 0) break;
+        current = i;
+      }
+
+      // 頁面捲到底時，最後幾個分類可能永遠碰不到判定線（網格排版下頁面只比
+      // 視窗高一點），高亮會卡在中間某一項，因此到底就直接標最後一個。
+      var atBottom = window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+      if (atBottom) current = items.length - 1;
+
+      items.forEach(function (item, i) {
+        item.link.classList.toggle('is-current', i === current);
+      });
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        update();
+        ticking = false;
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+
+    setOpen(false);
+    update();
+  }
+
   initNav();
   initTables();
   initScoreCards();
+  initCategoryNav();
 })();
