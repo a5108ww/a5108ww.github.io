@@ -4,6 +4,7 @@ title: "OpenTelemetry"
 date: 2026-09-02
 categories: [後端開發]
 tags: [可觀測性, tracing]
+description: "OpenTelemetry 三大訊號 Metrics、Traces、Logs 的差異與整體結構，以及 .NET 應用端的設定、Grafana 設定與 Server 環境建置的實作步驟。"
 ---
 
 # Open Telemetry

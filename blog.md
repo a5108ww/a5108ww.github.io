@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "我的文章列表"
+description: "依分類整理的全部文章，涵蓋後端開發、基礎建設、工具與AI，以及生活紀錄。"
 ---
 
 # 我的文章

@@ -55,6 +55,7 @@ curl -sL "https://a5108ww.github.io/?cb=$(date +%s)" -H "Cache-Control: no-cache
 - `docker-compose.yml`：本地預覽環境
 - `_layouts/default.html`：網站共用版型（首頁、一般頁）
 - `_layouts/post.html`：文章專用版型（文章頁）
+- `_includes/head.html`：兩個版型共用的 `<head>`（title、分享預覽的 meta、favicon、CSS/JS 引入）
 - `_includes/header.html`、`_includes/sidebar.html`：可重用片段
 - `_data/`：放 navigation、projects、skills、socials 等資料（支援 YAML/JSON）
 - `_posts/`：文章檔（使用 Jekyll 的標準檔名格式）
@@ -71,8 +72,11 @@ title: "Swagger"
 date: 2026-09-02
 categories: [後端開發]
 tags: [dotnet, api]
+description: "在 .NET 專案導入 Swagger 的設定步驟，含 csproj 與 Program.cs 的調整。"
 ---
 ```
+
+`description` 是分享連結時顯示的摘要，寫法見下方「分享預覽」一節。
 
 目前使用的分類：
 
@@ -95,9 +99,47 @@ tags: [dotnet, api]
 
 ## 撰寫文章時的注意事項
 
+- **一定要有描述，而且是兩個地方都要。** 新增或修改文章時一併檢查：
+  1. front matter 要寫 `description`（分享連結時顯示的摘要）
+  2. 正文的標題之後要先有一段說明文字，再進入程式碼、指令或表格
+
+  第 2 點常被忽略。「標題 → 直接上程式碼」的文章，讀者點進來要自己拼湊這篇在講什麼，
+  搜尋引擎抓到的摘要也會是一段指令。寫一兩句話交代這篇解決什麼問題就夠了。
 - **內容含 `{{ }}` 時要用 `{% raw %}` 包起來。** 例如 Docker 的 `--format "table {{.Names}}"`，否則 Jekyll 會當成 Liquid 變數解析並輸出成空字串。
 - **檔名需符合 `YYYY-MM-DD-標題.md` 格式**，否則不會被視為文章。
 - **front matter 不可省略。** 缺少時標題會由檔名自動推導，通常不是你要的樣子。
+- **別把含真實路徑、密鑰、內網位址的指令放在文章開頭。** 沒寫 `description` 時，
+  摘要會自動取正文開頭，那些內容會被送進 `<meta>` 並被搜尋引擎索引，
+  能見度比擺在文章中間高得多。
+
+## 分享預覽（Open Graph）
+
+把網址貼到 Slack、LINE、Facebook 時顯示的標題、描述與縮圖，由 `_includes/head.html`
+統一產生，兩個版型共用，不需要也不應該改到個別 layout。
+
+描述有三層 fallback，由上往下找到第一個有值的就用：
+
+| 順序 | 來源 | 說明 |
+|---|---|---|
+| 1 | `page.description` | 文章 front matter 自己寫的，**建議一律填寫** |
+| 2 | `page.excerpt` | Jekyll 自動取的正文開頭 |
+| 3 | `site.description` | `_config.yml` 的站台預設 |
+
+**為什麼建議一律填寫**：第 2 層是「有總比沒有好」的保險，不是好結果。文章若是標題後
+直接接程式碼，抓出來的摘要就會像這樣：
+
+> 一、流程圖 語法 \`\`\`mermaid flowchart LR A --&gt; B C--&gt; B \`\`\` 圖表…
+
+縮圖預設用 `_config.yml` 的 `image`（目前是 `/assets/images/avatar2.jpg`）。某篇文章想
+換一張，在 front matter 加 `image: "/assets/images/xxx.jpg"` 即可覆寫。
+
+兩件容易踩的事：
+
+- **縮圖只能是 jpg / png。** 各平台的分享卡片不吃 `.ico`，favicon 用的
+  `avatar.ico` 不能拿來當 `image`，填了會變成無圖卡片。
+- **`_config.yml` 的 `url` 必須是實際網域**（目前為 `https://myblog.shilvain.com`）。
+  `og:url`、`og:image`、`canonical` 都是由它組出的絕對網址，填錯會指到不存在的位址。
+  本機預覽時看到 `http://0.0.0.0:4000/...` 是正常的，`jekyll serve` 會覆寫這個值。
 
 ## 風格與相容性
 

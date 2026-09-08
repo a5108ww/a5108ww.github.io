@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "我的部落格首頁"
+title: "【MyBlog】"
 ---
 
 <section class="home-hero">

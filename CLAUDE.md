@@ -51,7 +51,16 @@ curl -sL "https://a5108ww.github.io/?cb=$(date +%s)" -H "Cache-Control: no-cache
 - `_layouts/default.html` —— 首頁與一般頁
 - `_layouts/post.html` —— 文章頁
 
-`_includes/header.html`、`_includes/sidebar.html` 為兩個版型共用。**內容大多由 `_data/` 驅動，改資料不必改模板**：`navigation.yml`（導覽列）、`socials.json`（側欄社群連結，需有 `name` + `url`，`external: true` 才開新分頁）、`projects.yml` + `skills.json`（`portfolio.md`）。YAML 與 JSON 皆可，`site.data` 兩種都讀得到。
+`_includes/head.html`、`_includes/header.html`、`_includes/sidebar.html` 為兩個版型共用。**`<head>` 的內容一律改 `_includes/head.html`，不要改回個別 layout** —— meta 標籤散在兩份 layout 時，加標籤要同步改兩處，漏掉一邊不會報錯、只會有一種頁面少了分享預覽。裡面包含 title、description、Open Graph / Twitter Card、canonical、favicon 與 CSS/JS 引入。
+
+`head.html` 有三個不明顯的地方：
+
+- **標題會去重** —— 首頁的 `page.title` 與 `site.title` 相同（都是站名），直接串接會輸出「站名 | 站名」，因此先比對再決定要不要串。
+- **描述是三層 fallback** —— `page.description` → `page.excerpt` → `site.description`。第二層是保險而非好結果，詳見下方「撰寫文章」。
+- **描述用 `escape_once` 而非 `escape`** —— `page.excerpt` 是 HTML，裡面的 `>` 已經是 `&gt;`，再套 `escape` 會變成 `&amp;gt;` 而在卡片上顯示出字面的 `&gt;`。
+
+改任何 Liquid 模板時共通的一個陷阱：**`comment` 區塊裡也不能寫出字面的 Liquid 標籤**。Liquid 連註解內部都會 tokenize，在說明文字裡寫一個標籤語法就會讓整份建置失敗（訊息形如 `Tag '...' was not properly terminated`）。要在註解裡提到某個標籤，改用文字描述它。
+**內容大多由 `_data/` 驅動，改資料不必改模板**：`navigation.yml`（導覽列）、`socials.json`（側欄社群連結，需有 `name` + `url`，`external: true` 才開新分頁）、`projects.yml` + `skills.json`（`portfolio.md`）。YAML 與 JSON 皆可，`site.data` 兩種都讀得到。
 
 ### 分類系統（改分類時最容易漏掉的一點）
 
@@ -86,9 +95,13 @@ title: "Swagger"
 date: 2026-09-02
 categories: [後端開發]
 tags: [dotnet, api]
+description: "在 .NET 專案導入 Swagger 的設定步驟，含 csproj 與 Program.cs 的調整。"
 ---
 ```
 
+- **新增或修改文章時，一定要檢查描述存在，而且是兩個地方**：front matter 的 `description`，以及正文標題之後要先有一段說明文字才進入程式碼／指令／表格。省略 `description` 不會讓建置失敗，摘要會 fallback 到 `page.excerpt`，但這個專案的技術筆記多半是「標題 → 直接上程式碼」，抓出來的摘要會是一段指令或 mermaid 語法。
+- 別把含真實路徑、密鑰、內網位址的指令放在文章開頭 —— 沒寫 `description` 時那段會被送進 `<meta name="description">` 並被搜尋引擎索引。
+- 想換某篇的分享縮圖，在 front matter 加 `image:`；縮圖只能是 jpg/png，`.ico` 不能用（那是 favicon 的格式）。
 - 檔名必須是 `YYYY-MM-DD-標題.md`，否則不會被當成文章。
 - front matter 不可省略，缺少時標題會由檔名推導。
 - **內容含 `{{ }}` 時要用 `{% raw %}` 包起來**（例如 Docker 的 `--format "table {{.Names}}"`），否則 Jekyll 會當成 Liquid 變數解析並輸出空字串。

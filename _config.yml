@@ -6,10 +6,15 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com"
-title: "Shilvain部落格"
+title: "【MyBlog】"
+
+# 分享連結時的預設描述與縮圖，頁面沒有自己的 description / image 時就用這一份。
+# image 需為 jpg/png：各平台的分享卡片不吃 .ico，favicon 用的 avatar.ico 無法共用。
+description: "技術筆記與生活紀錄。主要分享 .NET 後端開發，涵蓋框架、資料庫、容器與開發工具等主題。"
+image: "/assets/images/avatar2.jpg"
 
 # 基本站點設定（請視實際部署情況修改 url 與 baseurl）
-url: "https://a5108ww.github.io"
+url: "https://myblog.shilvain.com"
 baseurl: ""
 timezone: "Asia/Taipei"
 
