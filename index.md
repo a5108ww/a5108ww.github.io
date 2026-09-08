@@ -1,6 +1,5 @@
 ---
 layout: default
-title: "Shilvain Hsieh | Senior Backend Engineer"
 ---
 
 <section class="home-hero">
