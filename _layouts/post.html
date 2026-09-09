@@ -23,16 +23,50 @@
           {{ content }}
         </section>
 
-        {% if page.tags %}
         <footer class="post-tags">
+          {% if page.categories.size > 0 %}
+          <p>分類：
+            {% comment %}
+              連到文章列表的分類錨點（blog.md 的 h2 id 就是分類名），
+              讀完一篇可以直接跳回同分類的其他文章。
+            {% endcomment %}
+            {% for category in page.categories %}
+            <a class="tag tag--link" href="{{ '/blog#' | append: category | relative_url }}">{{ category }}</a>
+            {% endfor %}
+          </p>
+          {% endif %}
+
+          {% if page.tags.size > 0 %}
           <p>標籤：
             {% for tag in page.tags %}
             <span class="tag">{{ tag }}</span>{% unless forloop.last %}, {% endunless %}
             {% endfor %}
           </p>
+          {% endif %}
         </footer>
-        {% endif %}
       </article>
+
+      {% comment %}
+        site.posts 是新到舊排序，因此 page.previous 是「較新的一篇」、
+        page.next 是「較舊的一篇」，文案要照這個對應寫，不要跟著變數名走。
+      {% endcomment %}
+      {% if page.previous or page.next %}
+      <nav class="post-pager" aria-label="其他文章">
+        {% if page.next %}
+        <a class="post-pager__link" href="{{ page.next.url | relative_url }}" rel="prev">
+          <span class="post-pager__label">← 前一篇</span>
+          <span class="post-pager__title">{{ page.next.title }}</span>
+        </a>
+        {% endif %}
+
+        {% if page.previous %}
+        <a class="post-pager__link post-pager__link--next" href="{{ page.previous.url | relative_url }}" rel="next">
+          <span class="post-pager__label">後一篇 →</span>
+          <span class="post-pager__title">{{ page.previous.title }}</span>
+        </a>
+        {% endif %}
+      </nav>
+      {% endif %}
     </main>
 
     <aside class="sidebar">

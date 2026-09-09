@@ -54,6 +54,15 @@
 <meta name="twitter:description" content="{{ head_desc | escape_once }}">
 <meta name="twitter:image" content="{{ head_image }}">
 
+{%- comment -%}
+  CSS 與 JS 帶上建置時間當版本參數。沒有它的話，改完樣式或腳本後，
+  回訪的訪客（以及本機預覽）會繼續用瀏覽器快取裡的舊檔，畫面看起來
+  像是改動沒生效——這個坑在開發時踩過不只一次。
+  site.time 每次建置都會變，網址跟著變，瀏覽器就會重新抓。
+  favicon 不加：它幾乎不會改，加了只會讓每次發版都重新下載一次。
+{%- endcomment -%}
+{%- assign asset_version = site.time | date: '%s' -%}
+
 <link rel="icon" href="{{ '/assets/images/avatar.ico' | relative_url }}" sizes="any">
-<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-<script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ asset_version }}">
+<script src="{{ '/assets/js/site.js' | relative_url }}?v={{ asset_version }}" defer></script>

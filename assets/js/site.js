@@ -249,90 +249,83 @@
   }
 
   /* ------------------------------------------------------------------
-     文章列表頁的浮動分類清單
+     右下角的浮動導覽面板
 
-     清單直接從頁面上的 .post-index__group h2 生成，不另外維護一份分類表。
-     blog.md 與 index.md 已各有一份寫死的分類順序（ordered 變數），再多一份
-     就是第三個要同步的地方；改從 DOM 讀取，未列入 ordered 的分類與「未分類」
-     也都會自動出現在清單裡。
+     文章列表頁的分類清單與文章頁的目錄其實是同一種東西，只有資料來源與
+     文案不同，因此共用這個建構函式：建立面板 DOM、開關互動，以及捲動時
+     標示目前位置。
 
      預設收合成一顆按鈕：桌機的左右兩側都已被固定的 header/sidebar 佔滿，
      常駐面板一定會蓋到其中之一，所以展開與否交給使用者決定。
+
+     跳轉用原生錨點連結，平滑捲動與固定頂欄的偏移都交給 CSS
+     （scroll-behavior / scroll-margin-top）。
      ------------------------------------------------------------------ */
-  var CAT_NAV_OFFSET = 120; // 判定「目前分類」時，標題距視窗頂端的界線
+  var FLOAT_NAV_OFFSET = 120; // 判定「目前位置」時，標題距視窗頂端的界線
 
-  function initCategoryNav() {
-    var index = document.querySelector('.post-index');
-    if (!index) return; // 只有文章列表頁需要
-
-    var headings = index.querySelectorAll('.post-index__group h2[id]');
-    if (headings.length < 2) return; // 只有一個分類時沒有跳轉的必要
-
-    var panelId = 'cat-nav-panel';
+  function buildFloatNav(config) {
+    var panelId = config.name + '-panel';
 
     var nav = document.createElement('nav');
-    nav.className = 'cat-nav';
-    nav.setAttribute('aria-label', '分類快速跳轉');
+    nav.className = 'float-nav';
+    nav.setAttribute('aria-label', config.label);
 
     var toggle = document.createElement('button');
     toggle.type = 'button';
-    toggle.className = 'cat-nav__toggle';
+    toggle.className = 'float-nav__toggle';
     toggle.setAttribute('aria-controls', panelId);
 
     var icon = document.createElement('span');
-    icon.className = 'cat-nav__icon';
+    icon.className = 'float-nav__icon';
     icon.setAttribute('aria-hidden', 'true');
     icon.appendChild(document.createElement('i'));
     icon.appendChild(document.createElement('i'));
     icon.appendChild(document.createElement('i'));
 
     var toggleText = document.createElement('span');
-    toggleText.textContent = '分類';
+    toggleText.textContent = config.buttonText;
 
     toggle.appendChild(icon);
     toggle.appendChild(toggleText);
 
     var panel = document.createElement('div');
-    panel.className = 'cat-nav__panel';
+    panel.className = 'float-nav__panel';
     panel.id = panelId;
 
     var title = document.createElement('p');
-    title.className = 'cat-nav__title';
-    title.textContent = '跳至分類';
+    title.className = 'float-nav__title';
+    title.textContent = config.panelTitle;
 
     var list = document.createElement('ul');
-    list.className = 'cat-nav__list';
+    list.className = 'float-nav__list';
 
-    // 用原生錨點連結而非 JS 捲動：沒有 JS 時清單仍然可用，
-    // 平滑捲動與固定頂欄的偏移都交給 CSS（scroll-behavior / scroll-margin-top）。
     var items = [];
-    Array.prototype.forEach.call(headings, function (heading) {
-      var countEl = heading.querySelector('.post-index__count');
-
+    config.items.forEach(function (item) {
       var name = document.createElement('span');
-      name.className = 'cat-nav__name';
-      name.textContent = heading.id; // id 就是分類名，不含「-N篇」
+      name.className = 'float-nav__name';
+      name.textContent = item.text;
 
       var link = document.createElement('a');
-      link.href = '#' + encodeURIComponent(heading.id);
+      link.href = '#' + encodeURIComponent(item.heading.id);
+      if (item.sub) link.className = 'is-sub'; // 次層標題縮排
       link.appendChild(name);
 
-      if (countEl) {
-        var count = document.createElement('span');
-        count.className = 'cat-nav__count';
-        count.textContent = countEl.textContent.replace(/[^0-9]/g, '');
-        link.appendChild(count);
+      if (item.badge) {
+        var badge = document.createElement('span');
+        badge.className = 'float-nav__count';
+        badge.textContent = item.badge;
+        link.appendChild(badge);
       }
 
       link.addEventListener('click', function () {
-        setOpen(false); // 點完就收起，才看得到跳過去的分類
+        setOpen(false); // 點完就收起，才看得到跳過去的位置
       });
 
       var li = document.createElement('li');
       li.appendChild(link);
       list.appendChild(li);
 
-      items.push({ link: link, heading: heading });
+      items.push({ link: link, heading: item.heading });
     });
 
     panel.appendChild(title);
@@ -345,7 +338,7 @@
       nav.classList.toggle('is-open', open);
       panel.hidden = !open;
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.setAttribute('aria-label', open ? '收合分類清單' : '展開分類清單');
+      toggle.setAttribute('aria-label', open ? config.collapseLabel : config.expandLabel);
     }
 
     // 與 initNav 的漢堡選單相同的收合慣例：Esc、點擊面板以外的區域
@@ -362,15 +355,15 @@
       if (!nav.contains(e.target)) setOpen(false);
     });
 
-    // 捲動時標示目前所在的分類
+    // 捲動時標示目前所在的位置
     function update() {
       var current = 0;
       for (var i = 0; i < items.length; i++) {
-        if (items[i].heading.getBoundingClientRect().top - CAT_NAV_OFFSET > 0) break;
+        if (items[i].heading.getBoundingClientRect().top - FLOAT_NAV_OFFSET > 0) break;
         current = i;
       }
 
-      // 頁面捲到底時，最後幾個分類可能永遠碰不到判定線（網格排版下頁面只比
+      // 頁面捲到底時，最後幾項可能永遠碰不到判定線（例如網格排版下頁面只比
       // 視窗高一點），高亮會卡在中間某一項，因此到底就直接標最後一個。
       var atBottom = window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight - 2;
@@ -398,8 +391,69 @@
     update();
   }
 
+  /* 文章列表頁的分類清單。
+
+     項目直接從頁面上的 .post-index__group h2 生成，不另外維護一份分類表：
+     blog.md 與 index.md 已各有一份寫死的分類順序（ordered 變數），再多一份
+     就是第三個要同步的地方；改從 DOM 讀取，未列入 ordered 的分類與「未分類」
+     也都會自動出現。 */
+  function initCategoryNav() {
+    var index = document.querySelector('.post-index');
+    if (!index) return; // 只有文章列表頁需要
+
+    var headings = index.querySelectorAll('.post-index__group h2[id]');
+    if (headings.length < 2) return; // 只有一個分類時沒有跳轉的必要
+
+    buildFloatNav({
+      name: 'cat-nav',
+      label: '分類快速跳轉',
+      buttonText: '分類',
+      panelTitle: '跳至分類',
+      expandLabel: '展開分類清單',
+      collapseLabel: '收合分類清單',
+      items: Array.prototype.map.call(headings, function (heading) {
+        var countEl = heading.querySelector('.post-index__count');
+        return {
+          heading: heading,
+          text: heading.id, // id 就是分類名，不含「-N篇」
+          badge: countEl ? countEl.textContent.replace(/[^0-9]/g, '') : ''
+        };
+      })
+    });
+  }
+
+  /* 文章頁的目錄。
+
+     kramdown 會替每個標題自動產生 id，直接拿來當錨點；萬一沒有（例如標題
+     是純符號），就地補一個，否則連結會跳不動。 */
+  function initPostToc() {
+    var body = document.querySelector('.post-body');
+    if (!body) return; // 只有文章頁需要
+
+    var headings = body.querySelectorAll('h2, h3');
+    if (headings.length < 3) return; // 標題太少的短文不需要目錄
+
+    buildFloatNav({
+      name: 'toc-nav',
+      label: '文章目錄',
+      buttonText: '目錄',
+      panelTitle: '這篇的段落',
+      expandLabel: '展開目錄',
+      collapseLabel: '收合目錄',
+      items: Array.prototype.map.call(headings, function (heading, i) {
+        if (!heading.id) heading.id = 'section-' + (i + 1);
+        return {
+          heading: heading,
+          text: heading.textContent.trim(),
+          sub: heading.tagName === 'H3'
+        };
+      })
+    });
+  }
+
   initNav();
   initTables();
   initScoreCards();
   initCategoryNav();
+  initPostToc();
 })();

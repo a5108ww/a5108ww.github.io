@@ -456,9 +456,11 @@ body {
 }
 
 /* 分類卡片：篇數與最新文章皆由 site.categories 自動帶入 */
+/* 固定兩欄：220px 時 800px 的內容區會排成 3+1，最後一張卡片獨自一行，
+   看起來像漏排。300px 讓它穩定維持 2×2。 */
 .cat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
   gap: 12px;
 }
 
@@ -550,7 +552,7 @@ body {
   white-space: nowrap;
 }
 
-/* 文章頁底部的標籤列 */
+/* 文章頁底部的分類與標籤列 */
 .post-tags {
   margin-top: 28px;
   padding-top: 16px;
@@ -559,19 +561,83 @@ body {
   color: #666;
 }
 
+.post-tags p {
+  margin: 0 0 8px;
+}
+
+/* 可點的分類標籤，與純標示用的 .tag 區隔 */
+.tag--link {
+  color: #1a4d80;
+  text-decoration: none;
+}
+
+.tag--link:hover {
+  border-color: var(--accent);
+  background-color: #eef6ff;
+  color: var(--accent);
+}
+
+/* 上一篇／下一篇。讀完一篇文章後總得有下一步可去，
+   否則只能靠導覽列退回列表。 */
+.post-pager {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.post-pager__link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 16px;
+  border: 1px solid #e2e6ea;
+  border-radius: 6px;
+  background-color: #fbfcfd;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.post-pager__link:hover {
+  border-color: var(--accent);
+  background-color: #f4f9ff;
+}
+
+/* 只有後一篇時，靠右對齊才看得出方向 */
+.post-pager__link--next {
+  text-align: right;
+}
+
+.post-pager__label {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.post-pager__title {
+  color: #1a4d80;
+  font-weight: 600;
+}
+
 /* 依分類分組的文章列表
    ---------------------------------------------------------------------------
    分類與分類之間水平排列（欄數依容器寬度自動增減），同分類的文章仍垂直堆疊。
    min(300px, 100%) 是為了避免容器比 300px 還窄時 track 撐破版面。
    align-items: start 讓各分類卡片保持自身高度，不被同列最高者拉長。 */
+/* 用 multi-column 而不是 grid：分類篇數落差很大（後端開發 7 篇、基礎建設
+   1 篇），grid 會讓兩欄各自對齊列高，短的那欄下方留一大塊空白。
+   multi-column 會把卡片依序往下填、自動平衡欄高，排得緊密得多。 */
 .post-index {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-  align-items: start;
-  gap: 22px;
+  columns: 2;
+  column-gap: 22px;
 }
 
 .post-index__group {
+  /* 卡片不要被拆到兩欄去 */
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  /* multi-column 沒有 gap，欄內間距靠 margin */
+  margin-bottom: 22px;
   padding: 4px 18px 8px;
   border: 1px solid #e2e6ea;
   border-radius: 6px;
@@ -679,7 +745,7 @@ body {
   }
 }
 
-.cat-nav {
+.float-nav {
   position: fixed;
   /* 停在右側固定 sidebar 的左緣外，按鈕才不會疊在 sidebar 上
      （兩者同為深色，疊在一起會糊成一塊，還會蓋住「追蹤我」區塊） */
@@ -695,7 +761,7 @@ body {
   gap: 10px;
 }
 
-.cat-nav__toggle {
+.float-nav__toggle {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -712,24 +778,24 @@ body {
   transition: background-color 0.15s ease;
 }
 
-.cat-nav__toggle:hover {
+.float-nav__toggle:hover {
   background-color: #444;
 }
 
-.cat-nav__icon {
+.float-nav__icon {
   display: flex;
   flex-direction: column;
   gap: 3px;
   width: 14px;
 }
 
-.cat-nav__icon i {
+.float-nav__icon i {
   height: 2px;
   border-radius: 1px;
   background-color: currentColor;
 }
 
-.cat-nav__panel {
+.float-nav__panel {
   width: 210px;
   max-height: min(60vh, 420px);
   overflow-y: auto;
@@ -741,24 +807,24 @@ body {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
-.cat-nav__panel[hidden] {
+.float-nav__panel[hidden] {
   display: none;
 }
 
-.cat-nav__title {
+.float-nav__title {
   margin: 0 0 8px;
   color: var(--accent);
   font-size: 0.86rem;
   font-weight: 600;
 }
 
-.cat-nav__list {
+.float-nav__list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.cat-nav__list a {
+.float-nav__list a {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -771,26 +837,38 @@ body {
   text-decoration: none;
 }
 
-.cat-nav__list a:hover {
+.float-nav__list a:hover {
   background-color: #3f3f3f;
   color: var(--accent);
 }
 
 /* 捲動到哪一個分類就標示哪一個 */
-.cat-nav__list a.is-current {
+.float-nav__list a.is-current {
   border-left-color: var(--accent);
   background-color: #3a3a3a;
   color: var(--accent);
 }
 
-.cat-nav__count {
+.float-nav__count {
   color: #9aa3ad;
   font-size: 0.78rem;
   font-variant-numeric: tabular-nums;
 }
 
-.cat-nav__list a.is-current .cat-nav__count {
+.float-nav__list a.is-current .float-nav__count {
   color: inherit;
+}
+
+/* 目錄的次層標題（h3）縮排，看得出層次 */
+.float-nav__list a.is-sub {
+  padding-left: 22px;
+  font-size: 0.83rem;
+}
+
+/* 從目錄跳過去時，標題不要緊貼視窗上緣 */
+.post-body h2,
+.post-body h3 {
+  scroll-margin-top: 16px;
 }
 
 /* ==========================================================================
@@ -972,18 +1050,25 @@ body {
     width: 62px;
   }
 
-  /* 錨點跳轉的落點要避開固定頂欄，否則分類標題會被蓋住 */
-  .post-index__group h2 {
+  /* 窄螢幕排不下兩欄，退回單欄 */
+  .post-index {
+    columns: 1;
+  }
+
+  /* 錨點跳轉的落點要避開固定頂欄，否則標題會被蓋住 */
+  .post-index__group h2,
+  .post-body h2,
+  .post-body h3 {
     scroll-margin-top: calc(var(--mobile-bar-height) + 12px);
   }
 
   /* 浮動分類清單：貼邊縮進一點，面板不超過螢幕寬 */
-  .cat-nav {
+  .float-nav {
     right: 14px;
     bottom: 14px;
   }
 
-  .cat-nav__panel {
+  .float-nav__panel {
     width: min(210px, calc(100vw - 28px));
     max-height: min(55vh, 360px);
   }
