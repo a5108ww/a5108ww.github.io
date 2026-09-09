@@ -99,6 +99,13 @@ description: "在 .NET 專案導入 Swagger 的設定步驟，含 csproj 與 Pro
 ---
 ```
 
+- **任何程式碼、指令、XML/YAML/JSON 一律放進 ` ``` ` 圍籬，沒有例外**，並標上語言（`bash` / `csharp` / `xml` / `yaml` / `json` / `powershell` / `text`）。這是本專案踩過最大的坑：2026-09 以前的文章把指令當一般段落寫，12 篇有 8 篇的內容在網頁上是壞的。裸寫會同時觸發四種破壞，而且**原始檔看起來完全正常，只有渲染後才看得出來**：
+  - `<PropertyGroup>`、`<targets>`、`ILogger<Program>` 被當 HTML 標籤**整段吃掉**（NLog 那篇曾整份 34 行設定檔只剩一行）
+  - `--global` → `–global`（kramdown 把雙減號轉成 en dash，指令無法執行）
+  - `'字串'` → `‘字串’`（直引號轉彎引號，複製後語法錯誤）
+  - `D:\path`、`\s+`、`\033[30m` 的反斜線被當跳脫字元**吃掉**
+  
+  前後兩項是內容真的遺失，不是顯示問題。檢查方式：改完後看渲染結果，不能只看原始碼。
 - **新增或修改文章時，一定要檢查描述存在，而且是兩個地方**：front matter 的 `description`，以及正文標題之後要先有一段說明文字才進入程式碼／指令／表格。省略 `description` 不會讓建置失敗，摘要會 fallback 到 `page.excerpt`，但這個專案的技術筆記多半是「標題 → 直接上程式碼」，抓出來的摘要會是一段指令或 mermaid 語法。
 - 別把含真實路徑、密鑰、內網位址的指令放在文章開頭 —— 沒寫 `description` 時那段會被送進 `<meta name="description">` 並被搜尋引擎索引。
 - 想換某篇的分享縮圖，在 front matter 加 `image:`；縮圖只能是 jpg/png，`.ico` 不能用（那是 favicon 的格式）。

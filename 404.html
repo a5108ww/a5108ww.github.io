@@ -1,0 +1,31 @@
+---
+layout: default
+title: "找不到這個頁面"
+description: "這個網址不存在，或是內容已經搬走了。"
+permalink: /404.html
+sitemap: false
+---
+
+<section class="home-hero">
+  <h1>找不到這個頁面</h1>
+  <p class="home-hero__lead">
+    這個網址不存在，或是內容已經搬走了。<br>
+    可以從下面的入口重新找找。
+  </p>
+</section>
+
+<section class="home-section">
+  <h2>要去哪裡</h2>
+  <p class="home-links">
+    <a href="{{ '/' | relative_url }}">回首頁</a>
+    <a href="{{ '/blog' | relative_url }}">全部文章（{{ site.posts.size }} 篇）</a>
+    <a href="{{ '/portfolio' | relative_url }}">專案作品集</a>
+  </p>
+</section>
+
+{% comment %}
+  GitHub Pages 只認根目錄的 /404.html，因此用 permalink 固定輸出位置。
+  sitemap: false 讓 jekyll-sitemap 不要收錄這一頁。
+  站內連結一律走 relative_url：baseurl 為空時會輸出根路徑，
+  不管訪客是在哪一層深度的網址觸發 404，連結都指得對。
+{% endcomment %}

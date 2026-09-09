@@ -1,12 +1,7 @@
 [
   {
-    "url": "https://example.com.tw",
-    "name": "FB",
-    "external": true
-  },
-  {
-    "url": "https://example.com.tw",
-    "name": "IG",
+    "url": "https://github.com/a5108ww",
+    "name": "GitHub",
     "external": true
   }
 ]
