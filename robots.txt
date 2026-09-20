@@ -1,0 +1,12 @@
+# 允許所有搜尋引擎索引全站。
+#
+# 這個檔案刻意不加 front matter：加了之後 Jekyll 會渲染它，而 GitHub Pages
+# 預設啟用的 jekyll-default-layout 會替沒指定 layout 的頁面自動套上 default，
+# robots.txt 會整份被包進 HTML 而失效。沒有 front matter 才會被當靜態檔直接複製。
+#
+# 也因此網域只能寫死（無法用 site.url），與 CNAME 相同，換網域時兩處都要改。
+
+User-agent: *
+Allow: /
+
+Sitemap: https://myblog.shilvain.com/sitemap.xml

@@ -1,7 +1,7 @@
 <header class="site-header">
   <div class="site-header__bar">
     <div class="site-title">
-      <a href="{{ '/' | relative_url }}">{{ site.title | default: "我的部落格" }}</a>
+      <a href="{{ '/' | relative_url }}">{{ site.header_html.title | default: "我的部落格" }}</a>
     </div>
 
     <!-- 漢堡按鈕：僅手機版顯示，展開／收合由 assets/js/site.js 控制 -->

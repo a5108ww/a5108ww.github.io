@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "我的專案作品集"
+description: "近期開發的專案清單與技能列表。"
 ---
 
 # 我的專案作品集
