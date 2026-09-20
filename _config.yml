@@ -15,6 +15,9 @@ timezone: "Asia/Taipei"
 
 # Markdown 與 permalink 設定
 markdown: kramdown
+kramdown:
+  # 註腳的返回符號 ↩ 在 iOS 會被畫成彩色 emoji，加上 U+FE0E 強制以文字顯示
+  footnote_backlink: "&#8617;&#xFE0E;"
 permalink: /:year/:month/:day/:title.html
 
 # 本站不使用任何 Jekyll 主題，樣式全部來自 assets/css/style.css。

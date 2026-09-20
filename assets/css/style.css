@@ -246,6 +246,29 @@ body {
   border-radius: 4px;
 }
 
+/* 引用區塊。遊記用它放每天的心得，在成片的照片之間作為段落收尾 */
+.main-content blockquote {
+  margin: 24px 0;
+  padding: 14px 18px;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  background-color: #f6f8fa;
+  color: #444;
+  font-size: 0.96rem;
+}
+
+.main-content blockquote p {
+  margin: 0.5em 0;
+}
+
+.main-content blockquote p:first-child {
+  margin-top: 0;
+}
+
+.main-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
 /* --------------------------------------------------------------------------
    文章插圖
 
@@ -288,6 +311,66 @@ body {
   color: #7d858f;
   font-size: 0.84rem;
   text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   照片（由 _includes/photo.html 產生）
+
+   與上方 .shot 不同，不裁切、保留原始長寬比，適合遊記這類直式與橫式混雜的照片。
+   單張照片限制最大高度，避免直式照片在桌機上超過一個螢幕高；
+   .photo-pair 為兩張並排、.photo-trio 為三張並排，手機上也維持相同欄數。
+   -------------------------------------------------------------------------- */
+.photo {
+  margin: 20px 0 26px;
+  text-align: center;
+}
+
+.photo a {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: top;
+}
+
+.photo img {
+  display: block;
+  width: auto;
+  max-height: 80vh;
+  border-radius: 6px;
+}
+
+.photo figcaption {
+  margin-top: 6px;
+  color: #7d858f;
+  font-size: 0.84rem;
+}
+
+.photo-pair,
+.photo-trio {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 14px;
+  margin: 20px 0 26px;
+}
+
+.photo-trio {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.photo-pair .photo,
+.photo-trio .photo {
+  margin: 0;
+}
+
+.photo-pair .photo a,
+.photo-trio .photo a {
+  display: block;
+}
+
+.photo-pair .photo img,
+.photo-trio .photo img {
+  width: 100%;
+  max-height: none;
 }
 
 /* 表格捲動容器，由 assets/js/site.js 動態包上 */
@@ -506,6 +589,59 @@ body {
 }
 
 /* ==========================================================================
+   註腳（kramdown 的 [^名稱] 語法，定義會自動集中到文末 .footnotes）
+   ========================================================================== */
+/* 避免上標把該行行距撐開，造成段落行高不一致 */
+sup {
+  line-height: 0;
+}
+
+/* 內文中的註腳編號，顯示為 [1] */
+a.footnote {
+  padding: 0 2px; /* 上標字很小，加大手機點擊範圍 */
+  text-decoration: none;
+}
+
+a.footnote::before {
+  content: "[";
+}
+
+a.footnote::after {
+  content: "]";
+}
+
+/* 文末註腳區 */
+.footnotes {
+  margin-top: 2.5em;
+  padding-top: 1em;
+  border-top: 1px solid #e2e6ea;
+  color: #7d858f;
+  font-size: 0.9rem;
+}
+
+.footnotes::before {
+  content: "註";
+  display: block;
+  margin-bottom: 0.5em;
+  color: #222;
+  font-weight: bold;
+}
+
+.footnotes p {
+  margin: 0.25em 0;
+}
+
+a.reversefootnote {
+  margin-left: 4px;
+  text-decoration: none;
+}
+
+/* 點註腳跳過來時，標亮對應的那一條 */
+.footnotes li:target {
+  background-color: #fff8d6;
+}
+
+/* ==========================================================================
    手機與平板版 (螢幕寬度 <= 768px)
    ========================================================================== */
 
@@ -677,5 +813,16 @@ body {
   .shot-gallery {
     grid-template-columns: 1fr;
     gap: 18px;
+  }
+
+  /* 三張並排在手機上每張只剩約 110px 寬，縮小間距多留一點給照片 */
+  .photo-trio {
+    gap: 8px;
+  }
+
+  /* 註腳跳轉目標往下讓出頂部固定導覽列的高度，否則會被導覽列蓋住 */
+  .footnotes li,
+  sup[id^="fnref"] {
+    scroll-margin-top: calc(var(--mobile-bar-height) + 10px);
   }
 }

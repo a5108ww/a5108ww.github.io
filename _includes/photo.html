@@ -1,0 +1,16 @@
+{%- comment -%}
+  文章照片（不裁切，保留原始長寬比；點擊可開啟原圖）
+
+  用法：{% include photo.html src="2026_Japan_Travel/day1/day1_lunch1.jpg" caption="炸豬排飯" %}
+    src     assets/images/ 底下的相對路徑
+    caption 圖說，同時作為 alt 替代文字（可省略）
+
+  兩張並排時，外層包一個 <div class="photo-pair">。
+{%- endcomment -%}
+{%- assign photo_url = '/assets/images/' | append: include.src | relative_url -%}
+<figure class="photo">
+  <a href="{{ photo_url }}"><img src="{{ photo_url }}" alt="{{ include.caption | escape }}" loading="lazy" decoding="async"></a>
+  {%- if include.caption %}
+  <figcaption>{{ include.caption }}</figcaption>
+  {%- endif %}
+</figure>
