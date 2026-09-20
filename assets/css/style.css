@@ -838,7 +838,9 @@ a.reversefootnote {
 /* 點註腳跳過來時，標亮對應的那一條 */
 .footnotes li:target {
   background-color: #fff8d6;
-  /* ==========================================================================
+}
+
+/* ==========================================================================
    浮動分類清單（文章列表頁，DOM 由 assets/js/site.js 生成）
    ========================================================================== */
 
@@ -1188,6 +1190,7 @@ a.reversefootnote {
   .footnotes li,
   sup[id^="fnref"] {
     scroll-margin-top: calc(var(--mobile-bar-height) + 10px);
+  }
 
   /* 評分表在 600px 的捲動寬度下，滑桿也要跟著縮短才不會擠掉分數欄 */
   .score-card__weight input[type="range"] {
