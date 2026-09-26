@@ -1,0 +1,4 @@
+# 系列文章的顯示名稱。
+# key 是文章 front matter 裡 series 的值，value 是文末導覽區塊的標題。
+# 新增系列時在這裡加一行，不必改 _includes/series-nav.html。
+japan2026: "日本蜜月行"

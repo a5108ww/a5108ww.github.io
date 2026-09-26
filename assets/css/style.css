@@ -660,6 +660,35 @@ body {
   color: var(--accent);
 }
 
+/* 系列文章導覽（由 _includes/series-nav.html 產生）。
+   放在上一篇／下一篇之前：同系列的閱讀順序比時間相鄰的文章更重要。 */
+.series-nav {
+  margin-top: 26px;
+  padding: 16px 18px;
+  border: 1px solid #e2e6ea;
+  border-radius: 6px;
+  background-color: #f6f8fa;
+}
+
+.series-nav__title {
+  margin: 0 0 8px;
+  font-weight: bold;
+}
+
+.series-nav__list {
+  margin: 0;
+  padding-left: 1.4em;
+}
+
+.series-nav__list li {
+  margin: 4px 0;
+}
+
+/* 目前所在的這篇不是連結，用次要色標示，與其他項目區隔 */
+.series-nav__current {
+  color: var(--text-muted);
+}
+
 /* 上一篇／下一篇。讀完一篇文章後總得有下一步可去，
    否則只能靠導覽列退回列表。 */
 .post-pager {

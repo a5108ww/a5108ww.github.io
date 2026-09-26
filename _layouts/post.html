@@ -47,22 +47,31 @@
       </article>
 
       {% comment %}
-        site.posts 是新到舊排序，因此 page.previous 是「較新的一篇」、
-        page.next 是「較舊的一篇」，文案要照這個對應寫，不要跟著變數名走。
+        系列文章導覽。只有 front matter 寫了 series 的文章才會輸出內容，
+        其餘文章的 include 結果為空字串，不影響版面。
+      {% endcomment %}
+      {% include series-nav.html %}
+
+      {% comment %}
+        page.previous / page.next 是依 collection 內部的文件陣列（舊到新）決定，
+        與 site.posts 在畫面上的新到舊排序無關：
+          page.previous = 發佈日期較「舊」的一篇 → 左側「前一篇」
+          page.next     = 發佈日期較「新」的一篇 → 右側「後一篇」
+        rel 屬性也要跟著對應，否則會給搜尋引擎錯誤的前後關係。
       {% endcomment %}
       {% if page.previous or page.next %}
       <nav class="post-pager" aria-label="其他文章">
-        {% if page.next %}
-        <a class="post-pager__link" href="{{ page.next.url | relative_url }}" rel="prev">
+        {% if page.previous %}
+        <a class="post-pager__link" href="{{ page.previous.url | relative_url }}" rel="prev">
           <span class="post-pager__label">← 前一篇</span>
-          <span class="post-pager__title">{{ page.next.title }}</span>
+          <span class="post-pager__title">{{ page.previous.title }}</span>
         </a>
         {% endif %}
 
-        {% if page.previous %}
-        <a class="post-pager__link post-pager__link--next" href="{{ page.previous.url | relative_url }}" rel="next">
+        {% if page.next %}
+        <a class="post-pager__link post-pager__link--next" href="{{ page.next.url | relative_url }}" rel="next">
           <span class="post-pager__label">後一篇 →</span>
-          <span class="post-pager__title">{{ page.previous.title }}</span>
+          <span class="post-pager__title">{{ page.next.title }}</span>
         </a>
         {% endif %}
       </nav>

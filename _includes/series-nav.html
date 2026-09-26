@@ -1,0 +1,32 @@
+{%- comment -%}
+  系列文章導覽（文末）。
+
+  文章的 front matter 寫了 series 與 series_order 才會出現：
+
+    series: japan2026     系列代號，對應 _data/series.yml 的 key
+    series_order: 1       在系列中的順序
+
+  清單由 site.posts 自動篩選，新增或調整順序都不必回頭改各篇內文。
+  目前這篇不輸出連結，改以文字標示，讀者才知道自己在系列的哪一段。
+  series 只有一篇時不顯示（一篇文章的清單沒有意義）。
+{%- endcomment -%}
+{%- if page.series -%}
+  {%- assign series_posts = site.posts | where: "series", page.series | sort: "series_order" -%}
+  {%- if series_posts.size > 1 -%}
+    {%- assign series_name = site.data.series[page.series] | default: "系列文章" -%}
+<nav class="series-nav" aria-label="系列文章">
+  <p class="series-nav__title">{{ series_name }}</p>
+  <ol class="series-nav__list">
+    {%- for item in series_posts %}
+    <li>
+      {%- if item.url == page.url %}
+      <span class="series-nav__current">{{ item.title }}（本篇）</span>
+      {%- else %}
+      <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+      {%- endif %}
+    </li>
+    {%- endfor %}
+  </ol>
+</nav>
+  {%- endif -%}
+{%- endif -%}
