@@ -8,8 +8,14 @@
   兩張並排時，外層包一個 <div class="photo-pair">。
 {%- endcomment -%}
 {%- assign photo_url = '/assets/images/' | append: include.src | relative_url -%}
+{%- comment -%}
+  尺寸查 _data/photo_sizes.yml。有 width/height 瀏覽器才能在圖片載入前
+  按比例保留空間，否則整篇捲動時會一路被撐開（CLS）。查不到就不輸出，
+  不影響顯示。實際顯示尺寸仍由 CSS 的 width:100% / height:auto 決定。
+{%- endcomment -%}
+{%- assign size = site.data.photo_sizes[include.src] -%}
 <figure class="photo">
-  <a href="{{ photo_url }}"><img src="{{ photo_url }}" alt="{{ include.caption | escape }}" loading="lazy" decoding="async"></a>
+  <a href="{{ photo_url }}"><img src="{{ photo_url }}" alt="{{ include.caption | escape }}"{% if size %} width="{{ size.w }}" height="{{ size.h }}"{% endif %} loading="lazy" decoding="async"></a>
   {%- if include.caption %}
   <figcaption>{{ include.caption }}</figcaption>
   {%- endif %}

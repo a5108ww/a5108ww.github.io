@@ -1,0 +1,173 @@
+# 照片的像素尺寸，給 _includes/photo.html 輸出 width/height 屬性用。
+#
+# 為什麼需要：圖片沒有尺寸屬性時，瀏覽器在載入前不知道要留多少空間，
+# 載入後才把下方內容推開（CLS）。旅遊文一篇有 40~65 張照片且都是 lazy
+# load，捲動時會一路跳動。有了 width/height，瀏覽器就能先按比例保留位置。
+#
+# 為什麼不用固定的 aspect-ratio 佔位：這些照片 82% 是直拍（1200x1600），
+# 套橫向比例會讓多數照片被框在橫框裡、左右大量留白。
+#
+# 怎麼重新產生（例如壓縮或換圖之後，在專案根目錄執行）：
+#   for f in assets/images/*/*.jpg assets/images/*/*/*.jpg; do
+#     s=$(file -b "$f" | grep -oE '[0-9]{3,}x[0-9]{3,}' | tail -1)
+#     echo "\"${f#assets/images/}\": { w: ${s%x*}, h: ${s#*x} }"
+#   done > _data/photo_sizes.yml
+#
+# key 是 photo.html 的 src 參數（assets/images/ 底下的相對路徑）。
+# 查不到的圖不會輸出尺寸屬性，只是少了佔位，不會壞掉。
+
+"CC/CC內裝.jpg": { w: 943, h: 460 }
+"CC/CC正面.jpg": { w: 764, h: 416 }
+"Kicks/Kicks側面.jpg": { w: 886, h: 352 }
+"Kicks/Kicks內裝.jpg": { w: 941, h: 530 }
+"Kicks/Kicks後車廂.jpg": { w: 881, h: 531 }
+"Kicks/Kicks正面.jpg": { w: 551, h: 299 }
+"Kicks/Kicks背面.jpg": { w: 730, h: 513 }
+"XF/XF內裝.jpg": { w: 943, h: 531 }
+"XF/XF後座.jpg": { w: 937, h: 526 }
+"XF/XF後車廂.jpg": { w: 940, h: 527 }
+"XF/XF正面.jpg": { w: 922, h: 443 }
+"XF/XF背面.jpg": { w: 731, h: 459 }
+"2026_Japan_Travel/day1/day1_dinner1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day1/day1_dinner2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day1/day1_dinner3.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day1/day1_landing_to_japan.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day1/day1_lunch1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day1/day1_lunch2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day1/day1_market.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_bakery1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_bakery2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_bakery3.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_bakery4.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_bakery5.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_bakery6.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_bakery7.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_dessert1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_dessert2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_dessert3.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_dessert4.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_lunch1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_lunch2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint10.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint11.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day2/day2_viewpoint12.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint13.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint14.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint15.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint16.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint17.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint18.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint19.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint2.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day2/day2_viewpoint20.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint21.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint22.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint3.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day2/day2_viewpoint4.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day2/day2_viewpoint5.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day2/day2_viewpoint6.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day2/day2_viewpoint7.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day2/day2_viewpoint9.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_bakery1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_bakery2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_bakery3.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_dessert1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_dinner1.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day3/day3_dinner2.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day3/day3_lunch1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_lunch2.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day3/day3_lunch3.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day3/day3_lunch4.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_train1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_viewpoint1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_viewpoint10.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_viewpoint11.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_viewpoint12.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_viewpoint13.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day3/day3_viewpoint2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_viewpoint3.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_viewpoint4.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_viewpoint5.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_viewpoint6.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_viewpoint7.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_viewpoint8.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day3/day3_viewpoint9.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_dessert1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_dessert2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_dinner1.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day4/day4_dinner2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_dinner3.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_dinner4.jpg": { w: 2048, h: 1536 }
+"2026_Japan_Travel/day4/day4_lunch1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_lunch2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_lunch3.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_lunch4.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_lunch5.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_lunch6.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_lunch7.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_train1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_viewpoint1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_viewpoint10.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_viewpoint11.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day4/day4_viewpoint12.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day4/day4_viewpoint13.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day4/day4_viewpoint14.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day4/day4_viewpoint15.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_viewpoint16.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_viewpoint2.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day4/day4_viewpoint3.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_viewpoint4.jpg": { w: 1600, h: 647 }
+"2026_Japan_Travel/day4/day4_viewpoint5.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_viewpoint6.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_viewpoint7.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_viewpoint8.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day4/day4_viewpoint9.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day5/day5_dessert1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day5/day5_dinner1.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day5/day5_dinner2.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day5/day5_hotel1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day5/day5_hotel2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day5/day5_hotel3.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day5/day5_lunch1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day5/day5_lunch2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day5/day5_viewpoint1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day5/day5_viewpoint2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day5/day5_viewpoint3.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day5/day5_viewpoint4.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day5/day5_viewpoint5.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day6/day6_viewpoint1.jpg": { w: 1600, h: 540 }
+"2026_Japan_Travel/day6/day6_viewpoint2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day6/day6_viewpoint3.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day6/day6_viewpoint4.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day6/day6_viewpoint5.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_dessert1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_dessert2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_dinner1.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day7/day7_dinner2.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day7/day7_dinner3.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_dinner4.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint10.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day7/day7_viewpoint11.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint12.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint13.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint14.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint15.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint16.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint17.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint18.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint19.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint20.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint21.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint3.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day7/day7_viewpoint4.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day7/day7_viewpoint5.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint6.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint7.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint8.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day7/day7_viewpoint9.jpg": { w: 1600, h: 1200 }
+"2026_Japan_Travel/day8/day8_viewpoint1.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day8/day8_viewpoint2.jpg": { w: 1200, h: 1600 }
+"2026_Japan_Travel/day8/day8_viewpoint3.jpg": { w: 1200, h: 1600 }
