@@ -66,3 +66,42 @@
 <link rel="icon" href="{{ '/assets/images/avatar.ico' | relative_url }}" sizes="any">
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ asset_version }}">
 <script src="{{ '/assets/js/site.js' | relative_url }}?v={{ asset_version }}" defer></script>
+
+{%- comment -%}
+  Mermaid 圖表與數學公式：kramdown 只會把它們輸出成一般程式碼與純文字，
+  要靠前端函式庫才畫得出來。兩個函式庫都不小（Mermaid 約 1 MB），
+  所以只在 front matter 寫了 mermaid: true / math: true 的文章才載入，
+  其他頁面完全不受影響。
+{%- endcomment -%}
+{%- if page.mermaid %}
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  // kramdown 的輸出有兩種：一般位置是 div.language-mermaid 包住程式碼，
+  // 放在 markdown="1" 的 HTML 區塊裡則是 pre > code.language-mermaid。
+  // 兩種都換成 Mermaid 認得的 pre.mermaid。
+  var blocks = [];
+  document.querySelectorAll('div.language-mermaid').forEach(function (div) { blocks.push(div); });
+  document.querySelectorAll('pre > code.language-mermaid').forEach(function (code) { blocks.push(code.parentElement); });
+  blocks.forEach(function (block) {
+    var pre = document.createElement('pre');
+    pre.className = 'mermaid';
+    pre.textContent = block.textContent;
+    block.replaceWith(pre);
+  });
+
+  mermaid.initialize({ startOnLoad: false });
+  await mermaid.run({ querySelector: 'pre.mermaid' });
+</script>
+{%- endif %}
+{%- if page.math %}
+{%- comment -%}
+  kramdown 會把公式輸出成行內反斜線小括號、區塊反斜線中括號的形式，
+  這裡讓 KaTeX 只認這兩種分隔符號；程式碼區塊預設會被略過，
+  所以教學用的原始寫法不會被誤渲染。
+{%- endcomment %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, { delimiters: [ { left: '\\[', right: '\\]', display: true }, { left: '\\(', right: '\\)', display: false } ] })"></script>
+{%- endif %}

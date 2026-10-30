@@ -7,7 +7,7 @@
 - **樣板**：Liquid（位於 `_layouts`、`_includes`）
 - **內容**：Markdown（文章放在 `_posts/`，其他頁面為 `.md`）
 - **樣式**：`assets/css/style.css`
-- **腳本**：`assets/js/site.js`（漢堡選單、表格捲動容器）
+- **腳本**：`assets/js/site.js`（漢堡選單、表格捲動容器、評分表、警示框、分類清單、文章目錄）
 
 ## 本地開發（預覽）
 
@@ -34,6 +34,7 @@ docker compose up -d       # 背景執行
 
 - **改 `_config.yml` 後必須重啟容器**：`docker compose restart jekyll`。自動重建只監看內容檔，不會重載設定檔。改 Markdown、CSS、layout 則會自動重建。
 - **瀏覽器請開著 DevTools 並勾選 Network → Disable cache**。否則改了 CSS 卻看到舊樣式，很容易誤判。
+  （`_includes/head.html` 會用建置時間 `site.time` 替 CSS/JS 網址加上 `?v=` 版本參數，所以線上訪客在每次發版後都會拿到新檔；但本機開發時頁面不一定會重新建置，仍建議關掉快取。）
 - **`docker-compose.yml` 的 `--force_polling` 不可移除**。Windows 的 bind mount 不會把檔案變更事件傳進 Linux 容器，少了它存檔不會觸發重建。（Jekyll 啟動時會印出「Auto-regeneration may not work on some Windows versions」警告，實測有效，可忽略。）
 
 ## 部署到 GitHub Pages
@@ -43,7 +44,7 @@ docker compose up -d       # 背景執行
 驗證線上是否更新時要注意 **GitHub Pages 的 CDN 快取為 `max-age=600`（10 分鐘）**，剛推送完直接開會看到舊版。用 cache-buster 確認：
 
 ```bash
-curl -sL "https://a5108ww.github.io/?cb=$(date +%s)" -H "Cache-Control: no-cache"
+curl -sL "https://myblog.shilvain.com/?cb=$(date +%s)" -H "Cache-Control: no-cache"
 ```
 
 瀏覽器則用 Ctrl+Shift+R 強制重載。
@@ -82,10 +83,10 @@ description: "在 .NET 專案導入 Swagger 的設定步驟，含 csproj 與 Pro
 
 | 分類 | 收錄主題 |
 |---|---|
-| 後端開發 | Git、Log、OpenTelemetry、Swagger、Unit Test、資料庫、指令 |
+| 後端開發 | Git、Log、OpenTelemetry、Swagger、Unit Test、資料庫、指令、.NET、區塊鏈 |
 | 基礎建設 | 自架 Server 等部署與環境主題 |
-| 工具與AI | Markdown 圖表、AI 工具 |
-| 生活 | 非技術主題（不鏽鋼介紹、車款規格對照） |
+| 工具與AI | Markdown 語法大全、AI 工具 |
+| 生活 | 非技術主題（旅遊、購車與汽車保養、食譜、不鏽鋼介紹） |
 
 新增或調整分類時請注意三件事：
 
@@ -115,6 +116,16 @@ description: "在 .NET 專案導入 Swagger 的設定步驟，含 csproj 與 Pro
 
   順手標上語言（` ```bash `、` ```csharp `、` ```xml `、` ```yaml `、` ```json `、
   ` ```powershell `、` ```text `），純文字輸出或目錄樹用 ` ```text `。
+- **一般文字也有排版陷阱，同樣是原始檔正常、渲染後才壞。** 改完務必看渲染結果：
+
+  | 你寫的 | 網頁上變成 | 正確寫法 |
+  |---|---|---|
+  | 兩行文字之間沒有空行 | 合併成同一段 | 段落之間空一行 |
+  | 表格的前一行是文字 | 不會變成表格，`\|` 直接顯示 | 表格前空一行 |
+  | `1.文字`（點後面沒空格） | 不會變成清單 | `1. 文字` |
+  | `•` 開頭 | 不是清單符號，整段黏在一起 | `- 文字` |
+  | 警示框（`> [!NOTE]`）裡的多行文字 | 一樣會合併成一行 | 行與行之間加一行只有 `>` 的空行，或改用 `> - ` 清單 |
+  | 表頭欄數比分隔線多 | 每列多出一欄空白 | 表頭、分隔線、內容的欄數一致 |
 - **一定要有描述，而且是兩個地方都要。** 新增或修改文章時一併檢查：
   1. front matter 要寫 `description`（分享連結時顯示的摘要）
   2. 正文的標題之後要先有一段說明文字，再進入程式碼、指令或表格
@@ -127,6 +138,98 @@ description: "在 .NET 專案導入 Swagger 的設定步驟，含 csproj 與 Pro
 - **別把含真實路徑、密鑰、內網位址的指令放在文章開頭。** 沒寫 `description` 時，
   摘要會自動取正文開頭，那些內容會被送進 `<meta>` 並被搜尋引擎索引，
   能見度比擺在文章中間高得多。
+
+## 進階寫作功能
+
+### Front matter 選用欄位
+
+除了 `layout`、`title`、`date`、`categories`、`tags`、`description` 之外，以下欄位需要時再加：
+
+| 欄位 | 作用 |
+|---|---|
+| `image: "/assets/images/xxx.jpg"` | 換掉這篇的分享縮圖（見「分享預覽」） |
+| `featured: true` | 列入首頁「精選文章」（最多 5 篇） |
+| `mermaid: true` | 載入 Mermaid，` ```mermaid ` 區塊才會畫成圖表 |
+| `math: true` | 載入 KaTeX，`$$…$$` 才會渲染成公式 |
+| `series: car2026` + `series_order: 3` | 文末顯示系列文章導覽（見下方「系列文章」） |
+| `published: false` | 草稿：不會出現在網站上，但檔案仍會推進 repo |
+
+**Mermaid 與 KaTeX 是逐篇開啟的。** 兩個函式庫都不小（Mermaid 約 1 MB），所以只有寫了旗標的文章才會從 jsDelivr 載入，沒寫的頁面只會看到原始程式碼或純文字。公式的寫法是 kramdown 的 `$$…$$`（行內與獨立區塊都是兩個錢字號），跟 GitHub 的單個 `$` 不同。
+
+**同一天發兩篇時，`date` 要帶時間。** 只寫日期的話，Jekyll 會用檔名排序，前後篇的順序不一定是你要的：
+
+```yaml
+date: 2026-10-21 08:30:00 +0800
+```
+
+日期設在未來的文章預設不會發佈（`future: false`），等到那天之後下一次推送才會出現。
+
+### 警示框
+
+沿用 GitHub 的寫法，`assets/js/site.js` 的 `initAlerts()` 會轉成帶標題與顏色的提示框：
+
+```markdown
+> [!TIP]
+> 第一段
+>
+> 第二段（段落之間要有只寫 > 的空行，否則會併成一行）
+```
+
+可用的類型：`[!NOTE]`、`[!TIP]`、`[!IMPORTANT]`、`[!WARNING]`、`[!CAUTION]`。
+
+### 文章目錄
+
+文章裡的 `##`（h2）與 `###`（h3）合計 3 個以上時，右下角會自動出現「目錄」按鈕，點開可以跳到各段落，捲動時會標示目前位置。不需要任何設定。
+
+**`####`（h4）不會列入目錄。** 像「步驟」這種每段都會重複的小標，用 `####` 才不會塞滿目錄。
+
+文章列表頁（`/blog`）右下角的「分類」按鈕是同一個元件，清單直接從頁面上的分類標題產生。
+
+### 系列文章
+
+front matter 寫了 `series` 與 `series_order` 的文章，文末會出現同系列的文章清單（`_includes/series-nav.html`），本篇會標示「（本篇）」。系列只有一篇時不顯示。
+
+系列的顯示名稱寫在 `_data/series.yml`，新增系列時在那裡加一行：
+
+```yaml
+japan2026: "日本蜜月行"
+car2026: "2026 購車紀錄"
+```
+
+### 照片
+
+```liquid
+{% include photo.html src="2026_Japan_Travel/day1/day1_lunch1.jpg" caption="炸豬排飯" %}
+```
+
+`src` 是 `assets/images/` 底下的相對路徑，`caption` 同時當圖說與替代文字。兩張並排時外層包 `<div class="photo-pair">`。
+
+**新增、壓縮或替換照片後，要重新產生 `_data/photo_sizes.yml`。** 這份清單提供每張照片的寬高，瀏覽器才能在圖片載入前先保留空間；查不到的照片仍能顯示，但捲動時版面會跳動。重新產生的指令寫在該檔開頭。
+
+### 主觀評分表
+
+在 Markdown 表格的下一行加上 `{: .score-card}`，JS 會補上權重滑桿與加權總分列（範例見 `_posts/2026-09-06-2026年CUV大比拚.md`）。分數仍寫在表格裡，沒有 JS 時一樣讀得到。
+
+欄位角色由**表頭文字**決定，與順序無關：
+
+| 表頭 | 角色 |
+|---|---|
+| 第 1 欄 | 面向名稱 |
+| 「權重」 | 權重欄（必要）；填 `+` 的列是加扣分項，直接加到總分，不參與加權平均 |
+| 「說明」或「備註」 | 純文字欄 |
+| 其他欄 | 每欄各為一個受評對象 |
+
+### 同時呈現原始寫法與渲染結果
+
+教學類文章（例如 Markdown 語法大全）要讓讀者對照時，在程式碼區塊後面接一個 `md-result` 框，框裡的 Markdown 會正常解析：
+
+```html
+<div class="md-result" markdown="1">
+**這段會被渲染成粗體**
+</div>
+```
+
+示範標題大小時不要放真的 `#` 標題（會多出 h1、也會混進目錄），改用 `<p class="md-demo-h1">`～`md-demo-h6`。
 
 ## 分享預覽（Open Graph）
 
@@ -168,6 +271,8 @@ description: "在 .NET 專案導入 Swagger 的設定步驟，含 csproj 與 Pro
 
 - `site.data` 可同時讀取 YAML/JSON，專案保留兩種格式是可行的，但建議統一規範何時使用哪一種。
 - `_data/socials.json` 需有 `name`、`url` 欄位；`external: true` 才會以新分頁開啟。`_includes/sidebar.html` 已做空值檢查。
-- 若要加入外掛（plugins），在 GitHub Pages 上有支援限制，請先確認官方支援的插件清單。
+- 若要加入外掛（plugins），在 GitHub Pages 上有支援限制，請先確認官方支援的插件清單。目前使用 `jekyll-sitemap`（產生 `/sitemap.xml`）與 `jekyll-feed`（產生 `/feed.xml`）。
+- `robots.txt` 刻意不加 front matter：加了之後 Jekyll 會渲染它並自動套上 default 版型，整份被包進 HTML 而失效。
+- **改 Liquid 模板時，`comment` 區塊裡也不能寫出字面的 Liquid 標籤。** Liquid 連註解內部都會解析，在說明文字裡寫一個標籤語法就會讓整個建置失敗（訊息形如 `Tag '...' was not properly terminated`）。要在註解裡提到某個標籤，改用文字描述。
 
 作者：`_config.yml` 中 `author.name`（可修改）

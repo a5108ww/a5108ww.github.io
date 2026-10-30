@@ -451,9 +451,51 @@
     });
   }
 
+  /* ------------------------------------------------------------------
+     GitHub 警示框（> [!NOTE]、> [!TIP] 等）
+
+     kramdown 不認得這個 GitHub 擴充語法，會輸出成一般引用，第一行還留著
+     「[!NOTE]」字樣。這裡把它轉成帶標題與顏色的提示框；文章維持 GitHub
+     的寫法，搬到 GitHub 上一樣能用。
+     ------------------------------------------------------------------ */
+  var ALERT_TITLES = {
+    NOTE: 'Note',
+    TIP: 'Tip',
+    IMPORTANT: 'Important',
+    WARNING: 'Warning',
+    CAUTION: 'Caution'
+  };
+  var ALERT_MARK = /^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/;
+
+  function initAlerts() {
+    var quotes = document.querySelectorAll('.main-content blockquote');
+    Array.prototype.forEach.call(quotes, function (quote) {
+      var first = quote.firstElementChild;
+      if (!first || first.tagName !== 'P') return;
+
+      var match = first.textContent.match(ALERT_MARK);
+      if (!match) return;
+      var type = match[1];
+
+      // 標記在第一段開頭的文字節點裡；標記獨佔一段時，拿掉後整段刪除
+      var node = first.firstChild;
+      if (node && node.nodeType === 3) node.nodeValue = node.nodeValue.replace(ALERT_MARK, '');
+      if (!first.textContent.trim()) first.parentNode.removeChild(first);
+
+      var title = document.createElement('p');
+      title.className = 'md-alert__title';
+      title.textContent = ALERT_TITLES[type];
+      quote.insertBefore(title, quote.firstChild);
+
+      quote.classList.add('md-alert');
+      quote.classList.add('md-alert--' + type.toLowerCase());
+    });
+  }
+
   initNav();
   initTables();
   initScoreCards();
+  initAlerts();
   initCategoryNav();
   initPostToc();
 })();

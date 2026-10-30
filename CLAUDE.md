@@ -76,7 +76,10 @@ curl -sL "https://a5108ww.github.io/?cb=$(date +%s)" -H "Cache-Control: no-cache
 
 ### assets/js/site.js
 
-單一 IIFE，最後依序呼叫 `initNav()` → `initTables()` → `initScoreCards()` → `initCategoryNav()`，**前三者順序有相依性**：`initScoreCards` 會把控制列插到 `.table-scroll` 之外，前提是 `initTables` 已先包好容器。
+單一 IIFE，最後依序呼叫 `initNav()` → `initTables()` → `initScoreCards()` → `initAlerts()` → `initCategoryNav()` → `initPostToc()`，**前三者順序有相依性**：`initScoreCards` 會把控制列插到 `.table-scroll` 之外，前提是 `initTables` 已先包好容器。
+
+- `initAlerts()` —— 把 GitHub 警示框語法（`> [!NOTE]`、`[!TIP]`、`[!IMPORTANT]`、`[!WARNING]`、`[!CAUTION]`）轉成帶標題與顏色的提示框。kramdown 不認得這個語法，會輸出成一般引用並留著 `[!NOTE]` 字樣；文章維持 GitHub 的寫法即可，全站通用。
+- `initCategoryNav()`、`initPostToc()` —— 文章列表頁的浮動分類清單與文章頁的目錄，兩者共用 `buildFloatNav()` 建構面板、開關與捲動高亮；目錄只抓 `h2`／`h3`。
 
 - `initTables()` —— Markdown 產生的 `<table>` 沒有容器，寬表格會撐破版面；純 CSS 解不掉（`min-width` 加在 table 上時捲軸會落在父層），故用 JS 包一層 `.table-scroll`。
 - `initCategoryNav()` —— 文章列表頁右下角的浮動分類清單（只在頁面有 `.post-index` 時建立）。清單項目**從 DOM 上的 `.post-index__group h2[id]` 讀出**，刻意不再維護第四份分類表：`blog.md` 與 `index.md` 已各有一份寫死的 `ordered`，從 DOM 讀取可讓未列入 `ordered` 的分類與「未分類」自動出現。跳轉用原生錨點連結（無 JS 時仍可用），平滑捲動與固定頂欄的偏移交給 CSS 的 `scroll-behavior` / `scroll-margin-top`。
@@ -112,4 +115,5 @@ description: "在 .NET 專案導入 Swagger 的設定步驟，含 csproj 與 Pro
 - 檔名必須是 `YYYY-MM-DD-標題.md`，否則不會被當成文章。
 - front matter 不可省略，缺少時標題會由檔名推導。
 - **內容含 `{{ }}` 時要用 `{% raw %}` 包起來**（例如 Docker 的 `--format "table {{.Names}}"`），否則 Jekyll 會當成 Liquid 變數解析並輸出空字串。
-- 現有文章裡的 ` ```mermaid ` 區塊沒有載入任何 mermaid runtime（兩個 layout 都沒有），會以純程式碼區塊呈現。
+- **Mermaid 圖表與數學公式要在 front matter 開啟才會渲染**：`mermaid: true` 會載入 Mermaid、`math: true` 會載入 KaTeX（`_includes/head.html`，從 jsDelivr 載入）。沒開的頁面，` ```mermaid ` 只會顯示成程式碼，公式只會是純文字。兩個函式庫都不小，所以是逐篇開啟而不是全站載入。kramdown 的公式寫法是 `$$…$$`（行內與區塊都是），跟 GitHub 的單個 `$` 不同。
+- **要同時呈現「原始寫法」與「渲染結果」**（例如 `Markdown語法大全`），程式碼區塊後面接 `<div class="md-result" markdown="1">`，框裡的 Markdown 會被正常解析。示範標題大小時不要放真的 `#` 標題（會多出 h1、混進目錄），改用 `<p class="md-demo-h1">`～`md-demo-h6`。

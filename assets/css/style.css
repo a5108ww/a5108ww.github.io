@@ -379,6 +379,104 @@ body {
   max-height: none;
 }
 
+/* --------------------------------------------------------------------------
+   GitHub 警示框（> [!NOTE] 等），由 assets/js/site.js 的 initAlerts 轉換。
+   沿用一般引用的外框與底色，只換左邊框與標題的顏色（配色同 GitHub）。
+   選擇器帶上 blockquote，權重才蓋得過上面的 .main-content blockquote。
+   -------------------------------------------------------------------------- */
+.main-content blockquote.md-alert {
+  margin: 0 0 14px;
+}
+
+.md-alert__title {
+  font-weight: 600;
+}
+
+.main-content blockquote.md-alert--note      { border-left-color: #0969da; }
+.main-content blockquote.md-alert--tip       { border-left-color: #1a7f37; }
+.main-content blockquote.md-alert--important { border-left-color: #8250df; }
+.main-content blockquote.md-alert--warning   { border-left-color: #9a6700; }
+.main-content blockquote.md-alert--caution   { border-left-color: #cf222e; }
+
+.md-alert--note .md-alert__title      { color: #0969da; }
+.md-alert--tip .md-alert__title       { color: #1a7f37; }
+.md-alert--important .md-alert__title { color: #8250df; }
+.md-alert--warning .md-alert__title   { color: #9a6700; }
+.md-alert--caution .md-alert__title   { color: #cf222e; }
+
+/* 任務清單：kramdown 會產生勾選框，拿掉原本的項目符號以免重複 */
+.task-list {
+  padding-left: 0.4em;
+  list-style: none;
+}
+
+.task-list-item-checkbox {
+  margin-right: 0.5em;
+}
+
+/* Mermaid 圖表：head.html 把程式碼區塊換成 pre.mermaid 後，
+   不需要程式碼區塊的灰底，圖置中、太寬時橫向捲動 */
+.main-content pre.mermaid {
+  background-color: transparent;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   語法示範的「呈現結果」框（Markdown 語法大全）
+
+   原始寫法放在上方的程式碼區塊，實際渲染結果放在 .md-result 裡，
+   用虛線框和左上角的標籤跟程式碼區分。
+   -------------------------------------------------------------------------- */
+.md-result {
+  position: relative;
+  margin: 0 0 24px;
+  padding: 30px 18px 14px;
+  border: 1px dashed #c9d1d9;
+  border-radius: 6px;
+}
+
+.md-result::before {
+  content: "呈現結果";
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.md-result > :first-child {
+  margin-top: 0;
+}
+
+.md-result > :last-child {
+  margin-bottom: 0;
+}
+
+/* 示範用的圖片縮小，不要撐滿整個內容區 */
+.md-result img {
+  max-width: 160px;
+}
+
+/* 標題大小示範：用一般段落模仿各級標題的字級。
+   不用真的標題，才不會多出 h1、也不會混進右下角的目錄。 */
+.md-demo-h1,
+.md-demo-h2,
+.md-demo-h3,
+.md-demo-h4,
+.md-demo-h5,
+.md-demo-h6 {
+  margin: 0.25em 0;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.md-demo-h1 { font-size: 2em; }
+.md-demo-h2 { font-size: 1.5em; }
+.md-demo-h3 { font-size: 1.17em; }
+.md-demo-h4 { font-size: 1em; }
+.md-demo-h5 { font-size: 0.83em; }
+.md-demo-h6 { font-size: 0.67em; }
+
 /* 表格捲動容器，由 assets/js/site.js 動態包上 */
 .table-scroll {
   overflow-x: auto;
