@@ -1,0 +1,20 @@
+{%- comment -%}
+  判斷一篇文章的更新日期是否有效，結果放在 updated_at（無效時為 nil）。
+  用法：傳入 post 參數，文章頁傳 page、列表傳迴圈裡的文章。
+
+  更新日期只有「晚於」發布日期才採用；早於或等於視為填錯而忽略。
+  這條規則集中在這裡，文章頁顯示、head 的 meta 與排序共用同一份，
+  避免各處各寫一份、改了一邊漏掉另一邊。
+  比較時兩者都轉成固定長度的年月日時分秒字串，字串大小即等於時間先後。
+
+  include 內 assign 的變數會留在呼叫端可讀的作用域（Jekyll include 的行為），
+  呼叫端就是靠這點讀到 updated_at。
+{%- endcomment -%}
+{%- assign updated_at = nil -%}
+{%- if include.post.last_modified_at -%}
+  {%- assign ud_pub = include.post.date | date: "%Y%m%d%H%M%S" -%}
+  {%- assign ud_upd = include.post.last_modified_at | date: "%Y%m%d%H%M%S" -%}
+  {%- if ud_upd > ud_pub -%}
+    {%- assign updated_at = include.post.last_modified_at -%}
+  {%- endif -%}
+{%- endif -%}

@@ -13,13 +13,16 @@
 
 <hr>
 
-<!-- 最新文章動態列表 -->
+<!-- 最近更新：有效的更新日期優先，沒有就用發布日期（規則見 updated-sort.html） -->
 <div class="widget">
-  <h3>最新文章</h3>
+  <h3>最近更新</h3>
+  {% include updated-sort.html posts=site.posts %}
   <ul>
-    {% for post in site.posts limit:3 %}
+    {% for key in updated_keys limit:3 %}
+    {% assign recent_idx = key | split: ":" | last | plus: 0 %}
+    {% assign recent = site.posts[recent_idx] %}
     <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <a href="{{ recent.url | relative_url }}">{{ recent.title }}</a>
     </li>
     {% endfor %}
   </ul>

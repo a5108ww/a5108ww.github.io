@@ -74,6 +74,14 @@ curl -sL "https://a5108ww.github.io/?cb=$(date +%s)" -H "Cache-Control: no-cache
 - 首頁的分類卡片（篇數、最新文章）由 `site.categories` 自動帶入，新增文章不需回頭改 `index.md`。
 - 首頁「精選文章」區塊預設隱藏，文章 front matter 加 `featured: true` 才出現（最多 5 篇）。
 
+### 更新日期（`last_modified_at`）
+
+- **只能手動填** —— 自動抓 git 時間的 `jekyll-last-modified-at` 不在 GitHub Pages 支援清單內。欄位名刻意用 `last_modified_at`，`jekyll-sitemap`（`<lastmod>`）與 `jekyll-feed`（`<updated>`）不必改程式碼就會讀它。
+- **有效性規則只寫在 `_includes/updated-date.html`** —— 更新日期必須晚於發布日期才採用，否則視為填錯而忽略。文章頁的「更新：」、`head.html` 的 `article:modified_time`、排序全都呼叫它。sitemap 與 RSS 直接讀原始值，不受這條保護。
+- **排序在 `_includes/updated-sort.html`** —— Liquid 的 `sort` 無法「沒填就退回另一個欄位」，因此自組「日期:倒數名次:索引」字串排序，呼叫端取最後一段轉成數字再回陣列取文章。用在 sidebar 的「最近更新」與首頁分類卡片的「最新：」。
+- **只有上面兩處照更新日期排**；`blog.md` 文章列表與前一篇／後一篇維持照發布日期，刻意不改，避免列表順序隨修改跳動。
+- 兩個 include 都靠「include 內 assign 的變數會留在呼叫端」把結果傳回（`updated_at`、`updated_keys`）。
+
 ### assets/js/site.js
 
 單一 IIFE，最後依序呼叫 `initNav()` → `initTables()` → `initScoreCards()` → `initAlerts()` → `initCategoryNav()` → `initPostToc()`，**前三者順序有相依性**：`initScoreCards` 會把控制列插到 `.table-scroll` 之外，前提是 `initTables` 已先包好容器。
@@ -111,6 +119,7 @@ description: "在 .NET 專案導入 Swagger 的設定步驟，含 csproj 與 Pro
   前後兩項是內容真的遺失，不是顯示問題。檢查方式：改完後看渲染結果，不能只看原始碼。
 - **新增或修改文章時，一定要檢查描述存在，而且是兩個地方**：front matter 的 `description`，以及正文標題之後要先有一段說明文字才進入程式碼／指令／表格。省略 `description` 不會讓建置失敗，摘要會 fallback 到 `page.excerpt`，但這個專案的技術筆記多半是「標題 → 直接上程式碼」，抓出來的摘要會是一段指令或 mermaid 語法。
 - 別把含真實路徑、密鑰、內網位址的指令放在文章開頭 —— 沒寫 `description` 時那段會被送進 `<meta name="description">` 並被搜尋引擎索引。
+- 大幅修改舊文章時，在 front matter 加 `last_modified_at: 2026-10-31 14:00:00 +0800`，文章頁會顯示更新日期，並排進 sidebar「最近更新」。同一天內要帶時間：只寫日期會被當成 00:00，可能早於當天帶時間的 `date` 而被忽略。
 - 想換某篇的分享縮圖，在 front matter 加 `image:`；縮圖只能是 jpg/png，`.ico` 不能用（那是 favicon 的格式）。
 - 檔名必須是 `YYYY-MM-DD-標題.md`，否則不會被當成文章。
 - front matter 不可省略，缺少時標題會由檔名推導。

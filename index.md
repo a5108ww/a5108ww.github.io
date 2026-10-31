@@ -17,6 +17,8 @@ title: "Shilvain's Blog"
   {% comment %}
     分類卡片直接讀 site.categories，篇數與最新文章都會自動更新，
     日後新增文章不需要回來改首頁。順序與 blog.md 保持一致。
+    「最新」依有效的更新日期優先、沒有就用發布日期（規則見 updated-sort.html），
+    與 sidebar 的最近更新一致；文章列表 blog.md 則維持照發布日期。
   {% endcomment %}
   {% assign ordered = "後端開發,基礎建設,工具與AI,生活" | split: "," %}
 
@@ -24,12 +26,15 @@ title: "Shilvain's Blog"
     {% for name in ordered %}
       {% assign group = site.categories[name] %}
       {% if group %}
+        {% include updated-sort.html posts=group %}
+        {% assign latest_idx = updated_keys.first | split: ":" | last | plus: 0 %}
+        {% assign latest = group[latest_idx] %}
         <a class="cat-card" href="{{ '/blog#' | append: name | relative_url }}">
           <span class="cat-card__head">
             <span class="cat-card__name">{{ name }}</span>
             <span class="cat-card__count">{{ group.size }} 篇</span>
           </span>
-          <span class="cat-card__latest">最新：{{ group.first.title }}</span>
+          <span class="cat-card__latest">最新：{{ latest.title }}</span>
         </a>
       {% endif %}
     {% endfor %}

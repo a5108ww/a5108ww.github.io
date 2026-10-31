@@ -1,0 +1,21 @@
+{%- comment -%}
+  依「有效的更新日期優先，沒有就用發布日期」把文章由新到舊排序，
+  供 sidebar 的最近更新與首頁分類卡片共用。
+  用法：傳入 posts 參數（文章陣列），結果放在 updated_keys。
+
+  Liquid 的 sort 只能依單一欄位排，沒填該欄位的文章會被集中丟到最前或最後，
+  做不到「退回用發布日期」，所以改成自組排序鍵再排字串：
+    排序日期 : 倒數名次（補零） : 原陣列索引
+  呼叫端取鍵的最後一段、加 0 轉成數字，再回傳入的陣列取文章。
+
+  中段的倒數名次用來決定同時間的先後：傳入的陣列本身是發布新到舊，
+  反轉排序後倒數名次大的（原索引小的）在前，同時間時發布較新者排前面。
+{%- endcomment -%}
+{%- assign updated_keys = "" -%}
+{%- for us_post in include.posts -%}
+  {%- include updated-date.html post=us_post -%}
+  {%- assign us_date = updated_at | default: us_post.date | date: "%Y%m%d%H%M%S" -%}
+  {%- assign us_rank = forloop.rindex | prepend: "0000" | slice: -4, 4 -%}
+  {%- assign updated_keys = updated_keys | append: us_date | append: ":" | append: us_rank | append: ":" | append: forloop.index0 | append: "," -%}
+{%- endfor -%}
+{%- assign updated_keys = updated_keys | split: "," | sort | reverse -%}
