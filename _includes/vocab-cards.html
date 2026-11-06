@@ -1,0 +1,23 @@
+{%- comment -%}
+  國中小英文單字卡。資料在 _data/vocab.yml，每個主題輸出一個 h3 和一組單字卡。
+
+  用法：在文章裡 include 本檔，帶 level 參數
+    level   elementary（國小）或 junior（國中）
+  單字有 pos（詞性）時以小字接在單字後面；國小沒有這個欄位，就不輸出。
+
+  主題標題刻意輸出成 Markdown 的 h3：文章本身是 Markdown，include 的結果會先由
+  Liquid 展開再交給 kramdown，標題才會自動帶 id、進入右下角的浮動目錄。
+  卡片是 HTML 區塊，前後各空一行，kramdown 才會把它當成區塊原樣輸出。
+  樣式見 assets/css/style.css 的 .vocab-grid。
+{%- endcomment -%}
+{%- assign themes = site.data.vocab[include.level] -%}
+{%- for theme in themes %}
+
+### {{ theme.theme }}
+
+<ul class="vocab-grid">
+{%- for w in theme.words %}
+  <li><span class="vocab-grid__en">{{ w.en | escape }}{% if w.pos %}<span class="vocab-grid__pos">{{ w.pos | escape }}</span>{% endif %}</span><span class="vocab-grid__zh">{{ w.zh | escape }}</span></li>
+{%- endfor %}
+</ul>
+{%- endfor %}

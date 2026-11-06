@@ -1,0 +1,1307 @@
+# 國中小英文單字表，由 _includes/vocab-cards.html 輸出成單字卡：
+#   elementary 給〈國小必備英文單字〉，junior 給〈國中必備英文單字〉。
+# elementary：國小，欄位 en（單字）、zh（中文）
+# junior：國中，另加 pos（詞性：n. 名詞、v. 動詞、adj. 形容詞、adv. 副詞、
+#         prep. 介系詞、conj. 連接詞、pron. 代名詞、aux. 助動詞）
+# 國中只列國小沒有的字，兩邊合計約 1200 字（課綱國中階段的要求）。
+# 依主題分組，這裡的順序就是文章裡的顯示順序，新增主題不必改模板。
+# yes、no、on、true 這類字要加引號，否則 YAML 會把它們讀成布林值。
+elementary:
+  - theme: 打招呼與常用語
+    words:
+      - { en: hello, zh: 哈囉；你好 }
+      - { en: hi, zh: 嗨 }
+      - { en: goodbye, zh: 再見 }
+      - { en: bye, zh: 掰掰 }
+      - { en: please, zh: 請 }
+      - { en: thanks, zh: 謝謝 }
+      - { en: sorry, zh: 對不起 }
+      - { en: "yes", zh: 是；對 }
+      - { en: "no", zh: 不；不是 }
+      - { en: OK, zh: 好 }
+      - { en: welcome, zh: 歡迎 }
+  - theme: 數字
+    words:
+      - { en: one, zh: 一 }
+      - { en: two, zh: 二 }
+      - { en: three, zh: 三 }
+      - { en: four, zh: 四 }
+      - { en: five, zh: 五 }
+      - { en: six, zh: 六 }
+      - { en: seven, zh: 七 }
+      - { en: eight, zh: 八 }
+      - { en: nine, zh: 九 }
+      - { en: ten, zh: 十 }
+      - { en: eleven, zh: 十一 }
+      - { en: twelve, zh: 十二 }
+      - { en: thirteen, zh: 十三 }
+      - { en: fourteen, zh: 十四 }
+      - { en: fifteen, zh: 十五 }
+      - { en: sixteen, zh: 十六 }
+      - { en: seventeen, zh: 十七 }
+      - { en: eighteen, zh: 十八 }
+      - { en: nineteen, zh: 十九 }
+      - { en: twenty, zh: 二十 }
+      - { en: thirty, zh: 三十 }
+      - { en: forty, zh: 四十 }
+      - { en: fifty, zh: 五十 }
+      - { en: sixty, zh: 六十 }
+      - { en: seventy, zh: 七十 }
+      - { en: eighty, zh: 八十 }
+      - { en: ninety, zh: 九十 }
+      - { en: hundred, zh: 百 }
+  - theme: 顏色
+    words:
+      - { en: red, zh: 紅色 }
+      - { en: orange, zh: 橘色 }
+      - { en: yellow, zh: 黃色 }
+      - { en: green, zh: 綠色 }
+      - { en: blue, zh: 藍色 }
+      - { en: purple, zh: 紫色 }
+      - { en: pink, zh: 粉紅色 }
+      - { en: brown, zh: 咖啡色 }
+      - { en: black, zh: 黑色 }
+      - { en: white, zh: 白色 }
+      - { en: gray, zh: 灰色 }
+  - theme: 家人
+    words:
+      - { en: family, zh: 家人；家庭 }
+      - { en: father, zh: 父親 }
+      - { en: mother, zh: 母親 }
+      - { en: dad, zh: 爸爸 }
+      - { en: mom, zh: 媽媽 }
+      - { en: parents, zh: 父母 }
+      - { en: brother, zh: 兄弟 }
+      - { en: sister, zh: 姊妹 }
+      - { en: grandfather, zh: 祖父 }
+      - { en: grandmother, zh: 祖母 }
+      - { en: grandpa, zh: 爺爺；外公 }
+      - { en: grandma, zh: 奶奶；外婆 }
+      - { en: uncle, zh: 叔叔；舅舅 }
+      - { en: aunt, zh: 阿姨；姑姑 }
+      - { en: cousin, zh: 堂／表兄弟姊妹 }
+      - { en: baby, zh: 嬰兒 }
+  - theme: 人物與職業
+    words:
+      - { en: boy, zh: 男孩 }
+      - { en: girl, zh: 女孩 }
+      - { en: man, zh: 男人 }
+      - { en: woman, zh: 女人 }
+      - { en: people, zh: 人們 }
+      - { en: friend, zh: 朋友 }
+      - { en: teacher, zh: 老師 }
+      - { en: student, zh: 學生 }
+      - { en: doctor, zh: 醫生 }
+      - { en: nurse, zh: 護理師 }
+      - { en: cook, zh: 廚師 }
+      - { en: farmer, zh: 農夫 }
+      - { en: driver, zh: 司機 }
+      - { en: police officer, zh: 警察 }
+      - { en: singer, zh: 歌手 }
+  - theme: 身體
+    words:
+      - { en: body, zh: 身體 }
+      - { en: head, zh: 頭 }
+      - { en: hair, zh: 頭髮 }
+      - { en: face, zh: 臉 }
+      - { en: eye, zh: 眼睛 }
+      - { en: ear, zh: 耳朵 }
+      - { en: nose, zh: 鼻子 }
+      - { en: mouth, zh: 嘴巴 }
+      - { en: tooth, zh: 牙齒 }
+      - { en: neck, zh: 脖子 }
+      - { en: shoulder, zh: 肩膀 }
+      - { en: arm, zh: 手臂 }
+      - { en: hand, zh: 手 }
+      - { en: finger, zh: 手指 }
+      - { en: leg, zh: 腿 }
+      - { en: knee, zh: 膝蓋 }
+      - { en: foot, zh: 腳 }
+  - theme: 動物
+    words:
+      - { en: cat, zh: 貓 }
+      - { en: dog, zh: 狗 }
+      - { en: bird, zh: 鳥 }
+      - { en: fish, zh: 魚 }
+      - { en: pig, zh: 豬 }
+      - { en: cow, zh: 母牛 }
+      - { en: duck, zh: 鴨子 }
+      - { en: rabbit, zh: 兔子 }
+      - { en: horse, zh: 馬 }
+      - { en: sheep, zh: 綿羊 }
+      - { en: frog, zh: 青蛙 }
+      - { en: mouse, zh: 老鼠 }
+      - { en: bear, zh: 熊 }
+      - { en: monkey, zh: 猴子 }
+      - { en: tiger, zh: 老虎 }
+      - { en: lion, zh: 獅子 }
+      - { en: elephant, zh: 大象 }
+      - { en: panda, zh: 貓熊 }
+      - { en: zebra, zh: 斑馬 }
+      - { en: giraffe, zh: 長頸鹿 }
+  - theme: 食物
+    words:
+      - { en: apple, zh: 蘋果 }
+      - { en: banana, zh: 香蕉 }
+      - { en: orange, zh: 柳橙 }
+      - { en: grape, zh: 葡萄 }
+      - { en: egg, zh: 蛋 }
+      - { en: milk, zh: 牛奶 }
+      - { en: rice, zh: 米飯 }
+      - { en: bread, zh: 麵包 }
+      - { en: noodles, zh: 麵 }
+      - { en: chicken, zh: 雞肉 }
+      - { en: beef, zh: 牛肉 }
+      - { en: pork, zh: 豬肉 }
+      - { en: sandwich, zh: 三明治 }
+      - { en: hamburger, zh: 漢堡 }
+      - { en: pizza, zh: 披薩 }
+      - { en: hot dog, zh: 熱狗 }
+      - { en: cake, zh: 蛋糕 }
+      - { en: cookie, zh: 餅乾 }
+      - { en: candy, zh: 糖果 }
+      - { en: ice cream, zh: 冰淇淋 }
+      - { en: soup, zh: 湯 }
+      - { en: juice, zh: 果汁 }
+      - { en: water, zh: 水 }
+      - { en: tea, zh: 茶 }
+      - { en: breakfast, zh: 早餐 }
+      - { en: lunch, zh: 午餐 }
+      - { en: dinner, zh: 晚餐 }
+  - theme: 衣物
+    words:
+      - { en: clothes, zh: 衣服 }
+      - { en: shirt, zh: 襯衫 }
+      - { en: T-shirt, zh: T 恤 }
+      - { en: pants, zh: 長褲 }
+      - { en: shorts, zh: 短褲 }
+      - { en: skirt, zh: 裙子 }
+      - { en: dress, zh: 洋裝 }
+      - { en: jacket, zh: 夾克 }
+      - { en: coat, zh: 外套 }
+      - { en: hat, zh: 帽子 }
+      - { en: cap, zh: 棒球帽 }
+      - { en: shoes, zh: 鞋子 }
+      - { en: socks, zh: 襪子 }
+  - theme: 文具與教室
+    words:
+      - { en: school, zh: 學校 }
+      - { en: classroom, zh: 教室 }
+      - { en: book, zh: 書 }
+      - { en: notebook, zh: 筆記本 }
+      - { en: pen, zh: 原子筆 }
+      - { en: pencil, zh: 鉛筆 }
+      - { en: eraser, zh: 橡皮擦 }
+      - { en: ruler, zh: 尺 }
+      - { en: crayon, zh: 蠟筆 }
+      - { en: marker, zh: 麥克筆 }
+      - { en: glue, zh: 膠水 }
+      - { en: scissors, zh: 剪刀 }
+      - { en: bag, zh: 書包；袋子 }
+      - { en: desk, zh: 書桌 }
+      - { en: chair, zh: 椅子 }
+  - theme: 家裡
+    words:
+      - { en: house, zh: 房子 }
+      - { en: home, zh: 家 }
+      - { en: room, zh: 房間 }
+      - { en: bedroom, zh: 臥室 }
+      - { en: kitchen, zh: 廚房 }
+      - { en: bathroom, zh: 浴室 }
+      - { en: living room, zh: 客廳 }
+      - { en: door, zh: 門 }
+      - { en: window, zh: 窗戶 }
+      - { en: bed, zh: 床 }
+      - { en: table, zh: 桌子 }
+      - { en: sofa, zh: 沙發 }
+      - { en: TV, zh: 電視 }
+      - { en: phone, zh: 電話 }
+      - { en: clock, zh: 時鐘 }
+      - { en: cup, zh: 杯子 }
+      - { en: box, zh: 盒子 }
+  - theme: 時間
+    words:
+      - { en: time, zh: 時間 }
+      - { en: o'clock, zh: …點鐘 }
+      - { en: morning, zh: 早上 }
+      - { en: afternoon, zh: 下午 }
+      - { en: evening, zh: 傍晚 }
+      - { en: night, zh: 晚上 }
+      - { en: day, zh: 天；白天 }
+      - { en: week, zh: 星期；週 }
+      - { en: month, zh: 月 }
+      - { en: year, zh: 年 }
+      - { en: today, zh: 今天 }
+      - { en: tomorrow, zh: 明天 }
+      - { en: yesterday, zh: 昨天 }
+  - theme: 星期與月份
+    words:
+      - { en: Monday, zh: 星期一 }
+      - { en: Tuesday, zh: 星期二 }
+      - { en: Wednesday, zh: 星期三 }
+      - { en: Thursday, zh: 星期四 }
+      - { en: Friday, zh: 星期五 }
+      - { en: Saturday, zh: 星期六 }
+      - { en: Sunday, zh: 星期日 }
+      - { en: January, zh: 一月 }
+      - { en: February, zh: 二月 }
+      - { en: March, zh: 三月 }
+      - { en: April, zh: 四月 }
+      - { en: May, zh: 五月 }
+      - { en: June, zh: 六月 }
+      - { en: July, zh: 七月 }
+      - { en: August, zh: 八月 }
+      - { en: September, zh: 九月 }
+      - { en: October, zh: 十月 }
+      - { en: November, zh: 十一月 }
+      - { en: December, zh: 十二月 }
+  - theme: 天氣與季節
+    words:
+      - { en: weather, zh: 天氣 }
+      - { en: sunny, zh: 晴朗的 }
+      - { en: rainy, zh: 下雨的 }
+      - { en: cloudy, zh: 多雲的 }
+      - { en: windy, zh: 颳風的 }
+      - { en: snowy, zh: 下雪的 }
+      - { en: hot, zh: 熱的 }
+      - { en: cold, zh: 冷的 }
+      - { en: warm, zh: 溫暖的 }
+      - { en: cool, zh: 涼爽的 }
+      - { en: spring, zh: 春天 }
+      - { en: summer, zh: 夏天 }
+      - { en: fall, zh: 秋天 }
+      - { en: winter, zh: 冬天 }
+  - theme: 地點
+    words:
+      - { en: park, zh: 公園 }
+      - { en: zoo, zh: 動物園 }
+      - { en: library, zh: 圖書館 }
+      - { en: hospital, zh: 醫院 }
+      - { en: store, zh: 商店 }
+      - { en: supermarket, zh: 超市 }
+      - { en: restaurant, zh: 餐廳 }
+      - { en: post office, zh: 郵局 }
+      - { en: beach, zh: 海灘 }
+      - { en: mountain, zh: 山 }
+      - { en: farm, zh: 農場 }
+      - { en: city, zh: 城市 }
+  - theme: 交通
+    words:
+      - { en: bus, zh: 公車 }
+      - { en: car, zh: 汽車 }
+      - { en: bike, zh: 腳踏車 }
+      - { en: train, zh: 火車 }
+      - { en: taxi, zh: 計程車 }
+      - { en: boat, zh: 船 }
+  - theme: 運動與休閒
+    words:
+      - { en: ball, zh: 球 }
+      - { en: basketball, zh: 籃球 }
+      - { en: baseball, zh: 棒球 }
+      - { en: soccer, zh: 足球 }
+      - { en: badminton, zh: 羽毛球 }
+      - { en: kite, zh: 風箏 }
+      - { en: toy, zh: 玩具 }
+      - { en: doll, zh: 洋娃娃 }
+      - { en: game, zh: 遊戲 }
+      - { en: music, zh: 音樂 }
+      - { en: movie, zh: 電影 }
+      - { en: picture, zh: 圖片；照片 }
+  - theme: 動作
+    words:
+      - { en: go, zh: 去 }
+      - { en: come, zh: 來 }
+      - { en: run, zh: 跑 }
+      - { en: walk, zh: 走路 }
+      - { en: jump, zh: 跳 }
+      - { en: swim, zh: 游泳 }
+      - { en: fly, zh: 飛 }
+      - { en: sing, zh: 唱歌 }
+      - { en: dance, zh: 跳舞 }
+      - { en: read, zh: 讀 }
+      - { en: write, zh: 寫 }
+      - { en: draw, zh: 畫 }
+      - { en: eat, zh: 吃 }
+      - { en: drink, zh: 喝 }
+      - { en: sleep, zh: 睡覺 }
+      - { en: play, zh: 玩 }
+      - { en: like, zh: 喜歡 }
+      - { en: want, zh: 想要 }
+      - { en: have, zh: 有 }
+      - { en: see, zh: 看見 }
+      - { en: look, zh: 看 }
+      - { en: listen, zh: 聽 }
+      - { en: speak, zh: 說（語言） }
+      - { en: open, zh: 打開 }
+      - { en: close, zh: 關上 }
+      - { en: sit, zh: 坐 }
+      - { en: stand, zh: 站 }
+      - { en: wash, zh: 洗 }
+      - { en: help, zh: 幫忙 }
+      - { en: know, zh: 知道 }
+  - theme: 形容詞
+    words:
+      - { en: big, zh: 大的 }
+      - { en: small, zh: 小的 }
+      - { en: long, zh: 長的 }
+      - { en: short, zh: 短的；矮的 }
+      - { en: tall, zh: 高的 }
+      - { en: fat, zh: 胖的 }
+      - { en: thin, zh: 瘦的 }
+      - { en: happy, zh: 快樂的 }
+      - { en: sad, zh: 難過的 }
+      - { en: angry, zh: 生氣的 }
+      - { en: tired, zh: 累的 }
+      - { en: hungry, zh: 餓的 }
+      - { en: thirsty, zh: 口渴的 }
+      - { en: good, zh: 好的 }
+      - { en: bad, zh: 壞的 }
+      - { en: new, zh: 新的 }
+      - { en: old, zh: 舊的；老的 }
+      - { en: young, zh: 年輕的 }
+      - { en: beautiful, zh: 美麗的 }
+      - { en: cute, zh: 可愛的 }
+      - { en: fast, zh: 快的 }
+      - { en: slow, zh: 慢的 }
+  - theme: 代名詞
+    words:
+      - { en: I, zh: 我 }
+      - { en: you, zh: 你；你們 }
+      - { en: he, zh: 他 }
+      - { en: she, zh: 她 }
+      - { en: it, zh: 它；牠 }
+      - { en: we, zh: 我們 }
+      - { en: they, zh: 他們 }
+      - { en: me, zh: 我（當受詞） }
+      - { en: my, zh: 我的 }
+      - { en: your, zh: 你的 }
+      - { en: his, zh: 他的 }
+      - { en: her, zh: 她；她的 }
+  - theme: 疑問詞
+    words:
+      - { en: what, zh: 什麼 }
+      - { en: who, zh: 誰 }
+      - { en: where, zh: 哪裡 }
+      - { en: when, zh: 什麼時候 }
+      - { en: why, zh: 為什麼 }
+      - { en: how, zh: 如何；怎麼樣 }
+      - { en: which, zh: 哪一個 }
+  - theme: 位置
+    words:
+      - { en: in, zh: 在…裡面 }
+      - { en: "on", zh: 在…上面 }
+      - { en: under, zh: 在…下面 }
+      - { en: near, zh: 在…附近 }
+      - { en: behind, zh: 在…後面 }
+      - { en: next to, zh: 在…旁邊 }
+      - { en: in front of, zh: 在…前面 }
+      - { en: up, zh: 向上 }
+      - { en: down, zh: 向下 }
+      - { en: left, zh: 左邊 }
+      - { en: right, zh: 右邊 }
+
+junior:
+  - theme: 學校與學習
+    words:
+      - { en: subject, pos: n., zh: 科目 }
+      - { en: English, pos: n., zh: 英文 }
+      - { en: Chinese, pos: n., zh: 中文；國文 }
+      - { en: math, pos: n., zh: 數學 }
+      - { en: science, pos: n., zh: 自然科學 }
+      - { en: history, pos: n., zh: 歷史 }
+      - { en: geography, pos: n., zh: 地理 }
+      - { en: art, pos: n., zh: 美術 }
+      - { en: class, pos: n., zh: 班級；課 }
+      - { en: lesson, pos: n., zh: 課程 }
+      - { en: semester, pos: n., zh: 學期 }
+      - { en: homework, pos: n., zh: 回家作業 }
+      - { en: test, pos: n., zh: 測驗 }
+      - { en: exam, pos: n., zh: 考試 }
+      - { en: question, pos: n., zh: 問題 }
+      - { en: answer, pos: n./v., zh: 答案；回答 }
+      - { en: grade, pos: n., zh: 年級；成績 }
+      - { en: score, pos: n., zh: 分數 }
+      - { en: report, pos: n., zh: 報告 }
+      - { en: rule, pos: n., zh: 規則 }
+      - { en: education, pos: n., zh: 教育 }
+      - { en: dictionary, pos: n., zh: 字典 }
+      - { en: paper, pos: n., zh: 紙；報告 }
+      - { en: page, pos: n., zh: 頁 }
+      - { en: word, pos: n., zh: 字；單字 }
+      - { en: sentence, pos: n., zh: 句子 }
+      - { en: story, pos: n., zh: 故事 }
+      - { en: letter, pos: n., zh: 信；字母 }
+      - { en: idea, pos: n., zh: 想法 }
+      - { en: example, pos: n., zh: 例子 }
+      - { en: problem, pos: n., zh: 問題；難題 }
+      - { en: mistake, pos: n., zh: 錯誤 }
+      - { en: club, pos: n., zh: 社團 }
+      - { en: principal, pos: n., zh: 校長 }
+      - { en: classmate, pos: n., zh: 同學 }
+      - { en: blackboard, pos: n., zh: 黑板 }
+      - { en: study, pos: v., zh: 讀書；研究 }
+      - { en: learn, pos: v., zh: 學習 }
+      - { en: teach, pos: v., zh: 教 }
+      - { en: explain, pos: v., zh: 解釋 }
+      - { en: understand, pos: v., zh: 了解 }
+      - { en: remember, pos: v., zh: 記得 }
+      - { en: forget, pos: v., zh: 忘記 }
+      - { en: spell, pos: v., zh: 拼字 }
+      - { en: practice, pos: v./n., zh: 練習 }
+      - { en: repeat, pos: v., zh: 重複 }
+      - { en: pass, pos: v., zh: 通過；傳遞 }
+      - { en: fail, pos: v., zh: 失敗；不及格 }
+      - { en: easy, pos: adj., zh: 容易的 }
+      - { en: difficult, pos: adj., zh: 困難的 }
+      - { en: correct, pos: adj., zh: 正確的 }
+      - { en: wrong, pos: adj., zh: 錯的 }
+  - theme: 個性與情緒
+    words:
+      - { en: kind, pos: adj., zh: 親切的 }
+      - { en: friendly, pos: adj., zh: 友善的 }
+      - { en: polite, pos: adj., zh: 有禮貌的 }
+      - { en: honest, pos: adj., zh: 誠實的 }
+      - { en: brave, pos: adj., zh: 勇敢的 }
+      - { en: shy, pos: adj., zh: 害羞的 }
+      - { en: lazy, pos: adj., zh: 懶惰的 }
+      - { en: smart, pos: adj., zh: 聰明的 }
+      - { en: clever, pos: adj., zh: 聰明的；靈巧的 }
+      - { en: funny, pos: adj., zh: 好笑的；有趣的 }
+      - { en: careful, pos: adj., zh: 小心的 }
+      - { en: careless, pos: adj., zh: 粗心的 }
+      - { en: quiet, pos: adj., zh: 安靜的 }
+      - { en: noisy, pos: adj., zh: 吵鬧的 }
+      - { en: busy, pos: adj., zh: 忙碌的 }
+      - { en: free, pos: adj., zh: 空閒的；免費的 }
+      - { en: glad, pos: adj., zh: 高興的 }
+      - { en: excited, pos: adj., zh: 感到興奮的 }
+      - { en: bored, pos: adj., zh: 感到無聊的 }
+      - { en: boring, pos: adj., zh: 令人無聊的 }
+      - { en: surprised, pos: adj., zh: 感到驚訝的 }
+      - { en: afraid, pos: adj., zh: 害怕的 }
+      - { en: worried, pos: adj., zh: 擔心的 }
+      - { en: nervous, pos: adj., zh: 緊張的 }
+      - { en: proud, pos: adj., zh: 驕傲的；自豪的 }
+      - { en: lonely, pos: adj., zh: 寂寞的 }
+      - { en: feel, pos: v., zh: 感覺 }
+      - { en: smile, pos: v./n., zh: 微笑 }
+      - { en: laugh, pos: v., zh: 笑 }
+      - { en: cry, pos: v., zh: 哭 }
+      - { en: love, pos: v./n., zh: 愛 }
+      - { en: hate, pos: v., zh: 討厭 }
+      - { en: hope, pos: v./n., zh: 希望 }
+      - { en: worry, pos: v., zh: 擔心 }
+      - { en: mind, pos: v., zh: 介意 }
+      - { en: enjoy, pos: v., zh: 享受；喜愛 }
+  - theme: 身體與健康
+    words:
+      - { en: heart, pos: n., zh: 心臟；心 }
+      - { en: stomach, pos: n., zh: 胃；肚子 }
+      - { en: back, pos: n., zh: 背；後面 }
+      - { en: skin, pos: n., zh: 皮膚 }
+      - { en: lip, pos: n., zh: 嘴唇 }
+      - { en: tongue, pos: n., zh: 舌頭 }
+      - { en: blood, pos: n., zh: 血 }
+      - { en: health, pos: n., zh: 健康 }
+      - { en: healthy, pos: adj., zh: 健康的 }
+      - { en: sick, pos: adj., zh: 生病的 }
+      - { en: ill, pos: adj., zh: 生病的 }
+      - { en: fever, pos: n., zh: 發燒 }
+      - { en: cough, pos: n./v., zh: 咳嗽 }
+      - { en: headache, pos: n., zh: 頭痛 }
+      - { en: toothache, pos: n., zh: 牙痛 }
+      - { en: stomachache, pos: n., zh: 胃痛；肚子痛 }
+      - { en: pain, pos: n., zh: 疼痛 }
+      - { en: hurt, pos: v., zh: 使受傷；疼痛 }
+      - { en: medicine, pos: n., zh: 藥 }
+      - { en: dentist, pos: n., zh: 牙醫 }
+      - { en: clinic, pos: n., zh: 診所 }
+      - { en: rest, pos: n./v., zh: 休息 }
+      - { en: exercise, pos: n./v., zh: 運動；練習 }
+      - { en: strong, pos: adj., zh: 強壯的 }
+      - { en: weak, pos: adj., zh: 虛弱的 }
+      - { en: well, pos: adj./adv., zh: 健康的；好地 }
+      - { en: die, pos: v., zh: 死亡 }
+      - { en: dead, pos: adj., zh: 死的 }
+      - { en: alive, pos: adj., zh: 活著的 }
+      - { en: life, pos: n., zh: 生命；生活 }
+      - { en: born, pos: adj., zh: 出生的（be born 出生） }
+  - theme: 家庭與生活
+    words:
+      - { en: husband, pos: n., zh: 丈夫 }
+      - { en: wife, pos: n., zh: 妻子 }
+      - { en: son, pos: n., zh: 兒子 }
+      - { en: daughter, pos: n., zh: 女兒 }
+      - { en: child, pos: n., zh: 小孩 }
+      - { en: kid, pos: n., zh: 小孩 }
+      - { en: grandparents, pos: n., zh: 祖父母 }
+      - { en: adult, pos: n., zh: 成人 }
+      - { en: neighbor, pos: n., zh: 鄰居 }
+      - { en: guest, pos: n., zh: 客人 }
+      - { en: birthday, pos: n., zh: 生日 }
+      - { en: party, pos: n., zh: 派對 }
+      - { en: gift, pos: n., zh: 禮物 }
+      - { en: present, pos: n., zh: 禮物 }
+      - { en: holiday, pos: n., zh: 假日 }
+      - { en: vacation, pos: n., zh: 假期 }
+      - { en: weekend, pos: n., zh: 週末 }
+      - { en: festival, pos: n., zh: 節日 }
+      - { en: Christmas, pos: n., zh: 聖誕節 }
+      - { en: New Year, pos: n., zh: 新年 }
+      - { en: wedding, pos: n., zh: 婚禮 }
+      - { en: housework, pos: n., zh: 家事 }
+      - { en: get up, pos: v., zh: 起床 }
+      - { en: wake, pos: v., zh: 醒來 }
+      - { en: brush, pos: v., zh: 刷 }
+      - { en: clean, pos: v./adj., zh: 打掃；乾淨的 }
+      - { en: dirty, pos: adj., zh: 髒的 }
+      - { en: shower, pos: n., zh: 淋浴 }
+      - { en: bath, pos: n., zh: 洗澡 }
+      - { en: dream, pos: n./v., zh: 夢；做夢 }
+      - { en: live, pos: v., zh: 住；生活 }
+      - { en: marry, pos: v., zh: 結婚 }
+  - theme: 房屋與家具
+    words:
+      - { en: apartment, pos: n., zh: 公寓 }
+      - { en: building, pos: n., zh: 建築物；大樓 }
+      - { en: floor, pos: n., zh: 地板；樓層 }
+      - { en: wall, pos: n., zh: 牆 }
+      - { en: roof, pos: n., zh: 屋頂 }
+      - { en: stairs, pos: n., zh: 樓梯 }
+      - { en: elevator, pos: n., zh: 電梯 }
+      - { en: garden, pos: n., zh: 花園 }
+      - { en: yard, pos: n., zh: 院子 }
+      - { en: gate, pos: n., zh: 大門 }
+      - { en: key, pos: n., zh: 鑰匙 }
+      - { en: lock, pos: n./v., zh: 鎖；鎖上 }
+      - { en: dining room, pos: n., zh: 飯廳 }
+      - { en: furniture, pos: n., zh: 家具 }
+      - { en: closet, pos: n., zh: 衣櫥 }
+      - { en: shelf, pos: n., zh: 架子 }
+      - { en: mirror, pos: n., zh: 鏡子 }
+      - { en: lamp, pos: n., zh: 燈 }
+      - { en: light, pos: n./adj., zh: 光；燈；輕的 }
+      - { en: fan, pos: n., zh: 電扇；迷 }
+      - { en: refrigerator, pos: n., zh: 冰箱 }
+      - { en: stove, pos: n., zh: 爐子 }
+      - { en: sink, pos: n., zh: 水槽；洗手台 }
+      - { en: towel, pos: n., zh: 毛巾 }
+      - { en: blanket, pos: n., zh: 毯子 }
+      - { en: pillow, pos: n., zh: 枕頭 }
+      - { en: soap, pos: n., zh: 肥皂 }
+      - { en: toothbrush, pos: n., zh: 牙刷 }
+      - { en: trash, pos: n., zh: 垃圾 }
+  - theme: 食物與飲料
+    words:
+      - { en: food, pos: n., zh: 食物 }
+      - { en: meal, pos: n., zh: 一餐 }
+      - { en: dessert, pos: n., zh: 甜點 }
+      - { en: snack, pos: n., zh: 點心 }
+      - { en: fruit, pos: n., zh: 水果 }
+      - { en: vegetable, pos: n., zh: 蔬菜 }
+      - { en: meat, pos: n., zh: 肉 }
+      - { en: seafood, pos: n., zh: 海鮮 }
+      - { en: potato, pos: n., zh: 馬鈴薯 }
+      - { en: tomato, pos: n., zh: 番茄 }
+      - { en: carrot, pos: n., zh: 胡蘿蔔 }
+      - { en: onion, pos: n., zh: 洋蔥 }
+      - { en: corn, pos: n., zh: 玉米 }
+      - { en: bean, pos: n., zh: 豆子 }
+      - { en: pumpkin, pos: n., zh: 南瓜 }
+      - { en: lemon, pos: n., zh: 檸檬 }
+      - { en: strawberry, pos: n., zh: 草莓 }
+      - { en: watermelon, pos: n., zh: 西瓜 }
+      - { en: mango, pos: n., zh: 芒果 }
+      - { en: pear, pos: n., zh: 梨子 }
+      - { en: peach, pos: n., zh: 桃子 }
+      - { en: dumpling, pos: n., zh: 水餃 }
+      - { en: steak, pos: n., zh: 牛排 }
+      - { en: salad, pos: n., zh: 沙拉 }
+      - { en: spaghetti, pos: n., zh: 義大利麵 }
+      - { en: French fries, pos: n., zh: 薯條 }
+      - { en: toast, pos: n., zh: 吐司 }
+      - { en: chocolate, pos: n., zh: 巧克力 }
+      - { en: pie, pos: n., zh: 派 }
+      - { en: butter, pos: n., zh: 奶油 }
+      - { en: cheese, pos: n., zh: 起司 }
+      - { en: jam, pos: n., zh: 果醬 }
+      - { en: salt, pos: n., zh: 鹽 }
+      - { en: sugar, pos: n., zh: 糖 }
+      - { en: oil, pos: n., zh: 油 }
+      - { en: coffee, pos: n., zh: 咖啡 }
+      - { en: coke, pos: n., zh: 可樂 }
+      - { en: soda, pos: n., zh: 汽水 }
+  - theme: 烹飪與用餐
+    words:
+      - { en: bowl, pos: n., zh: 碗 }
+      - { en: plate, pos: n., zh: 盤子 }
+      - { en: dish, pos: n., zh: 盤子；一道菜 }
+      - { en: glass, pos: n., zh: 玻璃杯；玻璃 }
+      - { en: bottle, pos: n., zh: 瓶子 }
+      - { en: chopsticks, pos: n., zh: 筷子 }
+      - { en: fork, pos: n., zh: 叉子 }
+      - { en: knife, pos: n., zh: 刀子 }
+      - { en: spoon, pos: n., zh: 湯匙 }
+      - { en: menu, pos: n., zh: 菜單 }
+      - { en: waiter, pos: n., zh: 男服務生 }
+      - { en: waitress, pos: n., zh: 女服務生 }
+      - { en: order, pos: v./n., zh: 點餐；訂購；順序 }
+      - { en: bake, pos: v., zh: 烘烤 }
+      - { en: boil, pos: v., zh: 煮沸 }
+      - { en: fry, pos: v., zh: 油炸；煎 }
+      - { en: cut, pos: v., zh: 切 }
+      - { en: taste, pos: v./n., zh: 品嚐；味道 }
+      - { en: delicious, pos: adj., zh: 美味的 }
+      - { en: sweet, pos: adj., zh: 甜的 }
+      - { en: sour, pos: adj., zh: 酸的 }
+      - { en: bitter, pos: adj., zh: 苦的 }
+      - { en: salty, pos: adj., zh: 鹹的 }
+      - { en: spicy, pos: adj., zh: 辣的 }
+      - { en: full, pos: adj., zh: 飽的；滿的 }
+  - theme: 衣物與配件
+    words:
+      - { en: sweater, pos: n., zh: 毛衣 }
+      - { en: vest, pos: n., zh: 背心 }
+      - { en: jeans, pos: n., zh: 牛仔褲 }
+      - { en: uniform, pos: n., zh: 制服 }
+      - { en: pajamas, pos: n., zh: 睡衣 }
+      - { en: raincoat, pos: n., zh: 雨衣 }
+      - { en: boots, pos: n., zh: 靴子 }
+      - { en: sneakers, pos: n., zh: 運動鞋 }
+      - { en: slippers, pos: n., zh: 拖鞋 }
+      - { en: glove, pos: n., zh: 手套 }
+      - { en: scarf, pos: n., zh: 圍巾 }
+      - { en: belt, pos: n., zh: 皮帶 }
+      - { en: pocket, pos: n., zh: 口袋 }
+      - { en: button, pos: n., zh: 鈕扣；按鈕 }
+      - { en: umbrella, pos: n., zh: 雨傘 }
+      - { en: glasses, pos: n., zh: 眼鏡 }
+      - { en: watch, pos: n./v., zh: 手錶；觀看 }
+      - { en: ring, pos: n./v., zh: 戒指；鈴響 }
+      - { en: necklace, pos: n., zh: 項鍊 }
+      - { en: wallet, pos: n., zh: 皮夾 }
+      - { en: backpack, pos: n., zh: 背包 }
+      - { en: wear, pos: v., zh: 穿；戴 }
+      - { en: put on, pos: v., zh: 穿上 }
+      - { en: take off, pos: v., zh: 脫下 }
+      - { en: size, pos: n., zh: 尺寸 }
+  - theme: 購物與金錢
+    words:
+      - { en: money, pos: n., zh: 錢 }
+      - { en: dollar, pos: n., zh: 元；美元 }
+      - { en: price, pos: n., zh: 價格 }
+      - { en: cash, pos: n., zh: 現金 }
+      - { en: card, pos: n., zh: 卡片 }
+      - { en: change, pos: n./v., zh: 零錢；改變 }
+      - { en: cheap, pos: adj., zh: 便宜的 }
+      - { en: expensive, pos: adj., zh: 昂貴的 }
+      - { en: buy, pos: v., zh: 買 }
+      - { en: sell, pos: v., zh: 賣 }
+      - { en: pay, pos: v., zh: 付錢 }
+      - { en: spend, pos: v., zh: 花費 }
+      - { en: cost, pos: v./n., zh: 花費；成本 }
+      - { en: shop, pos: n./v., zh: 商店；購物 }
+      - { en: shopping, pos: n., zh: 購物 }
+      - { en: market, pos: n., zh: 市場 }
+      - { en: mall, pos: n., zh: 購物中心 }
+      - { en: convenience store, pos: n., zh: 便利商店 }
+      - { en: bookstore, pos: n., zh: 書店 }
+      - { en: bakery, pos: n., zh: 麵包店 }
+      - { en: sale, pos: n., zh: 拍賣；銷售 }
+      - { en: customer, pos: n., zh: 顧客 }
+      - { en: clerk, pos: n., zh: 店員 }
+      - { en: rich, pos: adj., zh: 有錢的 }
+      - { en: poor, pos: adj., zh: 貧窮的；可憐的 }
+  - theme: 交通與方向
+    words:
+      - { en: motorcycle, pos: n., zh: 機車 }
+      - { en: scooter, pos: n., zh: 速克達機車；滑板車 }
+      - { en: truck, pos: n., zh: 卡車 }
+      - { en: airplane, pos: n., zh: 飛機 }
+      - { en: ship, pos: n., zh: 船；輪船 }
+      - { en: subway, pos: n., zh: 地下鐵 }
+      - { en: MRT, pos: n., zh: 捷運 }
+      - { en: station, pos: n., zh: 車站 }
+      - { en: street, pos: n., zh: 街道 }
+      - { en: road, pos: n., zh: 道路 }
+      - { en: bridge, pos: n., zh: 橋 }
+      - { en: corner, pos: n., zh: 轉角 }
+      - { en: map, pos: n., zh: 地圖 }
+      - { en: ticket, pos: n., zh: 票 }
+      - { en: trip, pos: n., zh: 旅行 }
+      - { en: traffic, pos: n., zh: 交通 }
+      - { en: traffic light, pos: n., zh: 紅綠燈 }
+      - { en: ride, pos: v., zh: 騎；搭乘 }
+      - { en: drive, pos: v., zh: 開車 }
+      - { en: turn, pos: v./n., zh: 轉彎；輪到 }
+      - { en: cross, pos: v., zh: 穿越 }
+      - { en: straight, pos: adv., zh: 直直地 }
+      - { en: east, pos: n., zh: 東方 }
+      - { en: west, pos: n., zh: 西方 }
+      - { en: south, pos: n., zh: 南方 }
+      - { en: north, pos: n., zh: 北方 }
+      - { en: far, pos: adj., zh: 遠的 }
+      - { en: crowded, pos: adj., zh: 擁擠的 }
+  - theme: 地點與建築
+    words:
+      - { en: place, pos: n., zh: 地方 }
+      - { en: country, pos: n., zh: 國家；鄉下 }
+      - { en: town, pos: n., zh: 城鎮 }
+      - { en: village, pos: n., zh: 村莊 }
+      - { en: downtown, pos: n./adv., zh: 市中心 }
+      - { en: airport, pos: n., zh: 機場 }
+      - { en: bus stop, pos: n., zh: 公車站 }
+      - { en: bank, pos: n., zh: 銀行 }
+      - { en: church, pos: n., zh: 教堂 }
+      - { en: temple, pos: n., zh: 寺廟 }
+      - { en: museum, pos: n., zh: 博物館 }
+      - { en: theater, pos: n., zh: 戲院；劇院 }
+      - { en: gym, pos: n., zh: 體育館；健身房 }
+      - { en: hotel, pos: n., zh: 旅館 }
+      - { en: police station, pos: n., zh: 警察局 }
+      - { en: fire station, pos: n., zh: 消防局 }
+      - { en: office, pos: n., zh: 辦公室 }
+      - { en: factory, pos: n., zh: 工廠 }
+      - { en: company, pos: n., zh: 公司 }
+      - { en: department store, pos: n., zh: 百貨公司 }
+      - { en: night market, pos: n., zh: 夜市 }
+      - { en: playground, pos: n., zh: 操場；遊樂場 }
+      - { en: swimming pool, pos: n., zh: 游泳池 }
+      - { en: castle, pos: n., zh: 城堡 }
+      - { en: tower, pos: n., zh: 塔 }
+  - theme: 自然與環境
+    words:
+      - { en: sky, pos: n., zh: 天空 }
+      - { en: sun, pos: n., zh: 太陽 }
+      - { en: moon, pos: n., zh: 月亮 }
+      - { en: star, pos: n., zh: 星星 }
+      - { en: cloud, pos: n., zh: 雲 }
+      - { en: rain, pos: n./v., zh: 雨；下雨 }
+      - { en: snow, pos: n./v., zh: 雪；下雪 }
+      - { en: wind, pos: n., zh: 風 }
+      - { en: air, pos: n., zh: 空氣 }
+      - { en: earth, pos: n., zh: 地球；土地 }
+      - { en: world, pos: n., zh: 世界 }
+      - { en: sea, pos: n., zh: 海 }
+      - { en: ocean, pos: n., zh: 海洋 }
+      - { en: river, pos: n., zh: 河流 }
+      - { en: lake, pos: n., zh: 湖 }
+      - { en: island, pos: n., zh: 島 }
+      - { en: hill, pos: n., zh: 小山 }
+      - { en: forest, pos: n., zh: 森林 }
+      - { en: desert, pos: n., zh: 沙漠 }
+      - { en: waterfall, pos: n., zh: 瀑布 }
+      - { en: tree, pos: n., zh: 樹 }
+      - { en: flower, pos: n., zh: 花 }
+      - { en: grass, pos: n., zh: 草 }
+      - { en: leaf, pos: n., zh: 葉子 }
+      - { en: plant, pos: n./v., zh: 植物；種植 }
+      - { en: rock, pos: n., zh: 岩石 }
+      - { en: stone, pos: n., zh: 石頭 }
+      - { en: sand, pos: n., zh: 沙 }
+      - { en: fire, pos: n., zh: 火 }
+      - { en: land, pos: n., zh: 陸地；土地 }
+      - { en: nature, pos: n., zh: 自然 }
+      - { en: environment, pos: n., zh: 環境 }
+      - { en: pollution, pos: n., zh: 污染 }
+      - { en: typhoon, pos: n., zh: 颱風 }
+      - { en: earthquake, pos: n., zh: 地震 }
+      - { en: storm, pos: n., zh: 暴風雨 }
+  - theme: 動物
+    words:
+      - { en: animal, pos: n., zh: 動物 }
+      - { en: pet, pos: n., zh: 寵物 }
+      - { en: puppy, pos: n., zh: 小狗 }
+      - { en: kitten, pos: n., zh: 小貓 }
+      - { en: insect, pos: n., zh: 昆蟲 }
+      - { en: bee, pos: n., zh: 蜜蜂 }
+      - { en: butterfly, pos: n., zh: 蝴蝶 }
+      - { en: ant, pos: n., zh: 螞蟻 }
+      - { en: mosquito, pos: n., zh: 蚊子 }
+      - { en: spider, pos: n., zh: 蜘蛛 }
+      - { en: snail, pos: n., zh: 蝸牛 }
+      - { en: worm, pos: n., zh: 蟲 }
+      - { en: snake, pos: n., zh: 蛇 }
+      - { en: turtle, pos: n., zh: 烏龜 }
+      - { en: goat, pos: n., zh: 山羊 }
+      - { en: deer, pos: n., zh: 鹿 }
+      - { en: donkey, pos: n., zh: 驢子 }
+      - { en: camel, pos: n., zh: 駱駝 }
+      - { en: fox, pos: n., zh: 狐狸 }
+      - { en: wolf, pos: n., zh: 狼 }
+      - { en: kangaroo, pos: n., zh: 袋鼠 }
+      - { en: koala, pos: n., zh: 無尾熊 }
+      - { en: whale, pos: n., zh: 鯨魚 }
+      - { en: dolphin, pos: n., zh: 海豚 }
+      - { en: shark, pos: n., zh: 鯊魚 }
+      - { en: goose, pos: n., zh: 鵝 }
+      - { en: owl, pos: n., zh: 貓頭鷹 }
+      - { en: eagle, pos: n., zh: 老鷹 }
+      - { en: tail, pos: n., zh: 尾巴 }
+      - { en: wing, pos: n., zh: 翅膀 }
+  - theme: 時間與頻率
+    words:
+      - { en: hour, pos: n., zh: 小時 }
+      - { en: minute, pos: n., zh: 分鐘 }
+      - { en: second, pos: n./adj., zh: 秒；第二 }
+      - { en: moment, pos: n., zh: 片刻 }
+      - { en: noon, pos: n., zh: 中午 }
+      - { en: midnight, pos: n., zh: 午夜 }
+      - { en: tonight, pos: n./adv., zh: 今晚 }
+      - { en: weekday, pos: n., zh: 平日 }
+      - { en: date, pos: n., zh: 日期；約會 }
+      - { en: calendar, pos: n., zh: 月曆 }
+      - { en: season, pos: n., zh: 季節 }
+      - { en: century, pos: n., zh: 世紀 }
+      - { en: past, pos: n./adj., zh: 過去；過去的 }
+      - { en: future, pos: n., zh: 未來 }
+      - { en: early, pos: adj./adv., zh: 早的；早地 }
+      - { en: late, pos: adj./adv., zh: 晚的；遲到 }
+      - { en: soon, pos: adv., zh: 很快地 }
+      - { en: ago, pos: adv., zh: …以前 }
+      - { en: before, pos: prep./conj., zh: 在…之前 }
+      - { en: after, pos: prep./conj., zh: 在…之後 }
+      - { en: always, pos: adv., zh: 總是 }
+      - { en: usually, pos: adv., zh: 通常 }
+      - { en: often, pos: adv., zh: 經常 }
+      - { en: sometimes, pos: adv., zh: 有時候 }
+      - { en: never, pos: adv., zh: 從不 }
+      - { en: once, pos: adv., zh: 一次；曾經 }
+      - { en: twice, pos: adv., zh: 兩次 }
+      - { en: again, pos: adv., zh: 再一次 }
+      - { en: already, pos: adv., zh: 已經 }
+      - { en: yet, pos: adv., zh: 還（沒）；已經 }
+      - { en: still, pos: adv., zh: 仍然 }
+      - { en: now, pos: adv., zh: 現在 }
+      - { en: then, pos: adv., zh: 然後；那時 }
+      - { en: later, pos: adv., zh: 稍後 }
+  - theme: 數量與單位
+    words:
+      - { en: zero, pos: n., zh: 零 }
+      - { en: thousand, pos: n., zh: 千 }
+      - { en: million, pos: n., zh: 百萬 }
+      - { en: first, pos: adj., zh: 第一 }
+      - { en: third, pos: adj., zh: 第三 }
+      - { en: fourth, pos: adj., zh: 第四 }
+      - { en: fifth, pos: adj., zh: 第五 }
+      - { en: sixth, pos: adj., zh: 第六 }
+      - { en: seventh, pos: adj., zh: 第七 }
+      - { en: eighth, pos: adj., zh: 第八 }
+      - { en: ninth, pos: adj., zh: 第九 }
+      - { en: tenth, pos: adj., zh: 第十 }
+      - { en: half, pos: n., zh: 一半 }
+      - { en: quarter, pos: n., zh: 四分之一；十五分鐘 }
+      - { en: number, pos: n., zh: 數字；號碼 }
+      - { en: piece, pos: n., zh: 片；塊 }
+      - { en: pair, pos: n., zh: 一雙；一對 }
+      - { en: dozen, pos: n., zh: 一打 }
+      - { en: kilogram, pos: n., zh: 公斤 }
+      - { en: gram, pos: n., zh: 公克 }
+      - { en: meter, pos: n., zh: 公尺 }
+      - { en: kilometer, pos: n., zh: 公里 }
+      - { en: centimeter, pos: n., zh: 公分 }
+      - { en: liter, pos: n., zh: 公升 }
+  - theme: 運動
+    words:
+      - { en: sport, pos: n., zh: 運動 }
+      - { en: team, pos: n., zh: 隊伍 }
+      - { en: player, pos: n., zh: 球員；選手 }
+      - { en: coach, pos: n., zh: 教練 }
+      - { en: race, pos: n., zh: 賽跑；比賽 }
+      - { en: field, pos: n., zh: 原野；場地 }
+      - { en: tennis, pos: n., zh: 網球 }
+      - { en: volleyball, pos: n., zh: 排球 }
+      - { en: football, pos: n., zh: 足球；美式足球 }
+      - { en: table tennis, pos: n., zh: 桌球 }
+      - { en: dodgeball, pos: n., zh: 躲避球 }
+      - { en: win, pos: v., zh: 贏 }
+      - { en: lose, pos: v., zh: 輸；遺失 }
+      - { en: jog, pos: v., zh: 慢跑 }
+      - { en: hike, pos: v./n., zh: 健行 }
+      - { en: climb, pos: v., zh: 爬 }
+      - { en: ski, pos: v., zh: 滑雪 }
+      - { en: skate, pos: v., zh: 溜冰 }
+      - { en: kick, pos: v., zh: 踢 }
+      - { en: throw, pos: v., zh: 丟；投 }
+      - { en: catch, pos: v., zh: 接住；抓住 }
+      - { en: hit, pos: v., zh: 打；擊中 }
+  - theme: 休閒與娛樂
+    words:
+      - { en: hobby, pos: n., zh: 嗜好 }
+      - { en: fun, pos: n., zh: 樂趣 }
+      - { en: joke, pos: n., zh: 笑話 }
+      - { en: puzzle, pos: n., zh: 拼圖；謎題 }
+      - { en: concert, pos: n., zh: 音樂會 }
+      - { en: show, pos: n./v., zh: 表演；展示 }
+      - { en: song, pos: n., zh: 歌曲 }
+      - { en: band, pos: n., zh: 樂團 }
+      - { en: piano, pos: n., zh: 鋼琴 }
+      - { en: guitar, pos: n., zh: 吉他 }
+      - { en: violin, pos: n., zh: 小提琴 }
+      - { en: drum, pos: n., zh: 鼓 }
+      - { en: camera, pos: n., zh: 相機 }
+      - { en: photo, pos: n., zh: 照片 }
+      - { en: comic, pos: n., zh: 漫畫 }
+      - { en: magazine, pos: n., zh: 雜誌 }
+      - { en: newspaper, pos: n., zh: 報紙 }
+      - { en: novel, pos: n., zh: 小說 }
+      - { en: radio, pos: n., zh: 收音機 }
+      - { en: picnic, pos: n., zh: 野餐 }
+      - { en: camp, pos: v./n., zh: 露營 }
+      - { en: fishing, pos: n., zh: 釣魚 }
+  - theme: 職業與工作
+    words:
+      - { en: job, pos: n., zh: 工作 }
+      - { en: work, pos: v./n., zh: 工作 }
+      - { en: worker, pos: n., zh: 工人 }
+      - { en: boss, pos: n., zh: 老闆 }
+      - { en: businessman, pos: n., zh: 商人 }
+      - { en: engineer, pos: n., zh: 工程師 }
+      - { en: scientist, pos: n., zh: 科學家 }
+      - { en: artist, pos: n., zh: 藝術家；畫家 }
+      - { en: writer, pos: n., zh: 作家 }
+      - { en: reporter, pos: n., zh: 記者 }
+      - { en: actor, pos: n., zh: 男演員 }
+      - { en: actress, pos: n., zh: 女演員 }
+      - { en: dancer, pos: n., zh: 舞者 }
+      - { en: pilot, pos: n., zh: 飛行員 }
+      - { en: soldier, pos: n., zh: 士兵 }
+      - { en: firefighter, pos: n., zh: 消防員 }
+      - { en: mailman, pos: n., zh: 郵差 }
+      - { en: housewife, pos: n., zh: 家庭主婦 }
+      - { en: secretary, pos: n., zh: 祕書 }
+      - { en: lawyer, pos: n., zh: 律師 }
+      - { en: king, pos: n., zh: 國王 }
+      - { en: queen, pos: n., zh: 女王；皇后 }
+      - { en: prince, pos: n., zh: 王子 }
+      - { en: princess, pos: n., zh: 公主 }
+  - theme: 通訊與科技
+    words:
+      - { en: computer, pos: n., zh: 電腦 }
+      - { en: Internet, pos: n., zh: 網路 }
+      - { en: e-mail, pos: n., zh: 電子郵件 }
+      - { en: message, pos: n., zh: 訊息 }
+      - { en: cell phone, pos: n., zh: 手機 }
+      - { en: call, pos: v./n., zh: 打電話；叫 }
+      - { en: text, pos: v./n., zh: 傳簡訊；文字 }
+      - { en: video, pos: n., zh: 影片 }
+      - { en: online, pos: adj./adv., zh: 線上的；在線上 }
+      - { en: send, pos: v., zh: 寄；送 }
+      - { en: receive, pos: v., zh: 收到 }
+      - { en: mail, pos: n./v., zh: 郵件；郵寄 }
+      - { en: stamp, pos: n., zh: 郵票 }
+      - { en: envelope, pos: n., zh: 信封 }
+      - { en: news, pos: n., zh: 新聞；消息 }
+      - { en: information, pos: n., zh: 資訊 }
+      - { en: machine, pos: n., zh: 機器 }
+      - { en: robot, pos: n., zh: 機器人 }
+  - theme: 國家與語言
+    words:
+      - { en: Taiwan, pos: n., zh: 台灣 }
+      - { en: Japan, pos: n., zh: 日本 }
+      - { en: Korea, pos: n., zh: 韓國 }
+      - { en: China, pos: n., zh: 中國 }
+      - { en: America, pos: n., zh: 美國 }
+      - { en: Canada, pos: n., zh: 加拿大 }
+      - { en: England, pos: n., zh: 英格蘭；英國 }
+      - { en: France, pos: n., zh: 法國 }
+      - { en: Germany, pos: n., zh: 德國 }
+      - { en: Australia, pos: n., zh: 澳洲 }
+      - { en: Japanese, pos: adj./n., zh: 日本的；日語 }
+      - { en: American, pos: adj./n., zh: 美國的；美國人 }
+      - { en: language, pos: n., zh: 語言 }
+      - { en: foreign, pos: adj., zh: 外國的 }
+      - { en: foreigner, pos: n., zh: 外國人 }
+  - theme: 常用動詞
+    words:
+      - { en: be, pos: v., zh: 是；在 }
+      - { en: do, pos: v., zh: 做 }
+      - { en: make, pos: v., zh: 製作；使 }
+      - { en: get, pos: v., zh: 得到；變得 }
+      - { en: give, pos: v., zh: 給 }
+      - { en: take, pos: v., zh: 拿；帶；搭乘 }
+      - { en: bring, pos: v., zh: 帶來 }
+      - { en: carry, pos: v., zh: 攜帶；搬 }
+      - { en: put, pos: v., zh: 放 }
+      - { en: keep, pos: v., zh: 保持；保留 }
+      - { en: find, pos: v., zh: 找到 }
+      - { en: look for, pos: v., zh: 尋找 }
+      - { en: leave, pos: v., zh: 離開；留下 }
+      - { en: arrive, pos: v., zh: 抵達 }
+      - { en: return, pos: v., zh: 歸還；返回 }
+      - { en: stay, pos: v., zh: 停留 }
+      - { en: visit, pos: v., zh: 拜訪；參觀 }
+      - { en: travel, pos: v., zh: 旅行 }
+      - { en: move, pos: v., zh: 移動；搬家 }
+      - { en: stop, pos: v., zh: 停止 }
+      - { en: start, pos: v., zh: 開始 }
+      - { en: begin, pos: v., zh: 開始 }
+      - { en: finish, pos: v., zh: 完成 }
+      - { en: end, pos: v./n., zh: 結束；末端 }
+      - { en: try, pos: v., zh: 嘗試 }
+      - { en: use, pos: v., zh: 使用 }
+      - { en: need, pos: v., zh: 需要 }
+      - { en: think, pos: v., zh: 想；認為 }
+      - { en: believe, pos: v., zh: 相信 }
+      - { en: trust, pos: v., zh: 信任 }
+      - { en: guess, pos: v., zh: 猜 }
+      - { en: wonder, pos: v., zh: 想知道 }
+      - { en: mean, pos: v., zh: 意思是 }
+      - { en: decide, pos: v., zh: 決定 }
+      - { en: plan, pos: v./n., zh: 計畫 }
+      - { en: ask, pos: v., zh: 問；要求 }
+      - { en: tell, pos: v., zh: 告訴 }
+      - { en: say, pos: v., zh: 說 }
+      - { en: talk, pos: v., zh: 談話 }
+      - { en: shout, pos: v., zh: 大喊 }
+      - { en: agree, pos: v., zh: 同意 }
+      - { en: hear, pos: v., zh: 聽到 }
+      - { en: notice, pos: v., zh: 注意到 }
+      - { en: borrow, pos: v., zh: 借入 }
+      - { en: lend, pos: v., zh: 借出 }
+      - { en: share, pos: v., zh: 分享 }
+      - { en: offer, pos: v., zh: 提供 }
+      - { en: serve, pos: v., zh: 服務；供應 }
+      - { en: build, pos: v., zh: 建造 }
+      - { en: break, pos: v., zh: 打破 }
+      - { en: fix, pos: v., zh: 修理 }
+      - { en: fill, pos: v., zh: 裝滿 }
+      - { en: drop, pos: v., zh: 掉落 }
+      - { en: pick, pos: v., zh: 挑選；摘 }
+      - { en: push, pos: v., zh: 推 }
+      - { en: pull, pos: v., zh: 拉 }
+      - { en: hold, pos: v., zh: 握著；舉行 }
+      - { en: shake, pos: v., zh: 搖動 }
+      - { en: wave, pos: v./n., zh: 揮手；波浪 }
+      - { en: raise, pos: v., zh: 舉起；養育 }
+      - { en: hang, pos: v., zh: 掛 }
+      - { en: cover, pos: v., zh: 覆蓋 }
+      - { en: touch, pos: v., zh: 觸摸 }
+      - { en: smell, pos: v./n., zh: 聞；氣味 }
+      - { en: sound, pos: v./n., zh: 聽起來；聲音 }
+      - { en: wait, pos: v., zh: 等待 }
+      - { en: hurry, pos: v., zh: 趕快 }
+      - { en: follow, pos: v., zh: 跟隨 }
+      - { en: join, pos: v., zh: 加入 }
+      - { en: meet, pos: v., zh: 遇見；認識 }
+      - { en: invite, pos: v., zh: 邀請 }
+      - { en: introduce, pos: v., zh: 介紹 }
+      - { en: describe, pos: v., zh: 描述 }
+      - { en: prepare, pos: v., zh: 準備 }
+      - { en: check, pos: v., zh: 檢查 }
+      - { en: choose, pos: v., zh: 選擇 }
+      - { en: collect, pos: v., zh: 收集 }
+      - { en: save, pos: v., zh: 節省；拯救 }
+      - { en: waste, pos: v., zh: 浪費 }
+      - { en: recycle, pos: v., zh: 回收 }
+      - { en: protect, pos: v., zh: 保護 }
+      - { en: support, pos: v., zh: 支持 }
+      - { en: improve, pos: v., zh: 改善 }
+      - { en: solve, pos: v., zh: 解決 }
+      - { en: grow, pos: v., zh: 成長；種植 }
+      - { en: happen, pos: v., zh: 發生 }
+      - { en: become, pos: v., zh: 變成 }
+      - { en: seem, pos: v., zh: 似乎 }
+      - { en: let, pos: v., zh: 讓 }
+      - { en: allow, pos: v., zh: 允許 }
+      - { en: miss, pos: v., zh: 想念；錯過 }
+      - { en: reach, pos: v., zh: 到達；伸手拿 }
+      - { en: rise, pos: v., zh: 上升 }
+      - { en: shine, pos: v., zh: 照耀 }
+      - { en: burn, pos: v., zh: 燃燒 }
+      - { en: blow, pos: v., zh: 吹 }
+      - { en: bite, pos: v., zh: 咬 }
+      - { en: knock, pos: v., zh: 敲 }
+      - { en: kiss, pos: v., zh: 親吻 }
+      - { en: lie, pos: v., zh: 躺；說謊 }
+      - { en: hide, pos: v., zh: 躲藏 }
+      - { en: fight, pos: v., zh: 打架；奮戰 }
+      - { en: steal, pos: v., zh: 偷 }
+      - { en: act, pos: v., zh: 行動；表演 }
+      - { en: fit, pos: v., zh: 適合 }
+      - { en: excuse, pos: v., zh: 原諒 }
+      - { en: pray, pos: v., zh: 祈禱 }
+      - { en: cheer, pos: v., zh: 歡呼；加油 }
+      - { en: wish, pos: v./n., zh: 希望；祝福 }
+      - { en: celebrate, pos: v., zh: 慶祝 }
+      - { en: count, pos: v., zh: 計算；數 }
+      - { en: add, pos: v., zh: 加上 }
+  - theme: 助動詞
+    words:
+      - { en: can, pos: aux., zh: 能；會 }
+      - { en: could, pos: aux., zh: 能（can 的過去式） }
+      - { en: will, pos: aux., zh: 將會 }
+      - { en: would, pos: aux., zh: 將會（will 的過去式）；願意 }
+      - { en: shall, pos: aux., zh: 將；…好嗎 }
+      - { en: should, pos: aux., zh: 應該 }
+      - { en: may, pos: aux., zh: 可以；可能 }
+      - { en: might, pos: aux., zh: 可能 }
+      - { en: must, pos: aux., zh: 必須 }
+  - theme: 常用形容詞
+    words:
+      - { en: great, pos: adj., zh: 很棒的；偉大的 }
+      - { en: nice, pos: adj., zh: 好的；親切的 }
+      - { en: fine, pos: adj., zh: 好的；晴朗的 }
+      - { en: wonderful, pos: adj., zh: 精彩的 }
+      - { en: excellent, pos: adj., zh: 優秀的 }
+      - { en: terrible, pos: adj., zh: 糟糕的 }
+      - { en: favorite, pos: adj., zh: 最喜愛的 }
+      - { en: important, pos: adj., zh: 重要的 }
+      - { en: interesting, pos: adj., zh: 有趣的 }
+      - { en: popular, pos: adj., zh: 受歡迎的 }
+      - { en: famous, pos: adj., zh: 有名的 }
+      - { en: special, pos: adj., zh: 特別的 }
+      - { en: lucky, pos: adj., zh: 幸運的 }
+      - { en: different, pos: adj., zh: 不同的 }
+      - { en: same, pos: adj., zh: 相同的 }
+      - { en: real, pos: adj., zh: 真的 }
+      - { en: "true", pos: adj., zh: 真實的 }
+      - { en: possible, pos: adj., zh: 可能的 }
+      - { en: ready, pos: adj., zh: 準備好的 }
+      - { en: sure, pos: adj., zh: 確定的 }
+      - { en: simple, pos: adj., zh: 簡單的 }
+      - { en: clear, pos: adj., zh: 清楚的 }
+      - { en: serious, pos: adj., zh: 嚴重的；認真的 }
+      - { en: dangerous, pos: adj., zh: 危險的 }
+      - { en: safe, pos: adj., zh: 安全的 }
+      - { en: fair, pos: adj., zh: 公平的 }
+      - { en: heavy, pos: adj., zh: 重的 }
+      - { en: wide, pos: adj., zh: 寬的 }
+      - { en: narrow, pos: adj., zh: 窄的 }
+      - { en: high, pos: adj., zh: 高的 }
+      - { en: low, pos: adj., zh: 低的 }
+      - { en: deep, pos: adj., zh: 深的 }
+      - { en: large, pos: adj., zh: 大的 }
+      - { en: huge, pos: adj., zh: 巨大的 }
+      - { en: little, pos: adj., zh: 小的；少的 }
+      - { en: round, pos: adj., zh: 圓的 }
+      - { en: soft, pos: adj., zh: 軟的 }
+      - { en: hard, pos: adj./adv., zh: 硬的；困難的；努力地 }
+      - { en: dark, pos: adj., zh: 黑暗的 }
+      - { en: bright, pos: adj., zh: 明亮的；聰明的 }
+      - { en: wet, pos: adj., zh: 濕的 }
+      - { en: dry, pos: adj., zh: 乾的 }
+      - { en: empty, pos: adj., zh: 空的 }
+      - { en: fresh, pos: adj., zh: 新鮮的 }
+      - { en: loud, pos: adj., zh: 大聲的 }
+      - { en: quick, pos: adj., zh: 快的 }
+      - { en: sleepy, pos: adj., zh: 想睡的 }
+      - { en: ugly, pos: adj., zh: 醜的 }
+      - { en: pretty, pos: adj., zh: 漂亮的 }
+      - { en: handsome, pos: adj., zh: 英俊的 }
+      - { en: thick, pos: adj., zh: 厚的 }
+      - { en: whole, pos: adj., zh: 全部的 }
+      - { en: useful, pos: adj., zh: 有用的 }
+      - { en: convenient, pos: adj., zh: 方便的 }
+      - { en: comfortable, pos: adj., zh: 舒服的 }
+      - { en: necessary, pos: adj., zh: 必要的 }
+      - { en: modern, pos: adj., zh: 現代的 }
+      - { en: traditional, pos: adj., zh: 傳統的 }
+      - { en: public, pos: adj., zh: 公共的 }
+      - { en: own, pos: adj., zh: 自己的 }
+      - { en: next, pos: adj., zh: 下一個的 }
+      - { en: last, pos: adj., zh: 最後的；上一個的 }
+      - { en: only, pos: adj./adv., zh: 唯一的；只有 }
+      - { en: other, pos: adj., zh: 其他的 }
+      - { en: another, pos: adj., zh: 另一個的 }
+  - theme: 常用副詞
+    words:
+      - { en: very, pos: adv., zh: 非常 }
+      - { en: too, pos: adv., zh: 太；也 }
+      - { en: also, pos: adv., zh: 也 }
+      - { en: really, pos: adv., zh: 真地；非常 }
+      - { en: just, pos: adv., zh: 剛剛；只是 }
+      - { en: almost, pos: adv., zh: 幾乎 }
+      - { en: quite, pos: adv., zh: 相當 }
+      - { en: even, pos: adv., zh: 甚至 }
+      - { en: ever, pos: adv., zh: 曾經 }
+      - { en: here, pos: adv., zh: 這裡 }
+      - { en: there, pos: adv., zh: 那裡 }
+      - { en: everywhere, pos: adv., zh: 到處 }
+      - { en: together, pos: adv., zh: 一起 }
+      - { en: maybe, pos: adv., zh: 也許 }
+      - { en: perhaps, pos: adv., zh: 也許 }
+      - { en: probably, pos: adv., zh: 可能 }
+      - { en: certainly, pos: adv., zh: 當然 }
+      - { en: actually, pos: adv., zh: 事實上 }
+      - { en: especially, pos: adv., zh: 尤其 }
+      - { en: finally, pos: adv., zh: 最後；終於 }
+      - { en: suddenly, pos: adv., zh: 突然地 }
+      - { en: slowly, pos: adv., zh: 慢慢地 }
+      - { en: quickly, pos: adv., zh: 快速地 }
+      - { en: carefully, pos: adv., zh: 小心地 }
+      - { en: easily, pos: adv., zh: 容易地 }
+      - { en: loudly, pos: adv., zh: 大聲地 }
+      - { en: aloud, pos: adv., zh: 出聲地 }
+      - { en: away, pos: adv., zh: 離開；遠離 }
+      - { en: abroad, pos: adv., zh: 在國外 }
+      - { en: outside, pos: adv./n., zh: 在外面；外面 }
+      - { en: inside, pos: adv./n., zh: 在裡面；裡面 }
+      - { en: upstairs, pos: adv., zh: 在樓上 }
+      - { en: downstairs, pos: adv., zh: 在樓下 }
+      - { en: else, pos: adv., zh: 其他 }
+      - { en: instead, pos: adv., zh: 反而；代替 }
+      - { en: enough, pos: adj./adv., zh: 足夠的；足夠地 }
+  - theme: 介系詞與連接詞
+    words:
+      - { en: at, pos: prep., zh: 在（地點、時間） }
+      - { en: to, pos: prep., zh: 到；向 }
+      - { en: from, pos: prep., zh: 從 }
+      - { en: for, pos: prep., zh: 為了；給 }
+      - { en: with, pos: prep., zh: 和…一起；用 }
+      - { en: without, pos: prep., zh: 沒有 }
+      - { en: about, pos: prep., zh: 關於；大約 }
+      - { en: of, pos: prep., zh: …的 }
+      - { en: by, pos: prep., zh: 藉由；在…旁邊；被 }
+      - { en: into, pos: prep., zh: 進入 }
+      - { en: out of, pos: prep., zh: 從…出來 }
+      - { en: over, pos: prep., zh: 在…上方；超過 }
+      - { en: across, pos: prep., zh: 橫越 }
+      - { en: along, pos: prep., zh: 沿著 }
+      - { en: around, pos: prep., zh: 在…周圍 }
+      - { en: between, pos: prep., zh: 在…之間（兩者） }
+      - { en: among, pos: prep., zh: 在…之中（三者以上） }
+      - { en: through, pos: prep., zh: 穿過 }
+      - { en: during, pos: prep., zh: 在…期間 }
+      - { en: until, pos: prep./conj., zh: 直到 }
+      - { en: since, pos: prep./conj., zh: 自從；因為 }
+      - { en: and, pos: conj., zh: 和 }
+      - { en: but, pos: conj., zh: 但是 }
+      - { en: or, pos: conj., zh: 或者 }
+      - { en: so, pos: conj., zh: 所以 }
+      - { en: because, pos: conj., zh: 因為 }
+      - { en: if, pos: conj., zh: 如果 }
+      - { en: although, pos: conj., zh: 雖然 }
+      - { en: while, pos: conj., zh: 當…的時候；然而 }
+      - { en: than, pos: conj., zh: 比 }
+  - theme: 代名詞與限定詞
+    words:
+      - { en: him, pos: pron., zh: 他（當受詞） }
+      - { en: us, pos: pron., zh: 我們（當受詞） }
+      - { en: them, pos: pron., zh: 他們（當受詞） }
+      - { en: its, pos: pron., zh: 它的；牠的 }
+      - { en: our, pos: pron., zh: 我們的 }
+      - { en: their, pos: pron., zh: 他們的 }
+      - { en: mine, pos: pron., zh: 我的（東西） }
+      - { en: yours, pos: pron., zh: 你的（東西） }
+      - { en: myself, pos: pron., zh: 我自己 }
+      - { en: yourself, pos: pron., zh: 你自己 }
+      - { en: this, pos: pron./adj., zh: 這個 }
+      - { en: that, pos: pron./adj., zh: 那個 }
+      - { en: these, pos: pron./adj., zh: 這些 }
+      - { en: those, pos: pron./adj., zh: 那些 }
+      - { en: some, pos: adj./pron., zh: 一些 }
+      - { en: any, pos: adj./pron., zh: 任何；一些 }
+      - { en: many, pos: adj., zh: 許多（可數） }
+      - { en: much, pos: adj., zh: 許多（不可數） }
+      - { en: few, pos: adj., zh: 很少的（可數） }
+      - { en: all, pos: adj./pron., zh: 全部 }
+      - { en: every, pos: adj., zh: 每一個 }
+      - { en: each, pos: adj./pron., zh: 每個 }
+      - { en: both, pos: adj./pron., zh: 兩者都 }
+      - { en: someone, pos: pron., zh: 某人 }
+      - { en: everyone, pos: pron., zh: 每個人 }
+      - { en: something, pos: pron., zh: 某事；某物 }
+      - { en: everything, pos: pron., zh: 每件事 }
+      - { en: nothing, pos: pron., zh: 沒有東西 }
+      - { en: anything, pos: pron., zh: 任何東西 }

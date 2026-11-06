@@ -501,6 +501,49 @@ body {
 }
 
 /* --------------------------------------------------------------------------
+   英文單字卡（國中小必備英文單字）
+
+   由 _includes/vocab-cards.html 依 _data/vocab.yml 輸出。單字表是用來一個個
+   掃過去的，不需要表格的欄位對齊；改成卡片格狀排列，桌機一列約 5 張、
+   手機一列 2 張，補齊上千字後篇幅也不會失控。
+   -------------------------------------------------------------------------- */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.vocab-grid li {
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.vocab-grid__en {
+  display: block;
+  font-weight: 600;
+}
+
+/* 詞性用小字接在單字後面，不另佔一行 */
+.vocab-grid__pos {
+  margin-left: 4px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
+.vocab-grid__zh {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* --------------------------------------------------------------------------
    主觀評分表（權重試算）
 
    表格本體由 Markdown 產生，滑桿與「加權總分」列由 assets/js/site.js 補上。
