@@ -59,6 +59,7 @@ body {
 /* 主內容區塊限制寬度並置中，避免被固定側欄視覺上包覆 */
 .main-content {
   flex: 3;
+  min-width: 0; /* flex 子項預設不縮到內容以下，長程式碼行會把整欄撐出視窗 */
   max-width: var(--content-max-width);
   margin: 0 auto;
   padding: 24px;
