@@ -7,11 +7,18 @@
 # 為什麼不用固定的 aspect-ratio 佔位：這些照片 82% 是直拍（1200x1600），
 # 套橫向比例會讓多數照片被框在橫框裡、左右大量留白。
 #
-# 怎麼重新產生（例如壓縮或換圖之後，在專案根目錄執行）：
-#   for f in assets/images/*/*.jpg assets/images/*/*/*.jpg; do
-#     s=$(file -b "$f" | grep -oE '[0-9]{3,}x[0-9]{3,}' | tail -1)
-#     echo "\"${f#assets/images/}\": { w: ${s%x*}, h: ${s#*x} }"
-#   done > _data/photo_sizes.yml
+# 怎麼重新產生（例如壓縮或換圖之後，在專案根目錄用 Git Bash 執行）：
+#   { sed -e '/^"/,$d' -e 's/\r$//' _data/photo_sizes.yml
+#     for f in assets/images/*/*.jpg assets/images/*/*/*.jpg assets/images/*/*/*/*.jpg; do
+#       s=$(file -b "$f" | grep -oE '[0-9]{3,}x[0-9]{3,}' | tail -1)
+#       echo "\"${f#assets/images/}\": { w: ${s%x*}, h: ${s#*x} }"
+#     done
+#   } > _data/photo_sizes.yml.tmp && mv _data/photo_sizes.yml.tmp _data/photo_sizes.yml
+#
+# sed 從第一筆資料（雙引號開頭的行）刪到檔尾，留下的就是這段檔頭註解；
+# 同時去掉 CR，避免檔頭是 CRLF、新資料是 LF 混在同一個檔案。
+# 先寫到 .tmp 再搬回來：直接導向原檔的話，sed 還沒讀就會被清空。
+# 照片放在 assets/images/ 底下第四層以下時，要在 for 補上對應層數的路徑。
 #
 # key 是 photo.html 的 src 參數（assets/images/ 底下的相對路徑）。
 # 查不到的圖不會輸出尺寸屬性，只是少了佔位，不會壞掉。
@@ -171,3 +178,18 @@
 "2026_Japan_Travel/day8/day8_viewpoint1.jpg": { w: 1200, h: 1600 }
 "2026_Japan_Travel/day8/day8_viewpoint2.jpg": { w: 1200, h: 1600 }
 "2026_Japan_Travel/day8/day8_viewpoint3.jpg": { w: 1200, h: 1600 }
+"Travel/YiLan/2026-11/day1_dinner1.jpg": { w: 1200, h: 1600 }
+"Travel/YiLan/2026-11/day1_dinner2.jpg": { w: 1200, h: 1600 }
+"Travel/YiLan/2026-11/day1_dinner3.jpg": { w: 1200, h: 1600 }
+"Travel/YiLan/2026-11/day1_dinner3_1.jpg": { w: 1200, h: 1600 }
+"Travel/YiLan/2026-11/day1_dinner4.jpg": { w: 676, h: 643 }
+"Travel/YiLan/2026-11/day1_dinner5_1.jpg": { w: 664, h: 704 }
+"Travel/YiLan/2026-11/day1_dinner5_2.jpg": { w: 577, h: 807 }
+"Travel/YiLan/2026-11/day1_dinner5_3.jpg": { w: 358, h: 260 }
+"Travel/YiLan/2026-11/day1_night_market.jpg": { w: 1200, h: 1600 }
+"Travel/YiLan/2026-11/day2_view1_1.jpg": { w: 1200, h: 1600 }
+"Travel/YiLan/2026-11/day2_view1_2.jpg": { w: 1600, h: 739 }
+"Travel/YiLan/2026-11/day2_view2_1.jpg": { w: 1200, h: 1600 }
+"Travel/YiLan/2026-11/day2_view2_2.jpg": { w: 1200, h: 1600 }
+"Travel/YiLan/2026-11/day2_view2_3.jpg": { w: 1200, h: 1600 }
+"Travel/YiLan/2026-11/day2_view3.jpg": { w: 1200, h: 1600 }
